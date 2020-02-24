@@ -1,0 +1,2606 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"],{
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/confirm/confirmRegistration.html":
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/confirm/confirmRegistration.html ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<form class=\"form-signin\" method=\"POST\" action=\"#\" role=\"form\">\n    <div class=\"form-group\">\n        <h2>Confirm Registration</h2>\n    </div>\n    <div *ngIf=\"errorMessage!=null\" class=\"alert alert-danger\">\n        {{ errorMessage }}\n    </div>\n    <div class=\"form-group\" *ngIf=\"email===null\">\n        <label class=\"control-label\" for=\"confirmationCode\">Email</label>\n        <input id=\"email\" type=\"email\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"email\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"confirmationCode\">Confirmation Code</label>\n        <input id=\"confirmationCode\" type=\"text\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"confirmationCode\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <button (click)=\"onConfirmRegistration()\" id=\"confirmRegistration\" type=\"submit\"\n                class=\"btn btn-info btn-block\">Confirm\n        </button>\n    </div>\n    <hr>\n    <p>Can't find your code? <a [routerLink]=\"['/home/resendCode']\"> <i class=\"fa fa-fw fa-group\"></i> Resend\n        Code</a>\n        <a [routerLink]=\"['/home/register']\"> <i class=\"fa fa-fw fa-group\"></i> Register</a> <a\n                [routerLink]=\"['/home/login']\"> <i class=\"fa fa-fw fa-user\"></i> Login</a>\n    </p>\n</form>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/forgot/forgotPassword.html":
+/*!**********************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/forgot/forgotPassword.html ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<form class=\"form-signin\" method=\"POST\" action=\"#\" role=\"form\">\n    <div class=\"form-group\">\n        <h2>Forgot Password</h2>\n    </div>\n    <div *ngIf=\"errorMessage!=null\" class=\"alert alert-danger\">\n        {{ errorMessage }}\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupEmail\">Email</label>\n        <input id=\"signupEmail\" type=\"email\" maxlength=\"50\" class=\"form-control\" [(ngModel)]=\"email\"\n               [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <button (click)=\"onNext()\" id=\"nextPage\" type=\"submit\" class=\"btn btn-info btn-block\">Next\n        </button>\n    </div>\n\n    <hr>\n    <p><a [routerLink]=\"['/home/register']\"> <i class=\"fa fa-fw fa-group\"></i> Register</a> <a\n            [routerLink]=\"['/home/login']\"> <i class=\"fa fa-fw fa-user\"></i> Login</a>\n    </p>\n</form>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/forgot/forgotPasswordStep2.html":
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/forgot/forgotPasswordStep2.html ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<form class=\"form-signin\" method=\"POST\" action=\"#\" role=\"form\">\n    <div class=\"form-group\">\n        <h2>Forgot Password</h2>\n    </div>\n    <div *ngIf=\"errorMessage!=null\" class=\"alert alert-danger\">\n        {{ errorMessage }}\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"verificationCode\">Verification Code</label>\n        <input id=\"verificationCode\" type=\"verificationCode\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"verificationCode\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"newPassword\">New Password</label>\n        <input id=\"newPassword\" type=\"password\" maxlength=\"25\" class=\"form-control\"\n               length=\"40\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <button (click)=\"onNext()\" id=\"signupSubmit\" type=\"submit\" class=\"btn btn-info btn-block\">\n            Reset Password\n        </button>\n    </div>\n\n    <hr>\n    <p><a [routerLink]=\"['/home/resendCode']\"> <i class=\"fa fa-fw fa-group\"></i> Go back</a>\n    </p>\n</form>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/login/login.html":
+/*!************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/login/login.html ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<form class=\"form-signin\" method=\"POST\" action=\"#\" role=\"form\">\n    <div class=\"form-group\">\n        <h2>Login</h2>\n    </div>\n    <div *ngIf=\"errorMessage!=null\" class=\"alert alert-danger\">\n        {{ errorMessage }}\n    </div>\n    <div *ngIf=\"!mfaStep\">\n        <div class=\"form-group\">\n            <label class=\"control-label\" for=\"signupEmail\">Email</label>\n            <input id=\"signupEmail\" required type=\"email\" maxlength=\"100\" class=\"form-control\" [(ngModel)]=\"email\"\n                   [ngModelOptions]=\"{standalone: true}\">\n        </div>\n\n        <div class=\"form-group\">\n            <label class=\"control-label\" for=\"signupPassword\">Password</label>\n            <input id=\"signupPassword\" required type=\"password\" maxlength=\"25\" class=\"form-control\"\n                   length=\"40\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone: true}\">\n        </div>\n        <div class=\"form-group\">\n            <button (click)=\"onLogin()\" id=\"signupSubmit\" type=\"submit\" class=\"btn btn-info btn-block\">\n                Login\n            </button>\n        </div>\n\n        <hr>\n        <p>\n            <a [routerLink]=\"['/home/register']\"> <i class=\"fa fa-fw fa-group\"></i> Register</a>\n            <a [routerLink]=\"['/home/forgotPassword']\"> <i class=\"fa fa-fw fa-group\"></i> Forgot Password?</a><br/>\n            <a [routerLink]=\"['/home/resendCode']\"> <i class=\"fa fa-fw fa-group\"></i> Resend Confirmation Code</a>\n        </p>\n\n    </div>\n\n    <div class=\"form-group\" *ngIf=\"mfaStep\">\n        <awscognito-mfa [destination]=\"mfaData.destination\"\n                        [onSubmit]=\"mfaData.callback\"></awscognito-mfa>\n        <hr>\n        <a (click)=\"cancelMFA()\" href=\"\">Cancel</a>\n    </div>\n</form>\n\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/mfa/mfa.html":
+/*!********************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/mfa/mfa.html ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"form-group\">\n    <div>\n        Authentication code has been sent to: {{destination}}\n    </div>\n    <div class=\"form-group\">\n        <input id=\"mfaCode\" required type=\"text\" maxlength=\"10\" class=\"form-control\"\n               length=\"40\" #code>\n    </div>\n    <button (click)=\"onSubmit(code.value)\" type=\"submit\" class=\"btn btn-info btn-block\">\n        Submit code\n    </button>\n</div>\n\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/newpassword/newpassword.html":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/newpassword/newpassword.html ***!
+  \************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<form class=\"form-signin\" method=\"POST\" action=\"#\" role=\"form\">\n    <div class=\"form-group\">\n        <h2>Set new password</h2>\n    </div>\n    <div *ngIf=\"errorMessage!=null\" class=\"alert alert-danger\">\n        {{ errorMessage }}\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupEmail\">Username / Email</label>\n        <input id=\"signupEmail\" type=\"email\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"registrationUser.username\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"existingPassword\">Temporary Password</label>\n        <input id=\"existingPassword\" type=\"password\" maxlength=\"25\" class=\"form-control\"\n               placeholder=\"at least 8 characters\" length=\"40\" [(ngModel)]=\"registrationUser.existingPassword\"\n               [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupPassword\">New Password</label>\n        <input id=\"signupPassword\" type=\"password\" maxlength=\"25\" class=\"form-control\"\n               placeholder=\"at least 8 characters\" length=\"40\" [(ngModel)]=\"registrationUser.password\"\n               [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <button (click)=\"onRegister()\" id=\"signupSubmit\" type=\"submit\" class=\"btn btn-info btn-block\">\n            Set your password\n        </button>\n    </div>\n    <hr>\n    <p>Already have an account? <a [routerLink]=\"['/home/login']\"> <i class=\"fa fa-fw fa-lock\"></i>Login</a></p>\n</form>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/register/registration.html":
+/*!**********************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/register/registration.html ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<form class=\"form-signin\" method=\"POST\" action=\"#\" role=\"form\">\n    <div class=\"form-group\">\n        <h2>Create account</h2>\n    </div>\n    <div *ngIf=\"errorMessage!=null\" class=\"alert alert-danger\">\n        {{ errorMessage }}\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupName\">Name</label>\n        <input id=\"signupName\" type=\"text\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"registrationUser.name\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupEmail\">Email</label>\n        <input id=\"signupEmail\" type=\"email\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"registrationUser.email\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupPhone\">Phone number</label>\n        <input id=\"signupPhone\" type=\"text\" maxlength=\"13\" class=\"form-control\"\n               [(ngModel)]=\"registrationUser.phone_number\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupPassword\">Password</label>\n        <input id=\"signupPassword\" type=\"password\" maxlength=\"25\" class=\"form-control\"\n               placeholder=\"at least 8 characters\" length=\"40\" [(ngModel)]=\"registrationUser.password\"\n               [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <button (click)=\"onRegister()\" id=\"signupSubmit\" type=\"submit\" class=\"btn btn-info btn-block\">\n            Create your account\n        </button>\n    </div>\n    <hr>\n    <p>Already have an account? <a [routerLink]=\"['/home/login']\"> <i class=\"fa fa-fw fa-lock\"></i>Login</a></p>\n</form>\n\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/resend/resendCode.html":
+/*!******************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/resend/resendCode.html ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<form class=\"form-signin\" method=\"POST\" action=\"#\" role=\"form\">\n    <div class=\"form-group\">\n        <h2>Resend Code</h2>\n    </div>\n    <div *ngIf=\"errorMessage!=null\" class=\"alert alert-danger\">\n        {{ errorMessage }}\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupEmail\">Email</label>\n        <input id=\"signupEmail\" type=\"email\" maxlength=\"50\" class=\"form-control\" [(ngModel)]=\"email\"\n               [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <button (click)=\"resendCode()\" id=\"signupSubmit\" type=\"submit\" class=\"btn btn-info btn-block\">\n            Resend Code\n        </button>\n    </div>\n\n    <hr>\n    <p><a [routerLink]=\"['/home/register']\"> <i class=\"fa fa-fw fa-group\"></i> Register</a> <a\n            [routerLink]=\"['/home/login']\"> <i class=\"fa fa-fw fa-user\"></i> Login</a>\n    </p>\n</form>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/home.html":
+/*!************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/public/home.html ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<!-- Navigation -->\n<nav class=\"navbar navbar-default navbar-fixed-top topnav\" role=\"navigation\">\n    <div class=\"container topnav\">\n        <!-- Brand and toggle get grouped for better mobile display -->\n        <div class=\"navbar-header\">\n            <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\"\n                    data-target=\"#bs-example-navbar-collapse-1\">\n                <span class=\"sr-only\">Toggle navigation</span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n            </button>\n            <a class=\"navbar-brand topnav\" href=\"#\">Cognito QuickStart</a>\n        </div>\n        <!-- Collect the nav links, forms, and other content for toggling -->\n        <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n            <ul class=\"nav navbar-nav navbar-right\">\n                <li>\n                    <a [routerLink]=\"['/home']\">Home</a>\n                </li>\n                <li>\n                    <a [routerLink]=\"['/home/login']\">Login</a>\n                </li>\n            </ul>\n        </div>\n        <!-- /.navbar-collapse -->\n    </div>\n    <!-- /.container -->\n</nav>\n<div class=\"intro-header\">\n    <router-outlet></router-outlet>\n</div>\n\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/landinghome.html":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/public/landinghome.html ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<!-- Header -->\n<a name=\"about\"></a>\n<div class=\"intro-header\">\n    <div class=\"container\">\n\n        <div class=\"row\">\n            <div class=\"col-lg-12\">\n                <div class=\"intro-message\">\n                    <h1>Cognito QuickStart App</h1>\n                    <h3>Source code can be found <a href=\"https://github.com/awslabs/aws-cognito-angular2-quickstart\">here</a>\n                    </h3>\n                    <hr class=\"intro-divider\">\n                    <ul class=\"list-inline intro-social-buttons\">\n                        <li>\n                            <a\n                                    [routerLink]=\"['/home/login']\" class=\"btn btn-default btn-lg\"> <i\n                                    class=\"fa fa-lock fa-fw\"></i> <span class=\"network-name\">Cognito</span> Login</a>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </div>\n\n    </div>\n    <!-- /.container -->\n\n</div>\n<!-- /.intro-header -->\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/secure/jwttokens/jwt.html":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/secure/jwttokens/jwt.html ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"page-header\">JWT Tokens</h1>\n<ul class=\"nav nav-tabs\">\n    <li class=\"active\"><a data-toggle=\"tab\" href=\"#accesstoken\">Access Token</a></li>\n    <li><a data-toggle=\"tab\" href=\"#idtoken\">Id Token</a></li>\n</ul>\n\n<div class=\"tab-content\">\n    <div id=\"accesstoken\" class=\"tab-pane fade in active\">\n        <h3>Access Token</h3>\n        <p>{{ stuff.accessToken }}</p>\n    </div>\n    <div id=\"idtoken\" class=\"tab-pane fade\">\n        <h3>Id Token</h3>\n        <p>{{ stuff.idToken }}</p>\n    </div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/secure/landing/secureHome.html":
+/*!**************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/secure/landing/secureHome.html ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\n\n    <!-- Navigation -->\n    <nav class=\"navbar navbar-default navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\n        <div class=\"navbar-header\">\n            <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                <span class=\"sr-only\">Toggle navigation</span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n            </button>\n            <a class=\"navbar-brand\" href=\"index.html\">Cognito Startup</a>\n        </div>\n        <!-- /.navbar-header -->\n\n        <ul class=\"nav navbar-top-links navbar-right\">\n\n            <!-- /.dropdown -->\n            <li class=\"dropdown\">\n                <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">\n                    <i class=\"fa fa-user fa-fw\"></i> <i class=\"fa fa-caret-down\"></i>\n                </a>\n                <ul class=\"dropdown-menu dropdown-user\">\n                    <li><a [routerLink]=\"['/securehome/myprofile']\"><i class=\"fa fa-user fa-fw\"></i> User\n                            Profile</a>\n                    </li>\n                    <li class=\"divider\"></li>\n                    <li><a [routerLink]=\"['/securehome/logout']\">Logout</a>\n                    </li>\n                </ul>\n                <!-- /.dropdown-user -->\n            </li>\n            <!-- /.dropdown -->\n        </ul>\n        <!-- /.navbar-top-links -->\n\n        <div class=\"navbar-default sidebar\" role=\"navigation\">\n            <div class=\"sidebar-nav navbar-collapse\">\n                <ul class=\"nav\" id=\"side-menu\">\n                    <li>\n                        <a [routerLink]=\"['/securehome/myprofile']\"><i class=\"fa fa-dashboard fa-fw\"></i> My Profile</a>\n                    </li>\n                    <li>\n                        <a [routerLink]=\"['/securehome/jwttokens']\"><i class=\"fa fa-table fa-fw\"></i> JWT Tokens</a>\n                    </li>\n                    <li>\n                        <a [routerLink]=\"['/securehome/useractivity']\"><i class=\"fa fa-table fa-fw\"></i> Login Data</a>\n                    </li>\n                    <li>\n                        <a [routerLink]=\"['/challenges/view']\"><i class=\"fa fa-table fa-fw\"></i> Challenges</a>\n                    </li>\n                    <li>\n                        <a [routerLink]=\"['/challenges/create']\"><i class=\"fa fa-table fa-fw\"></i> Create Challenge</a>\n                    </li>\n                </ul>\n            </div>\n            <!-- /.sidebar-collapse -->\n        </div>\n        <!-- /.navbar-static-side -->\n    </nav>\n\n    <!-- Page Content -->\n    <div id=\"page-wrapper\">\n        <div class=\"container-fluid\">\n            <div class=\"row\">\n                <div class=\"col-lg-12\">\n\n                    <router-outlet></router-outlet>\n                </div>\n                <!-- /.col-lg-12 -->\n            </div>\n            <!-- /.row -->\n        </div>\n        <!-- /.container-fluid -->\n    </div>\n    <!-- /#page-wrapper -->\n\n</div>\n<!-- /#wrapper -->");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/secure/profile/myprofile.html":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/secure/profile/myprofile.html ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"page-header\">My Profile Parameters</h1>\n\n<div class=\"table-responsive\">\n    <table class=\"table table-hover table-striped\">\n        <tr>\n            <th>Name</th>\n            <th>Value</th>\n        </tr>\n        <tr *ngFor=\"let parameter of parameters\" class=\"active\">\n            <td>{{ parameter.name }}</td>\n            <td>{{ parameter.value }}</td>\n        </tr>\n\n    </table>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/secure/useractivity/useractivity.html":
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/secure/useractivity/useractivity.html ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 class=\"page-header\">My Login Activity</h1>\n\n<div class=\"table-responsive\">\n    <table class=\"table table-hover table-striped\">\n        <tr>\n            <th>Action</th>\n            <th>Date</th>\n        </tr>\n        <tr *ngFor=\"let item of logdata\" class=\"active\">\n            <td>{{ item.type }}</td>\n            <td>{{ item.date }}</td>\n        </tr>\n    </table>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/template/app.html":
+/*!*************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/template/app.html ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<router-outlet></router-outlet>\n");
+
+/***/ }),
+
+/***/ "./src/$$_lazy_route_resource lazy recursive":
+/*!**********************************************************!*\
+  !*** ./src/$$_lazy_route_resource lazy namespace object ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./secure/challenge/challenge.module": [
+		"./src/app/secure/challenge/challenge.module.ts",
+		"secure-challenge-challenge-module"
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(function() {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(id);
+	});
+}
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ "./src/app/app.component.ts":
+/*!**********************************!*\
+  !*** ./src/app/app.component.ts ***!
+  \**********************************/
+/*! exports provided: AppComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _service_aws_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./service/aws.service */ "./src/app/service/aws.service.ts");
+/* harmony import */ var _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./service/user-login.service */ "./src/app/service/user-login.service.ts");
+/* harmony import */ var _service_cognito_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./service/cognito.service */ "./src/app/service/cognito.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+/**
+ * @author Vladimir Budilov
+ *
+ * This is the entry-way into the routing logic. This is the first component that's called when the app
+ * loads.
+ *
+ */
+
+
+
+
+let AppComponent = class AppComponent {
+    constructor(awsUtil, userService, cognito) {
+        this.awsUtil = awsUtil;
+        this.userService = userService;
+        this.cognito = cognito;
+        console.log("AppComponent: constructor");
+    }
+    ngOnInit() {
+        console.log("AppComponent: Checking if the user is already authenticated");
+        this.userService.isAuthenticated(this);
+    }
+    isLoggedIn(message, isLoggedIn) {
+        console.log("AppComponent: the user is authenticated: " + isLoggedIn);
+        let mythis = this;
+        this.cognito.getIdToken({
+            callback() {
+            },
+            callbackWithParam(token) {
+                // Include the passed-in callback here as well so that it's executed downstream
+                console.log("AppComponent: calling initAwsService in callback");
+                mythis.awsUtil.initAwsService(null, isLoggedIn, token);
+            }
+        });
+    }
+};
+AppComponent.ctorParameters = () => [
+    { type: _service_aws_service__WEBPACK_IMPORTED_MODULE_1__["AwsUtil"] },
+    { type: _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"] },
+    { type: _service_cognito_service__WEBPACK_IMPORTED_MODULE_3__["CognitoUtil"] }
+];
+AppComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'app-root',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./template/app.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/template/app.html")).default
+    }),
+    __metadata("design:paramtypes", [_service_aws_service__WEBPACK_IMPORTED_MODULE_1__["AwsUtil"], _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"], _service_cognito_service__WEBPACK_IMPORTED_MODULE_3__["CognitoUtil"]])
+], AppComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/app.module.ts":
+/*!*******************************!*\
+  !*** ./src/app/app.module.ts ***!
+  \*******************************/
+/*! exports provided: AppModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm2015/http.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _service_user_registration_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./service/user-registration.service */ "./src/app/service/user-registration.service.ts");
+/* harmony import */ var _service_user_parameters_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./service/user-parameters.service */ "./src/app/service/user-parameters.service.ts");
+/* harmony import */ var _service_user_login_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./service/user-login.service */ "./src/app/service/user-login.service.ts");
+/* harmony import */ var _service_cognito_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./service/cognito.service */ "./src/app/service/cognito.service.ts");
+/* harmony import */ var _app_routes__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app.routes */ "./src/app/app.routes.ts");
+/* harmony import */ var _public_home_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./public/home.component */ "./src/app/public/home.component.ts");
+/* harmony import */ var _service_aws_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./service/aws.service */ "./src/app/service/aws.service.ts");
+/* harmony import */ var _secure_useractivity_useractivity_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./secure/useractivity/useractivity.component */ "./src/app/secure/useractivity/useractivity.component.ts");
+/* harmony import */ var _secure_profile_myprofile_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./secure/profile/myprofile.component */ "./src/app/secure/profile/myprofile.component.ts");
+/* harmony import */ var _secure_landing_securehome_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./secure/landing/securehome.component */ "./src/app/secure/landing/securehome.component.ts");
+/* harmony import */ var _secure_jwttokens_jwt_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./secure/jwttokens/jwt.component */ "./src/app/secure/jwttokens/jwt.component.ts");
+/* harmony import */ var _service_ddb_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./service/ddb.service */ "./src/app/service/ddb.service.ts");
+/* harmony import */ var _public_auth_login_login_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./public/auth/login/login.component */ "./src/app/public/auth/login/login.component.ts");
+/* harmony import */ var _public_auth_register_registration_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./public/auth/register/registration.component */ "./src/app/public/auth/register/registration.component.ts");
+/* harmony import */ var _public_auth_forgot_forgotPassword_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./public/auth/forgot/forgotPassword.component */ "./src/app/public/auth/forgot/forgotPassword.component.ts");
+/* harmony import */ var _public_auth_confirm_confirmRegistration_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./public/auth/confirm/confirmRegistration.component */ "./src/app/public/auth/confirm/confirmRegistration.component.ts");
+/* harmony import */ var _public_auth_resend_resendCode_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./public/auth/resend/resendCode.component */ "./src/app/public/auth/resend/resendCode.component.ts");
+/* harmony import */ var _public_auth_newpassword_newpassword_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./public/auth/newpassword/newpassword.component */ "./src/app/public/auth/newpassword/newpassword.component.ts");
+/* harmony import */ var _public_auth_mfa_mfa_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./public/auth/mfa/mfa.component */ "./src/app/public/auth/mfa/mfa.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _utils_jwt_interceptor__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./utils/jwt.interceptor */ "./src/app/utils/jwt.interceptor.ts");
+/* harmony import */ var ng_zorro_antd__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ng-zorro-antd */ "./node_modules/ng-zorro-antd/fesm2015/ng-zorro-antd.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @angular/common/locales/en */ "./node_modules/@angular/common/locales/en.js");
+/* harmony import */ var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_29___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_29__);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Object(_angular_common__WEBPACK_IMPORTED_MODULE_28__["registerLocaleData"])(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_29___default.a);
+let AppModule = class AppModule {
+};
+AppModule = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        declarations: [
+            _public_auth_newpassword_newpassword_component__WEBPACK_IMPORTED_MODULE_22__["NewPasswordComponent"],
+            _public_auth_login_login_component__WEBPACK_IMPORTED_MODULE_17__["LoginComponent"],
+            _public_auth_confirm_confirmRegistration_component__WEBPACK_IMPORTED_MODULE_20__["LogoutComponent"],
+            _public_auth_confirm_confirmRegistration_component__WEBPACK_IMPORTED_MODULE_20__["RegistrationConfirmationComponent"],
+            _public_auth_resend_resendCode_component__WEBPACK_IMPORTED_MODULE_21__["ResendCodeComponent"],
+            _public_auth_forgot_forgotPassword_component__WEBPACK_IMPORTED_MODULE_19__["ForgotPasswordStep1Component"],
+            _public_auth_forgot_forgotPassword_component__WEBPACK_IMPORTED_MODULE_19__["ForgotPassword2Component"],
+            _public_auth_register_registration_component__WEBPACK_IMPORTED_MODULE_18__["RegisterComponent"],
+            _public_auth_mfa_mfa_component__WEBPACK_IMPORTED_MODULE_23__["MFAComponent"],
+            _public_home_component__WEBPACK_IMPORTED_MODULE_10__["AboutComponent"],
+            _public_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeLandingComponent"],
+            _public_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"],
+            _secure_useractivity_useractivity_component__WEBPACK_IMPORTED_MODULE_12__["UseractivityComponent"],
+            _secure_profile_myprofile_component__WEBPACK_IMPORTED_MODULE_13__["MyProfileComponent"],
+            _secure_landing_securehome_component__WEBPACK_IMPORTED_MODULE_14__["SecureHomeComponent"],
+            _secure_jwttokens_jwt_component__WEBPACK_IMPORTED_MODULE_15__["JwtComponent"],
+            _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
+        ],
+        imports: [
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
+            _angular_http__WEBPACK_IMPORTED_MODULE_3__["HttpModule"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_24__["HttpClientModule"],
+            _app_routes__WEBPACK_IMPORTED_MODULE_9__["routing"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
+            ng_zorro_antd__WEBPACK_IMPORTED_MODULE_26__["NgZorroAntdModule"],
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_27__["BrowserAnimationsModule"]
+        ],
+        providers: [
+            _service_cognito_service__WEBPACK_IMPORTED_MODULE_8__["CognitoUtil"],
+            _service_aws_service__WEBPACK_IMPORTED_MODULE_11__["AwsUtil"],
+            _service_ddb_service__WEBPACK_IMPORTED_MODULE_16__["DynamoDBService"],
+            _service_user_registration_service__WEBPACK_IMPORTED_MODULE_5__["UserRegistrationService"],
+            _service_user_login_service__WEBPACK_IMPORTED_MODULE_7__["UserLoginService"],
+            _service_user_parameters_service__WEBPACK_IMPORTED_MODULE_6__["UserParametersService"],
+            { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_24__["HTTP_INTERCEPTORS"], useClass: _utils_jwt_interceptor__WEBPACK_IMPORTED_MODULE_25__["JwtInterceptor"], multi: true },
+            { provide: ng_zorro_antd__WEBPACK_IMPORTED_MODULE_26__["NZ_I18N"], useValue: ng_zorro_antd__WEBPACK_IMPORTED_MODULE_26__["en_GB"] }
+        ],
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
+    })
+], AppModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/app.routes.ts":
+/*!*******************************!*\
+  !*** ./src/app/app.routes.ts ***!
+  \*******************************/
+/*! exports provided: appRoutingProviders, routing */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appRoutingProviders", function() { return appRoutingProviders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routing", function() { return routing; });
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _public_home_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./public/home.component */ "./src/app/public/home.component.ts");
+/* harmony import */ var _secure_landing_securehome_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./secure/landing/securehome.component */ "./src/app/secure/landing/securehome.component.ts");
+/* harmony import */ var _secure_profile_myprofile_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./secure/profile/myprofile.component */ "./src/app/secure/profile/myprofile.component.ts");
+/* harmony import */ var _secure_jwttokens_jwt_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./secure/jwttokens/jwt.component */ "./src/app/secure/jwttokens/jwt.component.ts");
+/* harmony import */ var _secure_useractivity_useractivity_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./secure/useractivity/useractivity.component */ "./src/app/secure/useractivity/useractivity.component.ts");
+/* harmony import */ var _public_auth_login_login_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./public/auth/login/login.component */ "./src/app/public/auth/login/login.component.ts");
+/* harmony import */ var _public_auth_register_registration_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./public/auth/register/registration.component */ "./src/app/public/auth/register/registration.component.ts");
+/* harmony import */ var _public_auth_forgot_forgotPassword_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./public/auth/forgot/forgotPassword.component */ "./src/app/public/auth/forgot/forgotPassword.component.ts");
+/* harmony import */ var _public_auth_confirm_confirmRegistration_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./public/auth/confirm/confirmRegistration.component */ "./src/app/public/auth/confirm/confirmRegistration.component.ts");
+/* harmony import */ var _public_auth_resend_resendCode_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./public/auth/resend/resendCode.component */ "./src/app/public/auth/resend/resendCode.component.ts");
+/* harmony import */ var _public_auth_newpassword_newpassword_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./public/auth/newpassword/newpassword.component */ "./src/app/public/auth/newpassword/newpassword.component.ts");
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+
+
+
+
+
+
+
+
+const homeRoutes = [
+    {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
+    {
+        path: 'home',
+        component: _public_home_component__WEBPACK_IMPORTED_MODULE_1__["HomeComponent"],
+        children: [
+            // {path: 'about', component: AboutComponent},
+            { path: 'login', component: _public_auth_login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"] },
+            { path: 'register', component: _public_auth_register_registration_component__WEBPACK_IMPORTED_MODULE_7__["RegisterComponent"] },
+            { path: 'confirmRegistration/:username', component: _public_auth_confirm_confirmRegistration_component__WEBPACK_IMPORTED_MODULE_9__["RegistrationConfirmationComponent"] },
+            { path: 'resendCode', component: _public_auth_resend_resendCode_component__WEBPACK_IMPORTED_MODULE_10__["ResendCodeComponent"] },
+            { path: 'forgotPassword/:email', component: _public_auth_forgot_forgotPassword_component__WEBPACK_IMPORTED_MODULE_8__["ForgotPassword2Component"] },
+            { path: 'forgotPassword', component: _public_auth_forgot_forgotPassword_component__WEBPACK_IMPORTED_MODULE_8__["ForgotPasswordStep1Component"] },
+            { path: 'newPassword', component: _public_auth_newpassword_newpassword_component__WEBPACK_IMPORTED_MODULE_11__["NewPasswordComponent"] },
+            { path: '', component: _public_home_component__WEBPACK_IMPORTED_MODULE_1__["HomeLandingComponent"] }
+        ]
+    },
+];
+const secureHomeRoutes = [
+    {
+        path: '',
+        redirectTo: '/securehome',
+        pathMatch: 'full'
+    },
+    {
+        path: 'securehome', component: _secure_landing_securehome_component__WEBPACK_IMPORTED_MODULE_2__["SecureHomeComponent"], children: [
+            { path: 'logout', component: _public_auth_confirm_confirmRegistration_component__WEBPACK_IMPORTED_MODULE_9__["LogoutComponent"] },
+            { path: 'jwttokens', component: _secure_jwttokens_jwt_component__WEBPACK_IMPORTED_MODULE_4__["JwtComponent"] },
+            { path: 'myprofile', component: _secure_profile_myprofile_component__WEBPACK_IMPORTED_MODULE_3__["MyProfileComponent"] },
+            { path: 'useractivity', component: _secure_useractivity_useractivity_component__WEBPACK_IMPORTED_MODULE_5__["UseractivityComponent"] },
+            { path: '', component: _secure_profile_myprofile_component__WEBPACK_IMPORTED_MODULE_3__["MyProfileComponent"] }
+        ]
+    },
+    { path: 'challenges', loadChildren: './secure/challenge/challenge.module#ChallengeModule' },
+];
+const routes = [
+    {
+        path: '',
+        children: [
+            ...homeRoutes,
+            ...secureHomeRoutes,
+            {
+                path: '',
+                component: _public_home_component__WEBPACK_IMPORTED_MODULE_1__["HomeComponent"]
+            }
+        ]
+    },
+];
+const appRoutingProviders = [];
+const routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRoot(routes);
+
+
+/***/ }),
+
+/***/ "./src/app/index.ts":
+/*!**************************!*\
+  !*** ./src/app/index.ts ***!
+  \**************************/
+/*! exports provided: AppComponent, AppModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return _app_component__WEBPACK_IMPORTED_MODULE_0__["AppComponent"]; });
+
+/* harmony import */ var _app_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.module */ "./src/app/app.module.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return _app_module__WEBPACK_IMPORTED_MODULE_1__["AppModule"]; });
+
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+/***/ }),
+
+/***/ "./src/app/public/auth/confirm/confirmRegistration.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/public/auth/confirm/confirmRegistration.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: LogoutComponent, RegistrationConfirmationComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogoutComponent", function() { return LogoutComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegistrationConfirmationComponent", function() { return RegistrationConfirmationComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _service_user_registration_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../service/user-registration.service */ "./src/app/service/user-registration.service.ts");
+/* harmony import */ var _service_user_login_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../service/user-login.service */ "./src/app/service/user-login.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+let LogoutComponent = class LogoutComponent {
+    constructor(router, userService) {
+        this.router = router;
+        this.userService = userService;
+        this.userService.isAuthenticated(this);
+    }
+    isLoggedIn(message, isLoggedIn) {
+        if (isLoggedIn) {
+            this.userService.logout();
+            this.router.navigate(['/home']);
+        }
+        this.router.navigate(['/home']);
+    }
+};
+LogoutComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] },
+    { type: _service_user_login_service__WEBPACK_IMPORTED_MODULE_3__["UserLoginService"] }
+];
+LogoutComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: ''
+    }),
+    __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+        _service_user_login_service__WEBPACK_IMPORTED_MODULE_3__["UserLoginService"]])
+], LogoutComponent);
+
+let RegistrationConfirmationComponent = class RegistrationConfirmationComponent {
+    constructor(regService, router, route) {
+        this.regService = regService;
+        this.router = router;
+        this.route = route;
+    }
+    ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            this.email = params['username'];
+        });
+        this.errorMessage = null;
+    }
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+    onConfirmRegistration() {
+        this.errorMessage = null;
+        this.regService.confirmRegistration(this.email, this.confirmationCode, this);
+    }
+    cognitoCallback(message, result) {
+        if (message != null) { //error
+            this.errorMessage = message;
+            console.log("message: " + this.errorMessage);
+        }
+        else { //success
+            //move to the next step
+            console.log("Moving to securehome");
+            // this.configs.curUser = result.user;
+            this.router.navigate(['/securehome']);
+        }
+    }
+};
+RegistrationConfirmationComponent.ctorParameters = () => [
+    { type: _service_user_registration_service__WEBPACK_IMPORTED_MODULE_2__["UserRegistrationService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"] }
+];
+RegistrationConfirmationComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./confirmRegistration.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/confirm/confirmRegistration.html")).default
+    }),
+    __metadata("design:paramtypes", [_service_user_registration_service__WEBPACK_IMPORTED_MODULE_2__["UserRegistrationService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
+], RegistrationConfirmationComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/public/auth/forgot/forgotPassword.component.ts":
+/*!****************************************************************!*\
+  !*** ./src/app/public/auth/forgot/forgotPassword.component.ts ***!
+  \****************************************************************/
+/*! exports provided: ForgotPasswordStep1Component, ForgotPassword2Component */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ForgotPasswordStep1Component", function() { return ForgotPasswordStep1Component; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ForgotPassword2Component", function() { return ForgotPassword2Component; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../service/user-login.service */ "./src/app/service/user-login.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+let ForgotPasswordStep1Component = class ForgotPasswordStep1Component {
+    constructor(router, userService) {
+        this.router = router;
+        this.userService = userService;
+        this.errorMessage = null;
+    }
+    onNext() {
+        this.errorMessage = null;
+        this.userService.forgotPassword(this.email, this);
+    }
+    cognitoCallback(message, result) {
+        if (message == null && result == null) { //error
+            this.router.navigate(['/home/forgotPassword', this.email]);
+        }
+        else { //success
+            this.errorMessage = message;
+        }
+    }
+};
+ForgotPasswordStep1Component.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] },
+    { type: _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"] }
+];
+ForgotPasswordStep1Component = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./forgotPassword.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/forgot/forgotPassword.html")).default
+    }),
+    __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+        _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"]])
+], ForgotPasswordStep1Component);
+
+let ForgotPassword2Component = class ForgotPassword2Component {
+    constructor(router, route, userService) {
+        this.router = router;
+        this.route = route;
+        this.userService = userService;
+        console.log("email from the url: " + this.email);
+    }
+    ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            this.email = params['email'];
+        });
+        this.errorMessage = null;
+    }
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+    onNext() {
+        this.errorMessage = null;
+        this.userService.confirmNewPassword(this.email, this.verificationCode, this.password, this);
+    }
+    cognitoCallback(message) {
+        if (message != null) { //error
+            this.errorMessage = message;
+            console.log("result: " + this.errorMessage);
+        }
+        else { //success
+            this.router.navigate(['/home/login']);
+        }
+    }
+};
+ForgotPassword2Component.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"] },
+    { type: _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"] }
+];
+ForgotPassword2Component = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./forgotPasswordStep2.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/forgot/forgotPasswordStep2.html")).default
+    }),
+    __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
+        _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"]])
+], ForgotPassword2Component);
+
+
+
+/***/ }),
+
+/***/ "./src/app/public/auth/login/login.component.ts":
+/*!******************************************************!*\
+  !*** ./src/app/public/auth/login/login.component.ts ***!
+  \******************************************************/
+/*! exports provided: LoginComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../service/user-login.service */ "./src/app/service/user-login.service.ts");
+/* harmony import */ var _service_ddb_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../service/ddb.service */ "./src/app/service/ddb.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+let LoginComponent = class LoginComponent {
+    constructor(router, ddb, userService) {
+        this.router = router;
+        this.ddb = ddb;
+        this.userService = userService;
+        this.mfaStep = false;
+        this.mfaData = {
+            destination: '',
+            callback: null
+        };
+        console.log("LoginComponent constructor");
+    }
+    ngOnInit() {
+        this.errorMessage = null;
+        console.log("Checking if the user is already authenticated. If so, then redirect to the secure site");
+        this.userService.isAuthenticated(this);
+    }
+    onLogin() {
+        if (this.email == null || this.password == null) {
+            this.errorMessage = "All fields are required";
+            return;
+        }
+        this.errorMessage = null;
+        this.userService.authenticate(this.email, this.password, this);
+    }
+    cognitoCallback(message, result) {
+        if (message != null) { //error
+            this.errorMessage = message;
+            console.log("result: " + this.errorMessage);
+            if (this.errorMessage === 'User is not confirmed.') {
+                console.log("redirecting");
+                this.router.navigate(['/home/confirmRegistration', this.email]);
+            }
+            else if (this.errorMessage === 'User needs to set password.') {
+                console.log("redirecting to set new password");
+                this.router.navigate(['/home/newPassword']);
+            }
+        }
+        else { //success
+            this.ddb.writeLogEntry("login");
+            this.router.navigate(['/securehome']);
+        }
+    }
+    handleMFAStep(challengeName, challengeParameters, callback) {
+        this.mfaStep = true;
+        this.mfaData.destination = challengeParameters.CODE_DELIVERY_DESTINATION;
+        this.mfaData.callback = (code) => {
+            if (code == null || code.length === 0) {
+                this.errorMessage = "Code is required";
+                return;
+            }
+            this.errorMessage = null;
+            callback(code);
+        };
+    }
+    isLoggedIn(message, isLoggedIn) {
+        if (isLoggedIn) {
+            this.router.navigate(['/securehome']);
+        }
+    }
+    cancelMFA() {
+        this.mfaStep = false;
+        return false; //necessary to prevent href navigation
+    }
+};
+LoginComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] },
+    { type: _service_ddb_service__WEBPACK_IMPORTED_MODULE_3__["DynamoDBService"] },
+    { type: _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"] }
+];
+LoginComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./login.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/login/login.html")).default
+    }),
+    __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+        _service_ddb_service__WEBPACK_IMPORTED_MODULE_3__["DynamoDBService"],
+        _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"]])
+], LoginComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/public/auth/mfa/mfa.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/public/auth/mfa/mfa.component.ts ***!
+  \**************************************************/
+/*! exports provided: MFAComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MFAComponent", function() { return MFAComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+let MFAComponent = class MFAComponent {
+    constructor() {
+        console.log("MFAComponent constructor");
+    }
+};
+__decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+    __metadata("design:type", String)
+], MFAComponent.prototype, "destination", void 0);
+__decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+    __metadata("design:type", Function)
+], MFAComponent.prototype, "onSubmit", void 0);
+MFAComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-mfa',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./mfa.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/mfa/mfa.html")).default
+    }),
+    __metadata("design:paramtypes", [])
+], MFAComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/public/auth/newpassword/newpassword.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/public/auth/newpassword/newpassword.component.ts ***!
+  \******************************************************************/
+/*! exports provided: NewPasswordUser, NewPasswordComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewPasswordUser", function() { return NewPasswordUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewPasswordComponent", function() { return NewPasswordComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _service_user_registration_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../service/user-registration.service */ "./src/app/service/user-registration.service.ts");
+/* harmony import */ var _service_user_login_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../service/user-login.service */ "./src/app/service/user-login.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+class NewPasswordUser {
+}
+/**
+ * This component is responsible for displaying and controlling
+ * the registration of the user.
+ */
+let NewPasswordComponent = class NewPasswordComponent {
+    constructor(userRegistration, userService, router) {
+        this.userRegistration = userRegistration;
+        this.userService = userService;
+        this.router = router;
+        this.onInit();
+    }
+    onInit() {
+        this.registrationUser = new NewPasswordUser();
+        this.errorMessage = null;
+    }
+    ngOnInit() {
+        this.errorMessage = null;
+        console.log("Checking if the user is already authenticated. If so, then redirect to the secure site");
+        this.userService.isAuthenticated(this);
+    }
+    onRegister() {
+        console.log(this.registrationUser);
+        this.errorMessage = null;
+        this.userRegistration.newPassword(this.registrationUser, this);
+    }
+    cognitoCallback(message, result) {
+        if (message != null) { //error
+            this.errorMessage = message;
+            console.log("result: " + this.errorMessage);
+        }
+        else { //success
+            //move to the next step
+            console.log("redirecting");
+            this.router.navigate(['/securehome']);
+        }
+    }
+    isLoggedIn(message, isLoggedIn) {
+        if (isLoggedIn)
+            this.router.navigate(['/securehome']);
+    }
+};
+NewPasswordComponent.ctorParameters = () => [
+    { type: _service_user_registration_service__WEBPACK_IMPORTED_MODULE_2__["UserRegistrationService"] },
+    { type: _service_user_login_service__WEBPACK_IMPORTED_MODULE_3__["UserLoginService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] }
+];
+NewPasswordComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./newpassword.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/newpassword/newpassword.html")).default
+    }),
+    __metadata("design:paramtypes", [_service_user_registration_service__WEBPACK_IMPORTED_MODULE_2__["UserRegistrationService"], _service_user_login_service__WEBPACK_IMPORTED_MODULE_3__["UserLoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+], NewPasswordComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/public/auth/register/registration.component.ts":
+/*!****************************************************************!*\
+  !*** ./src/app/public/auth/register/registration.component.ts ***!
+  \****************************************************************/
+/*! exports provided: RegistrationUser, RegisterComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegistrationUser", function() { return RegistrationUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterComponent", function() { return RegisterComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _service_user_registration_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../service/user-registration.service */ "./src/app/service/user-registration.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+class RegistrationUser {
+}
+/**
+ * This component is responsible for displaying and controlling
+ * the registration of the user.
+ */
+let RegisterComponent = class RegisterComponent {
+    constructor(userRegistration, router) {
+        this.userRegistration = userRegistration;
+        this.router = router;
+        this.onInit();
+    }
+    onInit() {
+        this.registrationUser = new RegistrationUser();
+        this.errorMessage = null;
+    }
+    onRegister() {
+        this.errorMessage = null;
+        this.userRegistration.register(this.registrationUser, this);
+    }
+    cognitoCallback(message, result) {
+        if (message != null) { //error
+            this.errorMessage = message;
+            console.log("result: " + this.errorMessage);
+        }
+        else { //success
+            //move to the next step
+            console.log("redirecting");
+            this.router.navigate(['/home/confirmRegistration', result.user.username]);
+        }
+    }
+};
+RegisterComponent.ctorParameters = () => [
+    { type: _service_user_registration_service__WEBPACK_IMPORTED_MODULE_2__["UserRegistrationService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] }
+];
+RegisterComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./registration.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/register/registration.html")).default
+    }),
+    __metadata("design:paramtypes", [_service_user_registration_service__WEBPACK_IMPORTED_MODULE_2__["UserRegistrationService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+], RegisterComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/public/auth/resend/resendCode.component.ts":
+/*!************************************************************!*\
+  !*** ./src/app/public/auth/resend/resendCode.component.ts ***!
+  \************************************************************/
+/*! exports provided: ResendCodeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResendCodeComponent", function() { return ResendCodeComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _service_user_registration_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../service/user-registration.service */ "./src/app/service/user-registration.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+let ResendCodeComponent = class ResendCodeComponent {
+    constructor(registrationService, router) {
+        this.registrationService = registrationService;
+        this.router = router;
+    }
+    resendCode() {
+        this.registrationService.resendCode(this.email, this);
+    }
+    cognitoCallback(error, result) {
+        if (error != null) {
+            this.errorMessage = "Something went wrong...please try again";
+        }
+        else {
+            this.router.navigate(['/home/confirmRegistration', this.email]);
+        }
+    }
+};
+ResendCodeComponent.ctorParameters = () => [
+    { type: _service_user_registration_service__WEBPACK_IMPORTED_MODULE_1__["UserRegistrationService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+ResendCodeComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./resendCode.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/auth/resend/resendCode.html")).default
+    }),
+    __metadata("design:paramtypes", [_service_user_registration_service__WEBPACK_IMPORTED_MODULE_1__["UserRegistrationService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+], ResendCodeComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/public/home.component.ts":
+/*!******************************************!*\
+  !*** ./src/app/public/home.component.ts ***!
+  \******************************************/
+/*! exports provided: AboutComponent, HomeLandingComponent, HomeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AboutComponent", function() { return AboutComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeLandingComponent", function() { return HomeLandingComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+let AboutComponent = class AboutComponent {
+};
+AboutComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: '<p>Hello and welcome!"</p>'
+    })
+], AboutComponent);
+
+let HomeLandingComponent = class HomeLandingComponent {
+    constructor() {
+        console.log("HomeLandingComponent constructor");
+    }
+};
+HomeLandingComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./landinghome.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/landinghome.html")).default
+    }),
+    __metadata("design:paramtypes", [])
+], HomeLandingComponent);
+
+let HomeComponent = class HomeComponent {
+    constructor() {
+        console.log("HomeComponent constructor");
+    }
+    ngOnInit() {
+    }
+};
+HomeComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./home.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/public/home.html")).default
+    }),
+    __metadata("design:paramtypes", [])
+], HomeComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/secure/jwttokens/jwt.component.ts":
+/*!***************************************************!*\
+  !*** ./src/app/secure/jwttokens/jwt.component.ts ***!
+  \***************************************************/
+/*! exports provided: Stuff, JwtComponent, AccessTokenCallback, IdTokenCallback */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Stuff", function() { return Stuff; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JwtComponent", function() { return JwtComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccessTokenCallback", function() { return AccessTokenCallback; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IdTokenCallback", function() { return IdTokenCallback; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _service_user_login_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/user-login.service */ "./src/app/service/user-login.service.ts");
+/* harmony import */ var _service_cognito_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/cognito.service */ "./src/app/service/cognito.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+class Stuff {
+}
+let JwtComponent = class JwtComponent {
+    constructor(router, userService, cognitoUtil) {
+        this.router = router;
+        this.userService = userService;
+        this.cognitoUtil = cognitoUtil;
+        this.stuff = new Stuff();
+        this.userService.isAuthenticated(this);
+        console.log("in JwtComponent");
+    }
+    isLoggedIn(message, isLoggedIn) {
+        if (!isLoggedIn) {
+            this.router.navigate(['/home/login']);
+        }
+        else {
+            this.cognitoUtil.getAccessToken(new AccessTokenCallback(this));
+            this.cognitoUtil.getIdToken(new IdTokenCallback(this));
+        }
+    }
+};
+JwtComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: _service_user_login_service__WEBPACK_IMPORTED_MODULE_1__["UserLoginService"] },
+    { type: _service_cognito_service__WEBPACK_IMPORTED_MODULE_2__["CognitoUtil"] }
+];
+JwtComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./jwt.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/secure/jwttokens/jwt.html")).default
+    }),
+    __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _service_user_login_service__WEBPACK_IMPORTED_MODULE_1__["UserLoginService"], _service_cognito_service__WEBPACK_IMPORTED_MODULE_2__["CognitoUtil"]])
+], JwtComponent);
+
+class AccessTokenCallback {
+    constructor(jwt) {
+        this.jwt = jwt;
+    }
+    callback() {
+    }
+    callbackWithParam(result) {
+        this.jwt.stuff.accessToken = result;
+    }
+}
+class IdTokenCallback {
+    constructor(jwt) {
+        this.jwt = jwt;
+    }
+    callback() {
+    }
+    callbackWithParam(result) {
+        this.jwt.stuff.idToken = result;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/app/secure/landing/securehome.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/secure/landing/securehome.component.ts ***!
+  \********************************************************/
+/*! exports provided: SecureHomeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SecureHomeComponent", function() { return SecureHomeComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/user-login.service */ "./src/app/service/user-login.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+let SecureHomeComponent = class SecureHomeComponent {
+    constructor(router, userService) {
+        this.router = router;
+        this.userService = userService;
+        this.userService.isAuthenticated(this);
+        console.log("SecureHomeComponent: constructor");
+    }
+    ngOnInit() {
+    }
+    isLoggedIn(message, isLoggedIn) {
+        if (!isLoggedIn) {
+            this.router.navigate(['/home/login']);
+        }
+    }
+};
+SecureHomeComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] },
+    { type: _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"] }
+];
+SecureHomeComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./secureHome.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/secure/landing/secureHome.html")).default
+        // styleUrls: ['/assets/css/sb-admin.css']
+    }),
+    __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"]])
+], SecureHomeComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/secure/profile/myprofile.component.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/secure/profile/myprofile.component.ts ***!
+  \*******************************************************/
+/*! exports provided: MyProfileComponent, Parameters, GetParametersCallback */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyProfileComponent", function() { return MyProfileComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Parameters", function() { return Parameters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetParametersCallback", function() { return GetParametersCallback; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _service_user_login_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/user-login.service */ "./src/app/service/user-login.service.ts");
+/* harmony import */ var _service_cognito_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/cognito.service */ "./src/app/service/cognito.service.ts");
+/* harmony import */ var _service_user_parameters_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/user-parameters.service */ "./src/app/service/user-parameters.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+
+let MyProfileComponent = class MyProfileComponent {
+    constructor(router, userService, userParams, cognitoUtil) {
+        this.router = router;
+        this.userService = userService;
+        this.userParams = userParams;
+        this.cognitoUtil = cognitoUtil;
+        this.parameters = [];
+        this.userService.isAuthenticated(this);
+        console.log("In MyProfileComponent");
+    }
+    isLoggedIn(message, isLoggedIn) {
+        if (!isLoggedIn) {
+            this.router.navigate(['/home/login']);
+        }
+        else {
+            this.userParams.getParameters(new GetParametersCallback(this, this.cognitoUtil));
+        }
+    }
+};
+MyProfileComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _service_user_login_service__WEBPACK_IMPORTED_MODULE_1__["UserLoginService"] },
+    { type: _service_user_parameters_service__WEBPACK_IMPORTED_MODULE_3__["UserParametersService"] },
+    { type: _service_cognito_service__WEBPACK_IMPORTED_MODULE_2__["CognitoUtil"] }
+];
+MyProfileComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./myprofile.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/secure/profile/myprofile.html")).default
+    }),
+    __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _service_user_login_service__WEBPACK_IMPORTED_MODULE_1__["UserLoginService"], _service_user_parameters_service__WEBPACK_IMPORTED_MODULE_3__["UserParametersService"], _service_cognito_service__WEBPACK_IMPORTED_MODULE_2__["CognitoUtil"]])
+], MyProfileComponent);
+
+class Parameters {
+}
+class GetParametersCallback {
+    constructor(me, cognitoUtil) {
+        this.me = me;
+        this.cognitoUtil = cognitoUtil;
+    }
+    callback() {
+    }
+    callbackWithParam(result) {
+        for (let i = 0; i < result.length; i++) {
+            let parameter = new Parameters();
+            parameter.name = result[i].getName();
+            parameter.value = result[i].getValue();
+            this.me.parameters.push(parameter);
+        }
+        let param = new Parameters();
+        param.name = "cognito ID";
+        param.value = this.cognitoUtil.getCognitoIdentity();
+        this.me.parameters.push(param);
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/app/secure/useractivity/useractivity.component.ts":
+/*!***************************************************************!*\
+  !*** ./src/app/secure/useractivity/useractivity.component.ts ***!
+  \***************************************************************/
+/*! exports provided: Stuff, UseractivityComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Stuff", function() { return Stuff; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UseractivityComponent", function() { return UseractivityComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _service_user_login_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/user-login.service */ "./src/app/service/user-login.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _service_ddb_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/ddb.service */ "./src/app/service/ddb.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+class Stuff {
+}
+let UseractivityComponent = class UseractivityComponent {
+    constructor(router, ddb, userService) {
+        this.router = router;
+        this.ddb = ddb;
+        this.userService = userService;
+        this.logdata = [];
+        this.userService.isAuthenticated(this);
+        console.log("in UseractivityComponent");
+    }
+    isLoggedIn(message, isLoggedIn) {
+        if (!isLoggedIn) {
+            this.router.navigate(['/home/login']);
+        }
+        else {
+            console.log("scanning DDB");
+            this.ddb.getLogEntries(this.logdata);
+        }
+    }
+};
+UseractivityComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+    { type: _service_ddb_service__WEBPACK_IMPORTED_MODULE_3__["DynamoDBService"] },
+    { type: _service_user_login_service__WEBPACK_IMPORTED_MODULE_1__["UserLoginService"] }
+];
+UseractivityComponent = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+        selector: 'awscognito-angular2-app',
+        template: __importDefault(__webpack_require__(/*! raw-loader!./useractivity.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/secure/useractivity/useractivity.html")).default
+    }),
+    __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _service_ddb_service__WEBPACK_IMPORTED_MODULE_3__["DynamoDBService"], _service_user_login_service__WEBPACK_IMPORTED_MODULE_1__["UserLoginService"]])
+], UseractivityComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/service/aws.service.ts":
+/*!****************************************!*\
+  !*** ./src/app/service/aws.service.ts ***!
+  \****************************************/
+/*! exports provided: AwsUtil */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AwsUtil", function() { return AwsUtil; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _cognito_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cognito.service */ "./src/app/service/cognito.service.ts");
+/* harmony import */ var aws_sdk_global__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! aws-sdk/global */ "./node_modules/aws-sdk/browser.js");
+/* harmony import */ var aws_sdk_global__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(aws_sdk_global__WEBPACK_IMPORTED_MODULE_2__);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var AwsUtil_1;
+
+
+
+/**
+ * Created by Vladimir Budilov
+ */
+// declare var AMA: any;
+let AwsUtil = AwsUtil_1 = class AwsUtil {
+    constructor(cognitoUtil) {
+        this.cognitoUtil = cognitoUtil;
+        aws_sdk_global__WEBPACK_IMPORTED_MODULE_2__["config"].region = _cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"]._REGION;
+    }
+    /**
+     * This is the method that needs to be called in order to init the aws global creds
+     */
+    initAwsService(callback, isLoggedIn, idToken) {
+        if (AwsUtil_1.runningInit) {
+            // Need to make sure I don't get into an infinite loop here, so need to exit if this method is running already
+            console.log("AwsUtil: Aborting running initAwsService()...it's running already.");
+            // instead of aborting here, it's best to put a timer
+            if (callback != null) {
+                callback.callback();
+                callback.callbackWithParam(null);
+            }
+            return;
+        }
+        console.log("AwsUtil: Running initAwsService()");
+        AwsUtil_1.runningInit = true;
+        let mythis = this;
+        // First check if the user is authenticated already
+        if (isLoggedIn)
+            mythis.setupAWS(isLoggedIn, callback, idToken);
+    }
+    /**
+     * Sets up the AWS global params
+     *
+     * @param isLoggedIn
+     * @param callback
+     */
+    setupAWS(isLoggedIn, callback, idToken) {
+        console.log("AwsUtil: in setupAWS()");
+        if (isLoggedIn) {
+            console.log("AwsUtil: User is logged in");
+            // Setup mobile analytics
+            var options = {
+                appId: '32673c035a0b40e99d6e1f327be0cb60',
+                appTitle: "aws-cognito-angular2-quickstart"
+            };
+            // TODO: The mobile Analytics client needs some work to handle Typescript. Disabling for the time being.
+            // var mobileAnalyticsClient = new AMA.Manager(options);
+            // mobileAnalyticsClient.submitEvents();
+            this.addCognitoCredentials(idToken);
+            console.log("AwsUtil: Retrieving the id token");
+        }
+        else {
+            console.log("AwsUtil: User is not logged in");
+        }
+        if (callback != null) {
+            callback.callback();
+            callback.callbackWithParam(null);
+        }
+        AwsUtil_1.runningInit = false;
+    }
+    addCognitoCredentials(idTokenJwt) {
+        let creds = this.cognitoUtil.buildCognitoCreds(idTokenJwt);
+        aws_sdk_global__WEBPACK_IMPORTED_MODULE_2__["config"].credentials = creds;
+        creds.get(function (err) {
+            if (!err) {
+                if (AwsUtil_1.firstLogin) {
+                    // save the login info to DDB
+                    this.ddb.writeLogEntry("login");
+                    AwsUtil_1.firstLogin = false;
+                }
+            }
+        });
+    }
+    static getCognitoParametersForIdConsolidation(idTokenJwt) {
+        console.log("AwsUtil: enter getCognitoParametersForIdConsolidation()");
+        let url = 'cognito-idp.' + _cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"]._REGION.toLowerCase() + '.amazonaws.com/' + _cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"]._USER_POOL_ID;
+        let logins = [];
+        logins[url] = idTokenJwt;
+        let params = {
+            IdentityPoolId: _cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"]._IDENTITY_POOL_ID,
+            Logins: logins
+        };
+        return params;
+    }
+};
+AwsUtil.firstLogin = false;
+AwsUtil.runningInit = false;
+AwsUtil.ctorParameters = () => [
+    { type: _cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"] }
+];
+AwsUtil = AwsUtil_1 = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+    __metadata("design:paramtypes", [_cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"]])
+], AwsUtil);
+
+
+
+/***/ }),
+
+/***/ "./src/app/service/cognito.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/service/cognito.service.ts ***!
+  \********************************************/
+/*! exports provided: CognitoUtil */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CognitoUtil", function() { return CognitoUtil; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! amazon-cognito-identity-js */ "./node_modules/amazon-cognito-identity-js/es/index.js");
+/* harmony import */ var aws_sdk_global__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! aws-sdk/global */ "./node_modules/aws-sdk/browser.js");
+/* harmony import */ var aws_sdk_global__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(aws_sdk_global__WEBPACK_IMPORTED_MODULE_3__);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var CognitoUtil_1;
+
+
+
+
+let CognitoUtil = CognitoUtil_1 = class CognitoUtil {
+    getUserPool() {
+        if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].cognito_idp_endpoint) {
+            CognitoUtil_1._POOL_DATA.endpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].cognito_idp_endpoint;
+        }
+        return new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUserPool"](CognitoUtil_1._POOL_DATA);
+    }
+    getCurrentUser() {
+        return this.getUserPool().getCurrentUser();
+    }
+    // AWS Stores Credentials in many ways, and with TypeScript this means that
+    // getting the base credentials we authenticated with from the AWS globals gets really murky,
+    // having to get around both class extension and unions. Therefore, we're going to give
+    // developers direct access to the raw, unadulterated CognitoIdentityCredentials
+    // object at all times.
+    setCognitoCreds(creds) {
+        this.cognitoCreds = creds;
+    }
+    getCognitoCreds() {
+        return this.cognitoCreds;
+    }
+    // This method takes in a raw jwtToken and uses the global AWS config options to build a
+    // CognitoIdentityCredentials object and store it for us. It also returns the object to the caller
+    // to avoid unnecessary calls to setCognitoCreds.
+    buildCognitoCreds(idTokenJwt) {
+        let url = 'cognito-idp.' + CognitoUtil_1._REGION.toLowerCase() + '.amazonaws.com/' + CognitoUtil_1._USER_POOL_ID;
+        if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].cognito_idp_endpoint) {
+            url = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].cognito_idp_endpoint + '/' + CognitoUtil_1._USER_POOL_ID;
+        }
+        let logins = {};
+        logins[url] = idTokenJwt;
+        let params = {
+            IdentityPoolId: CognitoUtil_1._IDENTITY_POOL_ID,
+            Logins: logins
+        };
+        let serviceConfigs = {};
+        if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].cognito_identity_endpoint) {
+            serviceConfigs.endpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].cognito_identity_endpoint;
+        }
+        let creds = new aws_sdk_global__WEBPACK_IMPORTED_MODULE_3__["CognitoIdentityCredentials"](params, serviceConfigs);
+        this.setCognitoCreds(creds);
+        return creds;
+    }
+    getCognitoIdentity() {
+        return this.cognitoCreds.identityId;
+    }
+    getAccessToken(callback) {
+        if (callback == null) {
+            throw ("CognitoUtil: callback in getAccessToken is null...returning");
+        }
+        if (this.getCurrentUser() != null) {
+            this.getCurrentUser().getSession(function (err, session) {
+                if (err) {
+                    console.log("CognitoUtil: Can't set the credentials:" + err);
+                    callback.callbackWithParam(null);
+                }
+                else {
+                    if (session.isValid()) {
+                        callback.callbackWithParam(session.getAccessToken().getJwtToken());
+                    }
+                }
+            });
+        }
+        else {
+            callback.callbackWithParam(null);
+        }
+    }
+    getIdToken(callback) {
+        if (callback == null) {
+            throw ("CognitoUtil: callback in getIdToken is null...returning");
+        }
+        if (this.getCurrentUser() != null)
+            this.getCurrentUser().getSession(function (err, session) {
+                if (err) {
+                    console.log("CognitoUtil: Can't set the credentials:" + err);
+                    callback.callbackWithParam(null);
+                }
+                else {
+                    if (session.isValid()) {
+                        callback.callbackWithParam(session.getIdToken().getJwtToken());
+                    }
+                    else {
+                        console.log("CognitoUtil: Got the id token, but the session isn't valid");
+                    }
+                }
+            });
+        else
+            callback.callbackWithParam(null);
+    }
+    getRefreshToken(callback) {
+        if (callback == null) {
+            throw ("CognitoUtil: callback in getRefreshToken is null...returning");
+        }
+        if (this.getCurrentUser() != null)
+            this.getCurrentUser().getSession(function (err, session) {
+                if (err) {
+                    console.log("CognitoUtil: Can't set the credentials:" + err);
+                    callback.callbackWithParam(null);
+                }
+                else {
+                    if (session.isValid()) {
+                        callback.callbackWithParam(session.getRefreshToken());
+                    }
+                }
+            });
+        else
+            callback.callbackWithParam(null);
+    }
+    refresh() {
+        this.getCurrentUser().getSession(function (err, session) {
+            if (err) {
+                console.log("CognitoUtil: Can't set the credentials:" + err);
+            }
+            else {
+                if (session.isValid()) {
+                    console.log("CognitoUtil: refreshed successfully");
+                }
+                else {
+                    console.log("CognitoUtil: refreshed but session is still not valid");
+                }
+            }
+        });
+    }
+};
+CognitoUtil._REGION = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].region;
+CognitoUtil._IDENTITY_POOL_ID = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].identityPoolId;
+CognitoUtil._USER_POOL_ID = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].userPoolId;
+CognitoUtil._CLIENT_ID = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].clientId;
+CognitoUtil._POOL_DATA = {
+    UserPoolId: CognitoUtil_1._USER_POOL_ID,
+    ClientId: CognitoUtil_1._CLIENT_ID
+};
+CognitoUtil = CognitoUtil_1 = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])()
+], CognitoUtil);
+
+
+
+/***/ }),
+
+/***/ "./src/app/service/ddb.service.ts":
+/*!****************************************!*\
+  !*** ./src/app/service/ddb.service.ts ***!
+  \****************************************/
+/*! exports provided: DynamoDBService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DynamoDBService", function() { return DynamoDBService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _cognito_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cognito.service */ "./src/app/service/cognito.service.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var aws_sdk_global__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! aws-sdk/global */ "./node_modules/aws-sdk/browser.js");
+/* harmony import */ var aws_sdk_global__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(aws_sdk_global__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var aws_sdk_clients_dynamodb__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! aws-sdk/clients/dynamodb */ "./node_modules/aws-sdk/clients/dynamodb.js");
+/* harmony import */ var aws_sdk_clients_dynamodb__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(aws_sdk_clients_dynamodb__WEBPACK_IMPORTED_MODULE_4__);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+
+/**
+ * Created by Vladimir Budilov
+ */
+let DynamoDBService = class DynamoDBService {
+    constructor(cognitoUtil) {
+        this.cognitoUtil = cognitoUtil;
+        console.log("DynamoDBService: constructor");
+    }
+    getAWS() {
+        return aws_sdk_global__WEBPACK_IMPORTED_MODULE_3__;
+    }
+    getLogEntries(mapArray) {
+        console.log("DynamoDBService: reading from DDB with creds - " + aws_sdk_global__WEBPACK_IMPORTED_MODULE_3__["config"].credentials);
+        var params = {
+            TableName: _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].ddbTableName,
+            KeyConditionExpression: "userId = :userId",
+            ExpressionAttributeValues: {
+                ":userId": this.cognitoUtil.getCognitoIdentity()
+            }
+        };
+        var clientParams = {};
+        if (_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].dynamodb_endpoint) {
+            clientParams.endpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].dynamodb_endpoint;
+        }
+        var docClient = new aws_sdk_clients_dynamodb__WEBPACK_IMPORTED_MODULE_4__["DocumentClient"](clientParams);
+        docClient.query(params, onQuery);
+        function onQuery(err, data) {
+            if (err) {
+                console.error("DynamoDBService: Unable to query the table. Error JSON:", JSON.stringify(err, null, 2));
+            }
+            else {
+                // print all the movies
+                console.log("DynamoDBService: Query succeeded.");
+                data.Items.forEach(function (logitem) {
+                    mapArray.push({ type: logitem.type, date: logitem.activityDate });
+                });
+            }
+        }
+    }
+    writeLogEntry(type) {
+        try {
+            let date = new Date().toString();
+            console.log("DynamoDBService: Writing log entry. Type:" + type + " ID: " + this.cognitoUtil.getCognitoIdentity() + " Date: " + date);
+            this.write(this.cognitoUtil.getCognitoIdentity(), date, type);
+        }
+        catch (exc) {
+            console.log("DynamoDBService: Couldn't write to DDB");
+        }
+    }
+    write(data, date, type) {
+        console.log("DynamoDBService: writing " + type + " entry");
+        let clientParams = {
+            params: { TableName: _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].ddbTableName }
+        };
+        if (_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].dynamodb_endpoint) {
+            clientParams.endpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].dynamodb_endpoint;
+        }
+        var DDB = new aws_sdk_clients_dynamodb__WEBPACK_IMPORTED_MODULE_4__(clientParams);
+        // Write the item to the table
+        var itemParams = {
+            TableName: _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].ddbTableName,
+            Item: {
+                userId: { S: data },
+                activityDate: { S: date },
+                type: { S: type }
+            }
+        };
+        DDB.putItem(itemParams, function (result) {
+            console.log("DynamoDBService: wrote entry: " + JSON.stringify(result));
+        });
+    }
+};
+DynamoDBService.ctorParameters = () => [
+    { type: _cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"] }
+];
+DynamoDBService = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+    __metadata("design:paramtypes", [_cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"]])
+], DynamoDBService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/service/user-login.service.ts":
+/*!***********************************************!*\
+  !*** ./src/app/service/user-login.service.ts ***!
+  \***********************************************/
+/*! exports provided: UserLoginService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserLoginService", function() { return UserLoginService; });
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ddb_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ddb.service */ "./src/app/service/ddb.service.ts");
+/* harmony import */ var _cognito_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cognito.service */ "./src/app/service/cognito.service.ts");
+/* harmony import */ var amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! amazon-cognito-identity-js */ "./node_modules/amazon-cognito-identity-js/es/index.js");
+/* harmony import */ var aws_sdk_global__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! aws-sdk/global */ "./node_modules/aws-sdk/browser.js");
+/* harmony import */ var aws_sdk_global__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(aws_sdk_global__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var aws_sdk_clients_sts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! aws-sdk/clients/sts */ "./node_modules/aws-sdk/clients/sts.js");
+/* harmony import */ var aws_sdk_clients_sts__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(aws_sdk_clients_sts__WEBPACK_IMPORTED_MODULE_6__);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+
+
+
+let UserLoginService = class UserLoginService {
+    constructor(ddb, cognitoUtil) {
+        this.ddb = ddb;
+        this.cognitoUtil = cognitoUtil;
+        this.onLoginSuccess = (callback, session) => {
+            console.log("In authenticateUser onSuccess callback");
+            aws_sdk_global__WEBPACK_IMPORTED_MODULE_5__["config"].credentials = this.cognitoUtil.buildCognitoCreds(session.getIdToken().getJwtToken());
+            // So, when CognitoIdentity authenticates a user, it doesn't actually hand us the IdentityID,
+            // used by many of our other handlers. This is handled by some sly underhanded calls to AWS Cognito
+            // API's by the SDK itself, automatically when the first AWS SDK request is made that requires our
+            // security credentials. The identity is then injected directly into the credentials object.
+            // If the first SDK call we make wants to use our IdentityID, we have a
+            // chicken and egg problem on our hands. We resolve this problem by "priming" the AWS SDK by calling a
+            // very innocuous API call that forces this behavior.
+            let clientParams = {};
+            if (_environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].sts_endpoint) {
+                clientParams.endpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].sts_endpoint;
+            }
+            let sts = new aws_sdk_clients_sts__WEBPACK_IMPORTED_MODULE_6__(clientParams);
+            sts.getCallerIdentity(function (err, data) {
+                console.log("UserLoginService: Successfully set the AWS credentials");
+                callback.cognitoCallback(null, session);
+            });
+        };
+        this.onLoginError = (callback, err) => {
+            callback.cognitoCallback(err.message, null);
+        };
+    }
+    authenticate(username, password, callback) {
+        console.log("UserLoginService: starting the authentication");
+        let authenticationData = {
+            Username: username,
+            Password: password,
+        };
+        let authenticationDetails = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_4__["AuthenticationDetails"](authenticationData);
+        let userData = {
+            Username: username,
+            Pool: this.cognitoUtil.getUserPool()
+        };
+        console.log("UserLoginService: Params set...Authenticating the user");
+        let cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_4__["CognitoUser"](userData);
+        console.log("UserLoginService: config is " + aws_sdk_global__WEBPACK_IMPORTED_MODULE_5__["config"]);
+        cognitoUser.authenticateUser(authenticationDetails, {
+            newPasswordRequired: (userAttributes, requiredAttributes) => callback.cognitoCallback(`User needs to set password.`, null),
+            onSuccess: result => this.onLoginSuccess(callback, result),
+            onFailure: err => this.onLoginError(callback, err),
+            mfaRequired: (challengeName, challengeParameters) => {
+                callback.handleMFAStep(challengeName, challengeParameters, (confirmationCode) => {
+                    cognitoUser.sendMFACode(confirmationCode, {
+                        onSuccess: result => this.onLoginSuccess(callback, result),
+                        onFailure: err => this.onLoginError(callback, err)
+                    });
+                });
+            }
+        });
+    }
+    forgotPassword(username, callback) {
+        let userData = {
+            Username: username,
+            Pool: this.cognitoUtil.getUserPool()
+        };
+        let cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_4__["CognitoUser"](userData);
+        cognitoUser.forgotPassword({
+            onSuccess: function () {
+            },
+            onFailure: function (err) {
+                callback.cognitoCallback(err.message, null);
+            },
+            inputVerificationCode() {
+                callback.cognitoCallback(null, null);
+            }
+        });
+    }
+    confirmNewPassword(email, verificationCode, password, callback) {
+        let userData = {
+            Username: email,
+            Pool: this.cognitoUtil.getUserPool()
+        };
+        let cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_4__["CognitoUser"](userData);
+        cognitoUser.confirmPassword(verificationCode, password, {
+            onSuccess: function () {
+                callback.cognitoCallback(null, null);
+            },
+            onFailure: function (err) {
+                callback.cognitoCallback(err.message, null);
+            }
+        });
+    }
+    logout() {
+        console.log("UserLoginService: Logging out");
+        this.ddb.writeLogEntry("logout");
+        this.cognitoUtil.getCurrentUser().signOut();
+    }
+    isAuthenticated(callback) {
+        if (callback == null)
+            throw ("UserLoginService: Callback in isAuthenticated() cannot be null");
+        let cognitoUser = this.cognitoUtil.getCurrentUser();
+        if (cognitoUser != null) {
+            cognitoUser.getSession(function (err, session) {
+                if (err) {
+                    console.log("UserLoginService: Couldn't get the session: " + err, err.stack);
+                    callback.isLoggedIn(err, false);
+                }
+                else {
+                    console.log("UserLoginService: Session is " + session.isValid());
+                    callback.isLoggedIn(err, session.isValid());
+                }
+            });
+        }
+        else {
+            console.log("UserLoginService: can't retrieve the current user");
+            callback.isLoggedIn("Can't retrieve the CurrentUser", false);
+        }
+    }
+};
+UserLoginService.ctorParameters = () => [
+    { type: _ddb_service__WEBPACK_IMPORTED_MODULE_2__["DynamoDBService"] },
+    { type: _cognito_service__WEBPACK_IMPORTED_MODULE_3__["CognitoUtil"] }
+];
+UserLoginService = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+    __metadata("design:paramtypes", [_ddb_service__WEBPACK_IMPORTED_MODULE_2__["DynamoDBService"], _cognito_service__WEBPACK_IMPORTED_MODULE_3__["CognitoUtil"]])
+], UserLoginService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/service/user-parameters.service.ts":
+/*!****************************************************!*\
+  !*** ./src/app/service/user-parameters.service.ts ***!
+  \****************************************************/
+/*! exports provided: UserParametersService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserParametersService", function() { return UserParametersService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _cognito_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cognito.service */ "./src/app/service/cognito.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+let UserParametersService = class UserParametersService {
+    constructor(cognitoUtil) {
+        this.cognitoUtil = cognitoUtil;
+    }
+    getParameters(callback) {
+        let cognitoUser = this.cognitoUtil.getCurrentUser();
+        if (cognitoUser != null) {
+            cognitoUser.getSession(function (err, session) {
+                if (err)
+                    console.log("UserParametersService: Couldn't retrieve the user");
+                else {
+                    cognitoUser.getUserAttributes(function (err, result) {
+                        if (err) {
+                            console.log("UserParametersService: in getParameters: " + err);
+                        }
+                        else {
+                            callback.callbackWithParam(result);
+                        }
+                    });
+                }
+            });
+        }
+        else {
+            callback.callbackWithParam(null);
+        }
+    }
+};
+UserParametersService.ctorParameters = () => [
+    { type: _cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"] }
+];
+UserParametersService = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+    __metadata("design:paramtypes", [_cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"]])
+], UserParametersService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/service/user-registration.service.ts":
+/*!******************************************************!*\
+  !*** ./src/app/service/user-registration.service.ts ***!
+  \******************************************************/
+/*! exports provided: UserRegistrationService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserRegistrationService", function() { return UserRegistrationService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _cognito_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cognito.service */ "./src/app/service/cognito.service.ts");
+/* harmony import */ var amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! amazon-cognito-identity-js */ "./node_modules/amazon-cognito-identity-js/es/index.js");
+/* harmony import */ var aws_sdk_global__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! aws-sdk/global */ "./node_modules/aws-sdk/browser.js");
+/* harmony import */ var aws_sdk_global__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(aws_sdk_global__WEBPACK_IMPORTED_MODULE_3__);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+let UserRegistrationService = class UserRegistrationService {
+    constructor(cognitoUtil) {
+        this.cognitoUtil = cognitoUtil;
+    }
+    register(user, callback) {
+        console.log("UserRegistrationService: user is " + user);
+        let attributeList = [];
+        // let dataEmail = {
+        //     Name: 'email',
+        //     Value: user.email
+        // };
+        // let dataNickname = {
+        //     Name: 'nickname',
+        //     Value: user.name
+        // };
+        // attributeList.push(new CognitoUserAttribute(dataEmail));
+        // attributeList.push(new CognitoUserAttribute(dataNickname));
+        // attributeList.push(new CognitoUserAttribute({
+        //     Name: 'phone_number',
+        //     Value: user.phone_number
+        // }));
+        // regUser.email = "sm92pj91@gmail.com"
+        // regUser.birthdate = "1991-01-01"
+        // regUser.family_name = "Mandeville"
+        // regUser.given_name = "Steph"
+        // regUser.password = "2Caravans"
+        let dataEmail = {
+            Name: 'email',
+            Value: "sm92pj91@gmail.com"
+        };
+        let dataGivenName = {
+            Name: 'given_name',
+            Value: 'Steph'
+        };
+        let dataFamilyName = {
+            Name: 'family_name',
+            Value: 'Mandeville'
+        };
+        let dataBirthdate = {
+            Name: 'birthdate',
+            Value: '1991-01-01'
+        };
+        attributeList.push(new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUserAttribute"](dataEmail));
+        attributeList.push(new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUserAttribute"](dataGivenName));
+        attributeList.push(new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUserAttribute"](dataFamilyName));
+        attributeList.push(new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUserAttribute"](dataBirthdate));
+        this.cognitoUtil.getUserPool().signUp("sm92pj91@gmail.com", "2-Caravans", attributeList, null, function (err, result) {
+            if (err) {
+                callback.cognitoCallback(err.message, null);
+            }
+            else {
+                console.log("UserRegistrationService: registered user is " + result);
+                callback.cognitoCallback(null, result);
+            }
+        });
+    }
+    confirmRegistration(username, confirmationCode, callback) {
+        let userData = {
+            Username: username,
+            Pool: this.cognitoUtil.getUserPool()
+        };
+        let cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUser"](userData);
+        cognitoUser.confirmRegistration(confirmationCode, true, function (err, result) {
+            if (err) {
+                callback.cognitoCallback(err.message, null);
+            }
+            else {
+                callback.cognitoCallback(null, result);
+            }
+        });
+    }
+    resendCode(username, callback) {
+        let userData = {
+            Username: username,
+            Pool: this.cognitoUtil.getUserPool()
+        };
+        let cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUser"](userData);
+        cognitoUser.resendConfirmationCode(function (err, result) {
+            if (err) {
+                callback.cognitoCallback(err.message, null);
+            }
+            else {
+                callback.cognitoCallback(null, result);
+            }
+        });
+    }
+    newPassword(newPasswordUser, callback) {
+        console.log(newPasswordUser);
+        // Get these details and call
+        //cognitoUser.completeNewPasswordChallenge(newPassword, userAttributes, this);
+        let authenticationData = {
+            Username: newPasswordUser.username,
+            Password: newPasswordUser.existingPassword,
+        };
+        let authenticationDetails = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["AuthenticationDetails"](authenticationData);
+        let userData = {
+            Username: newPasswordUser.username,
+            Pool: this.cognitoUtil.getUserPool()
+        };
+        console.log("UserLoginService: Params set...Authenticating the user");
+        let cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUser"](userData);
+        console.log("UserLoginService: config is " + aws_sdk_global__WEBPACK_IMPORTED_MODULE_3__["config"]);
+        cognitoUser.authenticateUser(authenticationDetails, {
+            newPasswordRequired: function (userAttributes, requiredAttributes) {
+                // User was signed up by an admin and must provide new
+                // password and required attributes, if any, to complete
+                // authentication.
+                // the api doesn't accept this field back
+                delete userAttributes.email_verified;
+                cognitoUser.completeNewPasswordChallenge(newPasswordUser.password, requiredAttributes, {
+                    onSuccess: function (result) {
+                        callback.cognitoCallback(null, userAttributes);
+                    },
+                    onFailure: function (err) {
+                        callback.cognitoCallback(err, null);
+                    }
+                });
+            },
+            onSuccess: function (result) {
+                callback.cognitoCallback(null, result);
+            },
+            onFailure: function (err) {
+                callback.cognitoCallback(err, null);
+            }
+        });
+    }
+};
+UserRegistrationService.ctorParameters = () => [
+    { type: _cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"], decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: [_cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"],] }] }
+];
+UserRegistrationService = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+    __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"])),
+    __metadata("design:paramtypes", [_cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"]])
+], UserRegistrationService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/utils/jwt.interceptor.ts":
+/*!******************************************!*\
+  !*** ./src/app/utils/jwt.interceptor.ts ***!
+  \******************************************/
+/*! exports provided: JwtInterceptor, IdTokenCallback */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JwtInterceptor", function() { return JwtInterceptor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IdTokenCallback", function() { return IdTokenCallback; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _service_cognito_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../service/cognito.service */ "./src/app/service/cognito.service.ts");
+/* harmony import */ var _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../service/user-login.service */ "./src/app/service/user-login.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+let JwtInterceptor = class JwtInterceptor {
+    constructor(router, userService, cognitoUtil) {
+        this.router = router;
+        this.userService = userService;
+        this.cognitoUtil = cognitoUtil;
+        this.userService.isAuthenticated(this);
+        console.log("in Jwt Interceptor");
+    }
+    isLoggedIn(message, isLoggedIn) {
+        if (!isLoggedIn) {
+            this.router.navigate(['/home/login']);
+        }
+        else {
+            this.cognitoUtil.getIdToken(new IdTokenCallback(this));
+        }
+    }
+    intercept(request, next) {
+        // let currentUser = this.cognitoUtil.getCurrentUser().
+        // if (currentUser && currentUser.token) {
+        request = request.clone({
+            setHeaders: {
+                Authorization: `Bearer ${this.idToken}`
+            }
+        });
+        // }
+        // console.log(this.idToken)
+        return next.handle(request);
+    }
+};
+JwtInterceptor.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"] },
+    { type: _service_cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"] }
+];
+JwtInterceptor = __decorate([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+    __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _service_user_login_service__WEBPACK_IMPORTED_MODULE_2__["UserLoginService"], _service_cognito_service__WEBPACK_IMPORTED_MODULE_1__["CognitoUtil"]])
+], JwtInterceptor);
+
+class IdTokenCallback {
+    constructor(jwt) {
+        this.jwt = jwt;
+    }
+    callback() {
+    }
+    callbackWithParam(result) {
+        this.jwt.idToken = result;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/environments/environment.ts":
+/*!*****************************************!*\
+  !*** ./src/environments/environment.ts ***!
+  \*****************************************/
+/*! exports provided: environment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const environment = {
+    production: false,
+    region: 'eu-west-1',
+    identityPoolId: 'eu-west-1:82cf5325-61d8-482a-a6e1-9d23c806c1d6',
+    userPoolId: 'eu-west-1_kRznVlVBx',
+    clientId: '1p4hhvhrnae4lb7darhvtk0goc',
+    rekognitionBucket: 'rekognition-pics',
+    albumName: "usercontent",
+    bucketRegion: 'eu-west-1',
+    ddbTableName: 'LoginTrail',
+    cognito_idp_endpoint: '',
+    cognito_identity_endpoint: '',
+    sts_endpoint: '',
+    dynamodb_endpoint: '',
+    s3_endpoint: '',
+    apiUrl: 'https://p6aap78qf4.execute-api.eu-west-1.amazonaws.com/dev',
+};
+
+
+/***/ }),
+
+/***/ "./src/main.ts":
+/*!*********************!*\
+  !*** ./src/main.ts ***!
+  \*********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _polyfills_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./polyfills.ts */ "./src/polyfills.ts");
+/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ "./node_modules/@angular/platform-browser-dynamic/fesm2015/platform-browser-dynamic.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _app___WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/ */ "./src/app/index.ts");
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+
+if (_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].production) {
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["enableProdMode"])();
+}
+Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformBrowserDynamic"])().bootstrapModule(_app___WEBPACK_IMPORTED_MODULE_4__["AppModule"]);
+
+
+/***/ }),
+
+/***/ "./src/polyfills.ts":
+/*!**************************!*\
+  !*** ./src/polyfills.ts ***!
+  \**************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/es/symbol */ "./node_modules/core-js/es/symbol/index.js");
+/* harmony import */ var core_js_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_es_object__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/es/object */ "./node_modules/core-js/es/object/index.js");
+/* harmony import */ var core_js_es_object__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_es_object__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_es_function__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/es/function */ "./node_modules/core-js/es/function/index.js");
+/* harmony import */ var core_js_es_function__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_es_function__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_es_parse_int__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/es/parse-int */ "./node_modules/core-js/es/parse-int.js");
+/* harmony import */ var core_js_es_parse_int__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_es_parse_int__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_es_parse_float__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/es/parse-float */ "./node_modules/core-js/es/parse-float.js");
+/* harmony import */ var core_js_es_parse_float__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_es_parse_float__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_es_number__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/es/number */ "./node_modules/core-js/es/number/index.js");
+/* harmony import */ var core_js_es_number__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_es_number__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_es_math__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/es/math */ "./node_modules/core-js/es/math/index.js");
+/* harmony import */ var core_js_es_math__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_es_math__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_es_string__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/es/string */ "./node_modules/core-js/es/string/index.js");
+/* harmony import */ var core_js_es_string__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_es_string__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_es_date__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/es/date */ "./node_modules/core-js/es/date/index.js");
+/* harmony import */ var core_js_es_date__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_es_date__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_es_array__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/es/array */ "./node_modules/core-js/es/array/index.js");
+/* harmony import */ var core_js_es_array__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_es_array__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_es_regexp__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/es/regexp */ "./node_modules/core-js/es/regexp/index.js");
+/* harmony import */ var core_js_es_regexp__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_es_regexp__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_es_map__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/es/map */ "./node_modules/core-js/es/map/index.js");
+/* harmony import */ var core_js_es_map__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_es_map__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_es_set__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/es/set */ "./node_modules/core-js/es/set/index.js");
+/* harmony import */ var core_js_es_set__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_es_set__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_es_reflect__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/es/reflect */ "./node_modules/core-js/es/reflect/index.js");
+/* harmony import */ var core_js_es_reflect__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_es_reflect__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! zone.js/dist/zone */ "./node_modules/zone.js/dist/zone-evergreen.js");
+/* harmony import */ var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_14__);
+var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
+  return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ 0:
+/*!***************************!*\
+  !*** multi ./src/main.ts ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! /Users/psj03/challenge/challenge-accepted-cms/src/main.ts */"./src/main.ts");
+
+
+/***/ }),
+
+/***/ 1:
+/*!********************!*\
+  !*** fs (ignored) ***!
+  \********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ })
+
+},[[0,"runtime","vendor"]]]);
+//# sourceMappingURL=main-es2015.js.map
