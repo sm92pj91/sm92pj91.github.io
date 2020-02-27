@@ -141,7 +141,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<form class=\"form-signin\" method=\"POST\" action=\"#\" role=\"form\">\n    <div class=\"form-group\">\n        <h2>Create account</h2>\n    </div>\n    <div *ngIf=\"errorMessage!=null\" class=\"alert alert-danger\">\n        {{ errorMessage }}\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupName\">Name</label>\n        <input id=\"signupName\" type=\"text\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"registrationUser.name\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupEmail\">Email</label>\n        <input id=\"signupEmail\" type=\"email\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"registrationUser.email\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupPhone\">Phone number</label>\n        <input id=\"signupPhone\" type=\"text\" maxlength=\"13\" class=\"form-control\"\n               [(ngModel)]=\"registrationUser.phone_number\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupPassword\">Password</label>\n        <input id=\"signupPassword\" type=\"password\" maxlength=\"25\" class=\"form-control\"\n               placeholder=\"at least 8 characters\" length=\"40\" [(ngModel)]=\"registrationUser.password\"\n               [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <button (click)=\"onRegister()\" id=\"signupSubmit\" type=\"submit\" class=\"btn btn-info btn-block\">\n            Create your account\n        </button>\n    </div>\n    <hr>\n    <p>Already have an account? <a [routerLink]=\"['/home/login']\"> <i class=\"fa fa-fw fa-lock\"></i>Login</a></p>\n</form>\n\n";
+    __webpack_exports__["default"] = "<form class=\"form-signin\" method=\"POST\" action=\"#\" role=\"form\">\n    <div class=\"form-group\">\n        <h2>Create account</h2>\n    </div>\n    <div *ngIf=\"errorMessage!=null\" class=\"alert alert-danger\">\n        {{ errorMessage }}\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupEmail\">Email</label>\n        <input id=\"signupEmail\" type=\"email\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"registrationUser.email\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupFirstname\">First Name</label>\n        <input id=\"signupFirstname\" type=\"text\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"registrationUser.given_name\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupSurname\">Surname</label>\n        <input id=\"signupSurname\" type=\"text\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"registrationUser.family_name\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupdob\">First Name</label>\n        <input id=\"signupdob\" type=\"text\" maxlength=\"50\" class=\"form-control\"\n               [(ngModel)]=\"registrationUser.birthdate\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label\" for=\"signupPassword\">DOB (dd-mm-yyy)</label>\n        <input id=\"signupPassword\" type=\"password\" maxlength=\"25\" class=\"form-control\"\n               placeholder=\"at least 8 characters\" length=\"40\" [(ngModel)]=\"registrationUser.password\"\n               [ngModelOptions]=\"{standalone: true}\">\n    </div>\n    <div class=\"form-group\">\n        <button (click)=\"onRegister()\" id=\"signupSubmit\" type=\"submit\" class=\"btn btn-info btn-block\">\n            Create your account\n        </button>\n    </div>\n    <hr>\n    <p>Already have an account? <a [routerLink]=\"['/home/login']\"> <i class=\"fa fa-fw fa-lock\"></i>Login</a></p>\n</form>\n\n";
     /***/
   },
 
@@ -3667,47 +3667,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "register",
         value: function register(user, callback) {
           console.log("UserRegistrationService: user is " + user);
-          var attributeList = []; // let dataEmail = {
-          //     Name: 'email',
-          //     Value: user.email
-          // };
-          // let dataNickname = {
-          //     Name: 'nickname',
-          //     Value: user.name
-          // };
-          // attributeList.push(new CognitoUserAttribute(dataEmail));
-          // attributeList.push(new CognitoUserAttribute(dataNickname));
-          // attributeList.push(new CognitoUserAttribute({
-          //     Name: 'phone_number',
-          //     Value: user.phone_number
-          // }));
-          // regUser.email = "sm92pj91@gmail.com"
-          // regUser.birthdate = "1991-01-01"
-          // regUser.family_name = "Mandeville"
-          // regUser.given_name = "Steph"
-          // regUser.password = "2Caravans"
-
+          var attributeList = [];
           var dataEmail = {
             Name: 'email',
-            Value: "sm92pj91@gmail.com"
+            Value: user.email
           };
           var dataGivenName = {
             Name: 'given_name',
-            Value: 'Steph'
+            Value: user.given_name
           };
           var dataFamilyName = {
             Name: 'family_name',
-            Value: 'Mandeville'
+            Value: user.family_name
           };
           var dataBirthdate = {
             Name: 'birthdate',
-            Value: '1991-01-01'
+            Value: user.birthdate
           };
           attributeList.push(new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUserAttribute"](dataEmail));
           attributeList.push(new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUserAttribute"](dataGivenName));
           attributeList.push(new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUserAttribute"](dataFamilyName));
           attributeList.push(new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__["CognitoUserAttribute"](dataBirthdate));
-          this.cognitoUtil.getUserPool().signUp("sm92pj91@gmail.com", "2-Caravans", attributeList, null, function (err, result) {
+          this.cognitoUtil.getUserPool().signUp(user.email, user.password, attributeList, null, function (err, result) {
             if (err) {
               callback.cognitoCallback(err.message, null);
             } else {
@@ -3986,9 +3967,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var environment = {
       production: false,
       region: 'eu-west-1',
-      identityPoolId: 'eu-west-1:82cf5325-61d8-482a-a6e1-9d23c806c1d6',
-      userPoolId: 'eu-west-1_kRznVlVBx',
-      clientId: '1p4hhvhrnae4lb7darhvtk0goc',
+      identityPoolId: 'eu-west-1:0bf58654-f85a-4f19-97eb-27c63dab47df',
+      userPoolId: 'eu-west-1_t8pZSNmmY',
+      clientId: '5o27hpnvud73r9c0sh338v6pkb',
       rekognitionBucket: 'rekognition-pics',
       albumName: "usercontent",
       bucketRegion: 'eu-west-1',
@@ -3998,7 +3979,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       sts_endpoint: '',
       dynamodb_endpoint: '',
       s3_endpoint: '',
-      apiUrl: 'https://p6aap78qf4.execute-api.eu-west-1.amazonaws.com/dev'
+      apiUrl: 'https://cmfz9gue62.execute-api.eu-west-1.amazonaws.com/dev'
     };
     /***/
   },
