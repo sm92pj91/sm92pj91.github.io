@@ -60624,7 +60624,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this2 = this;
 
           this.filterService.getCategories().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (filter) {
-            _this2.categories = filter[0].Data;
+            _this2.categories = filter.Data;
             var children = [];
 
             for (var i = 0; i < _this2.categories.length; i++) {
@@ -61094,7 +61094,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this8 = this;
 
           this.filterService.getCategories().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (filter) {
-            _this8.categories = filter[0].Data;
+            _this8.categories = filter.Data;
             var children = [];
 
             for (var i = 0; i < _this8.categories.length; i++) {

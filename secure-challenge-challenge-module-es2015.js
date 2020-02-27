@@ -46006,7 +46006,7 @@ let CreateChallengeComponent = class CreateChallengeComponent {
     }
     loadCategories() {
         this.filterService.getCategories().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(filter => {
-            this.categories = filter[0].Data;
+            this.categories = filter.Data;
             const children = [];
             for (var i = 0; i < this.categories.length; i++) {
                 children.push({ label: this.categories[i], value: this.categories[i] });
@@ -46322,7 +46322,7 @@ let EditChallengeComponent = class EditChallengeComponent {
     }
     loadCategories() {
         this.filterService.getCategories().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(filter => {
-            this.categories = filter[0].Data;
+            this.categories = filter.Data;
             const children = [];
             for (var i = 0; i < this.categories.length; i++) {
                 children.push({ label: this.categories[i], value: this.categories[i] });
