@@ -3979,7 +3979,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       sts_endpoint: '',
       dynamodb_endpoint: '',
       s3_endpoint: '',
-      apiUrl: 'https://cmfz9gue62.execute-api.eu-west-1.amazonaws.com/dev'
+      apiUrl: 'https://cmfz9gue62.execute-api.eu-west-1.amazonaws.com/preprod'
     };
     /***/
   },
