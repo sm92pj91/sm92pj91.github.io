@@ -60706,13 +60706,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onSubmit",
         value: function onSubmit(challengesubmitted) {
-          var _this5 = this;
-
-          console.log("submitting changes");
-
-          if (this.selectedFile == null) {
-            return false;
-          }
+          console.log("submitting changes"); // if (this.selectedFile == null) {
+          //   return false;
+          // }
 
           this.challenge.ChallengeItems = [];
           this.challenge.CategoryItems = [];
@@ -60772,39 +60768,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           }
 
-          this.challenge.Image = this.selectedFile; // console.log(this.challenge)
-
-          this.challengeService.create(this.challenge).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (val) {
-            console.log("POST call successful value returned in body", val);
-
-            _this5.showSuccessModal("Challenge Successfully Edited!");
-          }, function (response) {
-            console.log("POST call in error", response);
-            _this5.failureMessage = response;
-
-            _this5.showFailureModal();
-          }, function () {
-            console.log("The POST observable is now completed.");
-          });
+          if (this.selectedFile) this.challenge.Image = this.selectedFile;
+          console.log(this.challenge);
+          this.handleResponse(this.challengeService.create(this.challenge).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()), "Challenge Successfully Created!");
         }
       }, {
         key: "deleteChallenge",
         value: function deleteChallenge() {
-          var _this6 = this;
-
-          console.log("Deleting Challenge");
-          this.challengeService.delete(this.challenge.ChallengeId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (val) {
-            console.log("POST call successful value returned in body", val);
-
-            _this6.showSuccessModal("Challenge Successfully Deleted!");
-          }, function (response) {
-            console.log("POST call in error", response);
-            _this6.failureMessage = response;
-
-            _this6.showFailureModal();
-          }, function () {
-            console.log("The POST observable is now completed.");
-          });
+          this.handleResponse(this.challengeService.delete(this.challenge.ChallengeId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()), "Challenge Successfully Deleted!");
         }
       }, {
         key: "categoriesChange",
@@ -60825,6 +60796,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           };
           var index = this.listOfControl.push(control);
           this.challengeItems.push(new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](item, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required));
+        }
+      }, {
+        key: "handleResponse",
+        value: function handleResponse(call, successString) {
+          var _this5 = this;
+
+          call.subscribe(function (val) {
+            console.log("POST call successful value returned in body", val);
+
+            _this5.showSuccessModal(successString);
+          }, function (err) {
+            console.log("POST call in error", err);
+            _this5.failureMessage = "Failed with error:\n\nStatus code: ".concat(err.status, "\n\nError Message: ").concat(err.error.Error);
+
+            _this5.showFailureModal();
+          }, function () {
+            console.log("The POST observable is now completed.");
+          });
         }
       }, {
         key: "removeField",
@@ -60890,7 +60879,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getBase64ImageFromURL",
         value: function getBase64ImageFromURL(url) {
-          var _this7 = this;
+          var _this6 = this;
 
           return rxjs__WEBPACK_IMPORTED_MODULE_8__["Observable"].create(function (observer) {
             // create an image object
@@ -60901,7 +60890,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (!img.complete) {
               // This will call another method that will create image from url
               img.onload = function () {
-                observer.next(_this7.getBase64Image(img));
+                observer.next(_this6.getBase64Image(img));
                 observer.complete();
               };
 
@@ -60909,7 +60898,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 observer.error(err);
               };
             } else {
-              observer.next(_this7.getBase64Image(img));
+              observer.next(_this6.getBase64Image(img));
               observer.complete();
             }
           });
@@ -61132,95 +61121,95 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "loadCategories",
         value: function loadCategories() {
-          var _this8 = this;
+          var _this7 = this;
 
           this.filterService.getCategories().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (filter) {
-            _this8.categories = filter.Data;
+            _this7.categories = filter.Data;
             var children = [];
 
-            for (var i = 0; i < _this8.categories.length; i++) {
+            for (var i = 0; i < _this7.categories.length; i++) {
               children.push({
-                label: _this8.categories[i],
-                value: _this8.categories[i]
+                label: _this7.categories[i],
+                value: _this7.categories[i]
               });
             }
 
-            _this8.listOfOption = children;
+            _this7.listOfOption = children;
           });
         }
       }, {
         key: "loadChallenge",
         value: function loadChallenge(id) {
-          var _this9 = this;
+          var _this8 = this;
 
           this.challengeService.getById(id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (challenge) {
-            _this9.challenge = challenge;
+            _this8.challenge = challenge;
 
-            _this9.formGroup.get('challengeType').setValue(challenge.ChallengeType);
+            _this8.formGroup.get('challengeType').setValue(challenge.ChallengeType);
 
-            _this9.formGroup.get('challengeName').setValue(challenge.Name);
+            _this8.formGroup.get('challengeName').setValue(challenge.Name);
 
-            _this9.formGroup.get('description').setValue(challenge.Description);
+            _this8.formGroup.get('description').setValue(challenge.Description);
 
-            _this9.selectedValue = challenge.IsActive ? "true" : "false";
-            _this9.isSearchableValue = challenge.IsSearchable ? "true" : "false";
+            _this8.selectedValue = challenge.IsActive ? "true" : "false";
+            _this8.isSearchableValue = challenge.IsSearchable ? "true" : "false";
 
-            _this9.formGroup.get("progressType").setValue(challenge.ProgressType != null ? challenge.ProgressType : "percentage");
+            _this8.formGroup.get("progressType").setValue(challenge.ProgressType != null ? challenge.ProgressType : "percentage");
 
             if (challenge.ChallengeType === "BASICINTERVAL") {
-              _this9.formGroup.get("interval").setValue(challenge.Interval);
+              _this8.formGroup.get("interval").setValue(challenge.Interval);
             }
 
             if (challenge.ChallengeType !== "CATEGORIES") {
-              _this9.formGroup.get('challengeItems').patchValue([challenge.ChallengeItems[0].item]);
+              _this8.formGroup.get('challengeItems').patchValue([challenge.ChallengeItems[0].item]);
 
               for (var i = 1; i < challenge.ChallengeItems.length; i++) {
-                _this9.addField(null, challenge.ChallengeItems[i].item);
+                _this8.addField(null, challenge.ChallengeItems[i].item);
               }
             } else {
-              _this9.formGroup.get('challengeItems').patchValue(["Category:" + challenge.CategoryItems[0].Category]);
+              _this8.formGroup.get('challengeItems').patchValue(["Category:" + challenge.CategoryItems[0].Category]);
 
               for (var i = 0; i < challenge.CategoryItems.length; i++) {
                 if (i != 0) {
-                  _this9.addField(null, "Category:" + challenge.CategoryItems[i].Category);
+                  _this8.addField(null, "Category:" + challenge.CategoryItems[i].Category);
                 }
 
                 for (var j = 0; j < challenge.CategoryItems[i].ChallengeItems.length; j++) {
-                  _this9.addField(null, challenge.CategoryItems[i].ChallengeItems[j].item);
+                  _this8.addField(null, challenge.CategoryItems[i].ChallengeItems[j].item);
                 }
               }
             }
 
             for (var i = 0; i < challenge.Categories.length; i++) {
-              _this9.listOfTagOptions.push(challenge.Categories[i]);
+              _this8.listOfTagOptions.push(challenge.Categories[i]);
             }
           });
         }
       }, {
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this10 = this;
+          var _this9 = this;
 
           this.challengeId = this.activatedRoute.snapshot.params['id'];
           this.loadChallenge(this.challengeId);
           this.getBase64ImageFromURL("https://challenge-accepted-mob.s3.eu-west-2.amazonaws.com/challenges/" + this.challengeId + "/main.jpg").subscribe(function (base64data) {
             // this is the image as dataUrl
-            _this10.selectedFile = base64data;
+            _this9.selectedFile = base64data;
 
-            _this10.files.push("main.jpg");
+            _this9.files.push("main.jpg");
           });
           this.loadCategories();
         }
       }, {
         key: "uploadFile",
         value: function uploadFile(event) {
-          var _this11 = this;
+          var _this10 = this;
 
           for (var index = 0; index < event.length; index++) {
             var element = event[index];
             var reader = new FileReader();
             reader.addEventListener('load', function (event) {
-              _this11.selectedFile = event.target.result.split(',')[1];
+              _this10.selectedFile = event.target.result.split(',')[1];
             });
             reader.readAsDataURL(element);
             this.files.push(element.name);
@@ -61229,7 +61218,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "uploadItemFile",
         value: function uploadItemFile(event) {
-          var _this12 = this;
+          var _this11 = this;
 
           for (var index = 0; index < event.length; index++) {
             var element = event[index];
@@ -61237,10 +61226,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             reader.addEventListener('load', function (event) {
               var uploadedItems = event.target.result.split('\n');
 
-              _this12.formGroup.get('challengeItems').patchValue([uploadedItems[0].replace('"', '').replace('"', '')]);
+              _this11.formGroup.get('challengeItems').patchValue([uploadedItems[0].replace('"', '').replace('"', '')]);
 
               for (var i = 1; i < uploadedItems.length; i++) {
-                _this12.addField(null, uploadedItems[i]);
+                _this11.addField(null, uploadedItems[i]);
               }
             });
             reader.readAsText(element);
@@ -61261,8 +61250,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onSubmit",
         value: function onSubmit(challengesubmitted) {
-          var _this13 = this;
-
           console.log(this.updateImage);
           console.log("submitting changes");
           this.challenge.ChallengeItems = [];
@@ -61329,18 +61316,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
 
           console.log(this.challenge);
-          this.challengeService.update(this.challenge).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (val) {
-            console.log("POST call successful value returned in body", val);
-
-            _this13.showSuccessModal("Challenge Successfully Edited!");
-          }, function (response) {
-            console.log("POST call in error", response);
-            _this13.failureMessage = response;
-
-            _this13.showFailureModal();
-          }, function () {
-            console.log("The POST observable is now completed.");
-          });
+          this.handleResponse(this.challengeService.create(this.challenge).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()), "Challenge Successfully Created!");
         }
       }, {
         key: "deleteChallengeModel",
@@ -61355,27 +61331,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "deleteChallenge",
         value: function deleteChallenge() {
-          var _this14 = this;
-
-          console.log("delete");
-          this.deleteVisible = false;
-          this.challengeService.delete(this.challenge.ChallengeId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (val) {
-            console.log("POST call successful value returned in body", val);
-
-            _this14.showSuccessModal("Challenge Successfully Deleted!");
-          }, function (response) {
-            console.log("POST call in error", response);
-            _this14.failureMessage = response;
-
-            _this14.showFailureModal();
-          }, function () {
-            console.log("The POST observable is now completed.");
-          });
+          this.handleResponse(this.challengeService.delete(this.challenge.ChallengeId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()), "Challenge Successfully Deleted!");
         }
       }, {
         key: "categoriesChange",
         value: function categoriesChange(event) {
           console.log(event);
+        }
+      }, {
+        key: "handleResponse",
+        value: function handleResponse(call, successString) {
+          var _this12 = this;
+
+          call.subscribe(function (val) {
+            console.log("POST call successful value returned in body", val);
+
+            _this12.showSuccessModal(successString);
+          }, function (err) {
+            console.log("POST call in error", err);
+            _this12.failureMessage = "Failed with error:\n\nStatus code: ".concat(err.status, "\n\nError Message: ").concat(err.error.Error);
+
+            _this12.showFailureModal();
+          }, function () {
+            console.log("The POST observable is now completed.");
+          });
         }
       }, {
         key: "addField",
@@ -61456,7 +61435,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getBase64ImageFromURL",
         value: function getBase64ImageFromURL(url) {
-          var _this15 = this;
+          var _this13 = this;
 
           return rxjs__WEBPACK_IMPORTED_MODULE_8__["Observable"].create(function (observer) {
             // create an image object
@@ -61467,7 +61446,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (!img.complete) {
               // This will call another method that will create image from url
               img.onload = function () {
-                observer.next(_this15.getBase64Image(img));
+                observer.next(_this13.getBase64Image(img));
                 observer.complete();
               };
 
@@ -61475,7 +61454,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 observer.error(err);
               };
             } else {
-              observer.next(_this15.getBase64Image(img));
+              observer.next(_this13.getBase64Image(img));
               observer.complete();
             }
           });
@@ -61748,10 +61727,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "loadAllChallenges",
         value: function loadAllChallenges() {
-          var _this16 = this;
+          var _this14 = this;
 
           this.challengeService.getAll().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["first"])()).subscribe(function (challenges) {
-            _this16.challenges = challenges;
+            _this14.challenges = challenges;
           });
         }
       }]);

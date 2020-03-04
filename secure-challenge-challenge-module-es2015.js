@@ -46058,9 +46058,9 @@ let CreateChallengeComponent = class CreateChallengeComponent {
     }
     onSubmit(challengesubmitted) {
         console.log("submitting changes");
-        if (this.selectedFile == null) {
-            return false;
-        }
+        // if (this.selectedFile == null) {
+        //   return false;
+        // }
         this.challenge.ChallengeItems = [];
         this.challenge.CategoryItems = [];
         this.challenge.Name = challengesubmitted.challengeName;
@@ -46113,31 +46113,13 @@ let CreateChallengeComponent = class CreateChallengeComponent {
                 this.challenge.Categories.push(this.listOfTagOptions[i]);
             }
         }
-        this.challenge.Image = this.selectedFile;
-        // console.log(this.challenge)
-        this.challengeService.create(this.challenge).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe((val) => {
-            console.log("POST call successful value returned in body", val);
-            this.showSuccessModal("Challenge Successfully Edited!");
-        }, response => {
-            console.log("POST call in error", response);
-            this.failureMessage = response;
-            this.showFailureModal();
-        }, () => {
-            console.log("The POST observable is now completed.");
-        });
+        if (this.selectedFile)
+            this.challenge.Image = this.selectedFile;
+        console.log(this.challenge);
+        this.handleResponse(this.challengeService.create(this.challenge).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()), "Challenge Successfully Created!");
     }
     deleteChallenge() {
-        console.log("Deleting Challenge");
-        this.challengeService.delete(this.challenge.ChallengeId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe((val) => {
-            console.log("POST call successful value returned in body", val);
-            this.showSuccessModal("Challenge Successfully Deleted!");
-        }, response => {
-            console.log("POST call in error", response);
-            this.failureMessage = response;
-            this.showFailureModal();
-        }, () => {
-            console.log("The POST observable is now completed.");
-        });
+        this.handleResponse(this.challengeService.delete(this.challenge.ChallengeId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()), "Challenge Successfully Deleted!");
     }
     categoriesChange(event) {
         console.log(event);
@@ -46153,6 +46135,20 @@ let CreateChallengeComponent = class CreateChallengeComponent {
         };
         const index = this.listOfControl.push(control);
         this.challengeItems.push(new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](item, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required));
+    }
+    handleResponse(call, successString) {
+        call.subscribe((val) => {
+            console.log("POST call successful value returned in body", val);
+            this.showSuccessModal(successString);
+        }, (err) => {
+            console.log("POST call in error", err);
+            this.failureMessage = `Failed with error:\n
+Status code: ${err.status}\n
+Error Message: ${err.error.Error}`;
+            this.showFailureModal();
+        }, () => {
+            console.log("The POST observable is now completed.");
+        });
     }
     removeField(i, e) {
         e.preventDefault();
@@ -46497,16 +46493,7 @@ let EditChallengeComponent = class EditChallengeComponent {
             this.challenge.Image = this.selectedFile;
         }
         console.log(this.challenge);
-        this.challengeService.update(this.challenge).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe((val) => {
-            console.log("POST call successful value returned in body", val);
-            this.showSuccessModal("Challenge Successfully Edited!");
-        }, response => {
-            console.log("POST call in error", response);
-            this.failureMessage = response;
-            this.showFailureModal();
-        }, () => {
-            console.log("The POST observable is now completed.");
-        });
+        this.handleResponse(this.challengeService.create(this.challenge).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()), "Challenge Successfully Created!");
     }
     deleteChallengeModel() {
         this.deleteVisible = true;
@@ -46515,21 +46502,24 @@ let EditChallengeComponent = class EditChallengeComponent {
         this.deleteVisible = false;
     }
     deleteChallenge() {
-        console.log("delete");
-        this.deleteVisible = false;
-        this.challengeService.delete(this.challenge.ChallengeId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe((val) => {
+        this.handleResponse(this.challengeService.delete(this.challenge.ChallengeId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()), "Challenge Successfully Deleted!");
+    }
+    categoriesChange(event) {
+        console.log(event);
+    }
+    handleResponse(call, successString) {
+        call.subscribe((val) => {
             console.log("POST call successful value returned in body", val);
-            this.showSuccessModal("Challenge Successfully Deleted!");
-        }, response => {
-            console.log("POST call in error", response);
-            this.failureMessage = response;
+            this.showSuccessModal(successString);
+        }, (err) => {
+            console.log("POST call in error", err);
+            this.failureMessage = `Failed with error:\n
+Status code: ${err.status}\n
+Error Message: ${err.error.Error}`;
             this.showFailureModal();
         }, () => {
             console.log("The POST observable is now completed.");
         });
-    }
-    categoriesChange(event) {
-        console.log(event);
     }
     addField(e, item) {
         if (e) {
