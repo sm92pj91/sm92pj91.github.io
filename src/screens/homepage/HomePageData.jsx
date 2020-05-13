@@ -137,7 +137,7 @@ const Container = () => {
         (dragIndex) => {
           const dragCard = cards[dragIndex]
           setCards(
-              cards.filter((card) => card.id != dragIndex)
+              cards.filter((card) => card.id !== dragIndex)
           )
         },
         [cards],
