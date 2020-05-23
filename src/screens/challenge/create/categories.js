@@ -7,8 +7,14 @@ export const CATEGORIES = [
   "Film & TV",
   "Customisable",
   "Sports",
-  "New",
   "Arts & Culture",
   "Daily Life",
-  "Music"
+  "Music",
+  "30 day challenges",
+  "Theatre",
+  "Get Creative",
+  "Productivity",
+  "At Home",
+  "Wellbeing",
+  "For Kids",
 ]
