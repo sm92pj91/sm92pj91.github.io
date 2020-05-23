@@ -13,7 +13,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -23,8 +23,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Build
         run: |
-          yarn install
-          yarn build
+          npm install
+          npm run build
 
       # Runs a set of commands using the runners shell
 #      - name: Deploy
