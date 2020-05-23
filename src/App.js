@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {Layout} from 'antd';
 import {MyHeader} from "./components/layout/header";
-import {BrowserRouter as Router, Route, useLocation} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {SearchScreenDefault} from "./screens/search/search-screen-default";
 import {AddRssFeedScreen} from "./screens/add-rss-feed";
 import {AuthScreen} from "./screens/auth/auth-screen";
@@ -44,7 +44,6 @@ export class App extends React.Component {
               render={props => (
                   <prop.component
                       {...props}
-                      // handleClick={this.handleNotificationClick}
                   />
               )}
               key={key}
