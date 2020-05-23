@@ -1,19 +1,23 @@
 import React from "react";
-import { useDropzone } from "react-dropzone";
+import {useDropzone} from "react-dropzone";
 import "./Dropzone.css"
+
 const getClassName = (className, isActive) => {
-  if (!isActive) return className;
+  if (!isActive) {
+    return className;
+  }
   return `${className} ${className}-active`;
 };
 
-const Dropzone = ({ onDrop, accept, title }) => {
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+const Dropzone = ({onDrop, accept, title}) => {
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({
     onDrop,
     accept
   });
 
   return (
-      <div className={getClassName("dropzone", isDragActive)} {...getRootProps()}>
+      <div className={getClassName("dropzone",
+          isDragActive)} {...getRootProps()}>
         <input className="dropzone-input" {...getInputProps()} />
         <div className="text-center">
           {isDragActive ? (

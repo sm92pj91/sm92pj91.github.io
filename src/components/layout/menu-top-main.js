@@ -7,87 +7,95 @@ import {Auth} from "aws-amplify";
 
 export class MyMenuTopMain extends React.Component {
 
-    state = {
-        loggedIn: false
-    };
+  state = {
+    loggedIn: false
+  };
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        Hub.listen(AuthService.CHANNEL, this.onHubCapsule, 'MyListener');
+    Hub.listen(AuthService.CHANNEL, this.onHubCapsule, 'MyListener');
+  }
+
+  componentDidMount() {
+    // Check if the user is already logged-in...if so, redirect
+    Auth.currentAuthenticatedUser({
+      bypassCache: true
+    }).then(user => {
+      Auth.currentAuthenticatedUser({
+        bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+      }).then(user => this.setState({firstname: user.attributes.given_name}))
+      .catch(err => console.log(err));
+      this.setState({loggedIn: true});
+    })
+    .catch(err => {
+      this.setState({loggedIn: false});
+    });
+  }
+
+  onHubCapsule = (capsule) => {
+    const {channel, payload} = capsule;
+    if (channel === AuthService.CHANNEL &&
+        payload.event === AuthService.AUTH_EVENTS.LOGIN) {
+      if (payload.success) {
+        this.setState({
+          loggedIn: true,
+          username: payload.username,
+          firstname: payload.user.attributes.given_name
+        });
+      }
+    } else if (channel === AuthService.CHANNEL &&
+        payload.event === AuthService.AUTH_EVENTS.SIGN_OUT) {
+      if (payload.success) {
+        this.setState({loggedIn: false, username: ""});
+        notification.open({
+          type: 'info',
+          message: 'You have logged out',
+          duration: 10
+        });
+      }
     }
+  };
 
-    componentDidMount() {
-        // Check if the user is already logged-in...if so, redirect
-        Auth.currentAuthenticatedUser({
-            bypassCache: true
-        }).then(user => {
-            Auth.currentAuthenticatedUser({
-                bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-            }).then(user => this.setState({firstname: user.attributes.given_name}))
-            .catch(err => console.log(err));
-            this.setState({loggedIn: true});
-        })
-            .catch(err => {
-                this.setState({loggedIn: false});
-            });
-    }
+  onAuthEvent(payload) {
+    // ... your implementation
+  }
 
+  logout() {
+    AuthService.signOut()
+  }
 
-    onHubCapsule = (capsule) => {
-        const {channel, payload} = capsule;
-        if (channel === AuthService.CHANNEL &&
-            payload.event === AuthService.AUTH_EVENTS.LOGIN) {
-            if (payload.success) {
-                this.setState({loggedIn: true, username: payload.username, firstname: payload.user.attributes.given_name});
-            }
-        } else if (channel === AuthService.CHANNEL &&
-            payload.event === AuthService.AUTH_EVENTS.SIGN_OUT) {
-            if (payload.success) {
-                this.setState({loggedIn: false, username: ""});
-                notification.open({
-                    type: 'info',
-                    message: 'You have logged out',
-                    duration: 10
-                });
-            }
-        }
-    };
+  render() {
+    return (<Menu
+        theme="light"
+        mode="horizontal"
+        // defaultSelectedKeys={[this.props.location.pathname]}
+        style={{lineHeight: '64px'}}
+    >
+      <Menu.Item key="search"><Link to="/"><Icon
+          type="home"/> Home</Link></Menu.Item>
+      {/*<Menu.Item key="browse"><Link to="browse"><Icon type="search"/> Browse </Link></Menu.Item>*/}
+      {/*<Menu.Item key="addrss"><Link to="addrss"><Icon type="plus"/> Submit RSS Feed</Link></Menu.Item>*/}
+      <Menu.SubMenu
+          title={
+            <Avatar shape="square" size="large">{this.state.firstname}</Avatar>
+          }
+      >
+        <Menu.ItemGroup title="Settings">
+          <Menu.Item key="setting:1"><Link
+              to="profile">Profile</Link></Menu.Item>
+          <Menu.Item key="setting:2"><Link
+              to="settings">Settings</Link></Menu.Item>
+        </Menu.ItemGroup>
 
-    onAuthEvent(payload) {
-        // ... your implementation
-    }
+        {this.state.loggedIn &&
+        <Menu.Item key="auth:1" onClick={this.logout}><Icon type="home"/> Log
+          Out</Menu.Item>}
+        {!this.state.loggedIn &&
+        <Menu.Item key="auth:2"><Link to="login"><Icon type="home"/> Log
+          In</Link></Menu.Item>}
+      </Menu.SubMenu>
 
-    logout() {
-        AuthService.signOut()
-    }
-
-    render() {
-        return (<Menu
-            theme="light"
-            mode="horizontal"
-            // defaultSelectedKeys={[this.props.location.pathname]}
-            style={{lineHeight: '64px'}}
-        >
-            <Menu.Item key="search"><Link to="/"><Icon type="home"/> Home</Link></Menu.Item>
-            {/*<Menu.Item key="browse"><Link to="browse"><Icon type="search"/> Browse </Link></Menu.Item>*/}
-            {/*<Menu.Item key="addrss"><Link to="addrss"><Icon type="plus"/> Submit RSS Feed</Link></Menu.Item>*/}
-            <Menu.SubMenu
-                title={
-                    <Avatar shape="square" size="large">{this.state.firstname}</Avatar>
-                }
-            >
-                <Menu.ItemGroup title="Settings">
-                    <Menu.Item key="setting:1"><Link to="profile">Profile</Link></Menu.Item>
-                    <Menu.Item key="setting:2"><Link to="settings">Settings</Link></Menu.Item>
-                </Menu.ItemGroup>
-
-                {this.state.loggedIn &&
-                <Menu.Item key="auth:1" onClick={this.logout}><Icon type="home"/> Log Out</Menu.Item>}
-                {!this.state.loggedIn &&
-                <Menu.Item key="auth:2"><Link to="login"><Icon type="home"/> Log In</Link></Menu.Item>}
-            </Menu.SubMenu>
-
-        </Menu>)
-    }
+    </Menu>)
+  }
 }

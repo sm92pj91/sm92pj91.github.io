@@ -1,15 +1,21 @@
 import React, {Component} from "react";
-import {Container, Row, Col, Table} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import "./vcstyle.css"
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-import { Redirect } from 'react-router-dom'
+import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
+import {Redirect} from 'react-router-dom'
 import Card from "../../components/Card/Card.jsx"
 import config from "../../configs/config"
+
 const challengeColumns = [
-  {dataField: 'name', text: "Name", sort: true, headerStyle: (column, colIndex) => {
-      return { width: '300px' };
-    }},
+  {
+    dataField: 'name',
+    text: "Name",
+    sort: true,
+    headerStyle: (column, colIndex) => {
+      return {width: '300px'};
+    }
+  },
   {dataField: 'description', text: "Description", sort: true},
   {dataField: 'type', text: "Type", sort: true},
   {dataField: 'categories', text: "Categories", sort: true},
@@ -18,10 +24,9 @@ const challengeColumns = [
   {dataField: 'updatedAt', text: "Updated At", sort: true},
   {dataField: 'createdAt', text: "Created At", sort: true},
   {dataField: 'id', text: "ID", sort: true}];
-const { SearchBar } = Search;
+const {SearchBar} = Search;
 
-
-  class ViewChallenges extends Component {
+class ViewChallenges extends Component {
   state = {
     tdChallenges: [],
     redirect: false,
@@ -31,7 +36,7 @@ const { SearchBar } = Search;
     onClick: (e, row, rowIndex) => {
       this.state.redirectChallenge = row.id;
       this.setRedirect()
-    console.log(row.id)
+      console.log(row.id)
     }
   };
   setRedirect = () => {
@@ -41,26 +46,25 @@ const { SearchBar } = Search;
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to={'/challenges/create/'+ this.state.redirectChallenge} />
+      return <Redirect
+          to={'/challenges/create/' + this.state.redirectChallenge}/>
     }
   }
-
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     fetch(
         config.BASE_URL + '/challenge')
     .then(res => res.json())
     .then((data) => {
       this.setState({
-        tdChallenges: data.sort(function(a,b){return Date.parse(b.UpdatedAt) - Date.parse(a.UpdatedAt)}).map(c => this.createChallengeData(c))
-    })})
+        tdChallenges: data.sort(function (a, b) {
+          return Date.parse(b.UpdatedAt) - Date.parse(a.UpdatedAt)
+        }).map(c => this.createChallengeData(c))
+      })
+    })
     .catch(console.log)
   }
 
-  createChallengeData(challenge){
+  createChallengeData(challenge) {
     return {
       id: challenge.ChallengeId,
       name: challenge.Name,
@@ -94,8 +98,8 @@ const { SearchBar } = Search;
                           striped
                           hover
                           keyField="id"
-                          data={ this.state.tdChallenges }
-                          columns={ challengeColumns }
+                          data={this.state.tdChallenges}
+                          columns={challengeColumns}
                           rowEvents={this.rowEvents}
                           wrapperClasses="table-responsive"
                           search
@@ -103,14 +107,15 @@ const { SearchBar } = Search;
                         {
                           props => (
                               <div>
-                                <h4 className="title">Challenges&nbsp;&nbsp;&nbsp;&nbsp;      <SearchBar { ...props.searchProps } /></h4>
-                                <hr />
+                                <h4 className="title">Challenges&nbsp;&nbsp;&nbsp;&nbsp;
+                                  <SearchBar {...props.searchProps} /></h4>
+                                <hr/>
                                 <div className="tableStyle">
-                                <BootstrapTable
-                                    { ...props.baseProps}
-                                    // selectRow={this.rowEvents}
-                                    rowEvents={this.rowEvents}
-                                />
+                                  <BootstrapTable
+                                      {...props.baseProps}
+                                      // selectRow={this.rowEvents}
+                                      rowEvents={this.rowEvents}
+                                  />
                                 </div>
                               </div>
                           )
@@ -125,7 +130,5 @@ const { SearchBar } = Search;
     );
   }
 }
-
-
 
 export default ViewChallenges;

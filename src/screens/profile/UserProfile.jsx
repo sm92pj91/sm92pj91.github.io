@@ -15,21 +15,12 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  FormGroup,
-  FormLabel,
-  FormControl
-} from "react-bootstrap";
+import React, {Component} from "react";
+import {Col, Container, Row} from "react-bootstrap";
 
-import { Card } from "../.././components/Card/Card.jsx";
-import { FormInputs } from "../.././components/FormInputs/FormInputs.jsx";
+import {Card} from "../.././components/Card/Card.jsx";
+import {FormInputs} from "../.././components/FormInputs/FormInputs.jsx";
 // import { UserCard } from "/Users/psj03/IdeaProjects/ReactjsCognitoStarter/src/components/UserCard/UserCard.jsx";
-import Button from "../.././components/CustomButton/CustomButton.jsx";
-
 // import avatar from "/Users/psj03/IdeaProjects/ReactjsCognitoStarter/src/assets/img/faces/face-3.jpg";
 import {Hub} from "@aws-amplify/core";
 import {AuthService} from "../../services/auth-service";
@@ -52,7 +43,12 @@ class UserProfile extends Component {
     // Check if the user is already logged-in...if so, redirect
     Auth.currentAuthenticatedUser({
       bypassCache: true
-    }).then(user => { this.setState({firstname: user.attributes.given_name, userdata: user.attributes, username: user.username})
+    }).then(user => {
+      this.setState({
+        firstname: user.attributes.given_name,
+        userdata: user.attributes,
+        username: user.username
+      })
       this.setState({loggedIn: true});
       this.setState()
       console.log(user)
@@ -67,7 +63,12 @@ class UserProfile extends Component {
     if (channel === AuthService.CHANNEL &&
         payload.event === AuthService.AUTH_EVENTS.LOGIN) {
       if (payload.success) {
-        this.setState({loggedIn: true, username: payload.username, firstname: payload.user.attributes.given_name, userdata: payload.user.attributes});
+        this.setState({
+          loggedIn: true,
+          username: payload.username,
+          firstname: payload.user.attributes.given_name,
+          userdata: payload.user.attributes
+        });
       }
     } else if (channel === AuthService.CHANNEL &&
         payload.event === AuthService.AUTH_EVENTS.SIGN_OUT) {
@@ -84,63 +85,63 @@ class UserProfile extends Component {
 
   render() {
     return (
-      <div className="content">
-        <Container fluid>
-          <Row>
-            <Col md={12}>
-              <Card
-                title="Profile"
-                content={
-                  <form>
-                    <FormInputs
-                      ncols={["col-md-6", "col-md-4"]}
-                      properties={[
-                        {
-                          label: "Username",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Username",
-                          defaultValue: this.state.username
-                        },
-                        {
-                          label: "Email address",
-                          type: "email",
-                          bsClass: "form-control",
-                          placeholder: "Email",
-                          defaultValue: this.state.userdata.email
-                        }
-                      ]}
-                    />
-                    <FormInputs
-                      ncols={["col-md-6", "col-md-6"]}
-                      properties={[
-                        {
-                          label: "First name",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "First name",
-                          defaultValue: this.state.firstname
-                        },
-                        {
-                          label: "Last name",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Last name",
-                          defaultValue: this.state.userdata.family_name
-                        }
-                      ]}
-                    />
-                    {/*<Button bsStyle="info" pullRight fill type="submit">*/}
-                    {/*  Update Profile*/}
-                    {/*</Button>*/}
-                    <div className="clearfix" />
-                  </form>
-                }
-              />
-            </Col>
-          </Row>
-        </Container>
-      </div>
+        <div className="content">
+          <Container fluid>
+            <Row>
+              <Col md={12}>
+                <Card
+                    title="Profile"
+                    content={
+                      <form>
+                        <FormInputs
+                            ncols={["col-md-6", "col-md-4"]}
+                            properties={[
+                              {
+                                label: "Username",
+                                type: "text",
+                                bsClass: "form-control",
+                                placeholder: "Username",
+                                defaultValue: this.state.username
+                              },
+                              {
+                                label: "Email address",
+                                type: "email",
+                                bsClass: "form-control",
+                                placeholder: "Email",
+                                defaultValue: this.state.userdata.email
+                              }
+                            ]}
+                        />
+                        <FormInputs
+                            ncols={["col-md-6", "col-md-6"]}
+                            properties={[
+                              {
+                                label: "First name",
+                                type: "text",
+                                bsClass: "form-control",
+                                placeholder: "First name",
+                                defaultValue: this.state.firstname
+                              },
+                              {
+                                label: "Last name",
+                                type: "text",
+                                bsClass: "form-control",
+                                placeholder: "Last name",
+                                defaultValue: this.state.userdata.family_name
+                              }
+                            ]}
+                        />
+                        {/*<Button bsStyle="info" pullRight fill type="submit">*/}
+                        {/*  Update Profile*/}
+                        {/*</Button>*/}
+                        <div className="clearfix"/>
+                      </form>
+                    }
+                />
+              </Col>
+            </Row>
+          </Container>
+        </div>
     );
   }
 }

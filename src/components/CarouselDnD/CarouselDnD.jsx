@@ -1,30 +1,20 @@
 import React, {useRef, useState} from "react";
 import {useDrag, useDrop} from "react-dnd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircle, faCoffee, faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faCircle, faEdit} from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 
-const type = "Image"; // Need to pass which type element can be draggable
-const style = {
-  border: '1px solid gray',
-  padding: '0.5rem 1rem',
-  marginBottom: '.5rem',
-  backgroundColor: 'white',
-  cursor: 'move',
-}
-const trafficStyle = {
-  textAlign: 'right',
-}
 const Image = ({image, callback, index, moveImage}) => {
   const ref = useRef(null);
   const [showModal, setShowModal] = useState(false)
   const [type, setType] = useState(image.CarouselItem.Type)
   const [active, setActive] = useState(image.CarouselItem.Active)
-  const [category, setCategory] = useState(image.CarouselItem.Type ==="challenge"? "" : image.CarouselItem.Id)
+  const [category, setCategory] = useState(
+      image.CarouselItem.Type === "challenge" ? "" : image.CarouselItem.Id)
   let CarouselChallengeId = React.createRef();
   const [, drop] = useDrop({
     accept: type,
@@ -63,9 +53,13 @@ const Image = ({image, callback, index, moveImage}) => {
 
   };
   const handleSubmit = () => {
-    image = {...image, CarouselItem: {...image.CarouselItem, Active: active,Type: type,
-        Id: type === "challenge" ? CarouselChallengeId.current.value : category} }
-        console.log(image)
+    image = {
+      ...image, CarouselItem: {
+        ...image.CarouselItem, Active: active, Type: type,
+        Id: type === "challenge" ? CarouselChallengeId.current.value : category
+      }
+    }
+    console.log(image)
     callback(image)
     setShowModal(false)
   };
@@ -83,7 +77,8 @@ const Image = ({image, callback, index, moveImage}) => {
 
 
             <Form.Row>
-              <Form.Control as="select" size="sm" onChange={selectChange} value={category} custom>
+              <Form.Control as="select" size="sm" onChange={selectChange}
+                            value={category} custom>
                 <option>Travel</option>
                 <option>Health & Fitness</option>
                 <option>Food & Drink</option>
@@ -111,7 +106,8 @@ const Image = ({image, callback, index, moveImage}) => {
                             placeholder="Challenge ID" id="challengeId"
                             name="CarouselChallengeId"
                             ref={CarouselChallengeId}
-                            defaultValue={image.CarouselItem.Type === "challenge" ? image.CarouselItem.Id : ""}
+                            defaultValue={image.CarouselItem.Type
+                            === "challenge" ? image.CarouselItem.Id : ""}
               />
             </Form.Row>
           </div>
@@ -120,10 +116,10 @@ const Image = ({image, callback, index, moveImage}) => {
   }
 
   const activeChange = (event) => {
-      setActive(!active);
+    setActive(!active);
   }
   const selectChange = (event) => {
-      setCategory(event.target.value)
+    setCategory(event.target.value)
     console.log(event.target.value)
   }
 

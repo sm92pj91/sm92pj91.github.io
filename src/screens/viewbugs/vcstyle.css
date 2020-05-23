@@ -1,6 +1,7 @@
 .tableStyle {
   overflow-x: auto;
 }
+
 .react-bootstrap-table table {
   table-layout: auto;
 }

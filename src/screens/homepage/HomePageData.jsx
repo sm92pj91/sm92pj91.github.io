@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react'
+import React, {useCallback, useState} from 'react'
 import Card from './Card'
 import update from 'immutability-helper'
 import config from "../../configs/config"
@@ -6,16 +6,14 @@ import Button from "react-bootstrap/Button";
 import {notification} from 'antd';
 import {Auth} from "aws-amplify";
 import ChallengeDropdown from "./ChallengeDropdown";
-import {Col, Row} from "react-bootstrap";
 
 const style = {
   width: "80%",
 }
 const buttonStyle = {
-  marginTop:"20px",
+  marginTop: "20px",
 }
 const Container = () => {
-  {
 
     const [loaded, setLoaded] = useState(false)
     const [otherChallenges, setOtherChallenges] = useState([])
@@ -40,8 +38,7 @@ const Container = () => {
                 ChallengeName: c.Name,
                 id: data.Data.indexOf(c.ChallengeId)
               }]
-            }
-            else{
+            } else {
               otherItems = [...otherItems, {
                 text: c.Name + ' - ' + c.ChallengeId,
                 ChallengeId: c.ChallengeId,
@@ -135,7 +132,6 @@ const Container = () => {
     )
     const deleteCard = useCallback(
         (dragIndex) => {
-          const dragCard = cards[dragIndex]
           setCards(
               cards.filter((card) => card.id !== dragIndex)
           )
@@ -160,7 +156,8 @@ const Container = () => {
           newCard.id = cards.length
           setCards([...cards, newCard])
           console.log(newCard)
-          setOtherChallenges(otherChallenges.filter(c => c.ChallengeId !== challenge.ChallengeId))
+          setOtherChallenges(otherChallenges.filter(
+              c => c.ChallengeId !== challenge.ChallengeId))
         },
         [cards, otherChallenges],
     )
@@ -172,11 +169,11 @@ const Container = () => {
               callback={addChallenge}
           />
           <div className="container">
-          <Button style={buttonStyle} onClick={submitChanges}>Save Changes</Button>
+            <Button style={buttonStyle} onClick={submitChanges}>Save
+              Changes</Button>
           </div>
 
         </>
     )
-  }
 }
 export default Container

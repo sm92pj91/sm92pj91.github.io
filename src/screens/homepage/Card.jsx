@@ -67,13 +67,14 @@ const Card = ({id, text, index, moveCard, deleteCard}) => {
   const opacity = isDragging ? 0 : 1
   drag(drop(ref))
   return (
-      <div ref={ref} style={{ ...style, opacity }}>
+      <div ref={ref} style={{...style, opacity}}>
         {/*<Button size="sm" onClick={() => deleteCard(id)}>X</Button>&nbsp;&nbsp;&nbsp;*/}
         {text}&nbsp;&nbsp;&nbsp;
         <OverlayTrigger placement="top" overlay={remove}>
-          <Button bsStyle="danger" onClick={() => deleteCard(id)} simple type="button" bsSize="sm">
+          <Button bsStyle="danger" onClick={() => deleteCard(id)} simple
+                  type="button" bsSize="sm">
             {/*<i className="fa fa-times" />*/}
-            <FontAwesomeIcon icon={faTimes} />
+            <FontAwesomeIcon icon={faTimes}/>
           </Button>
         </OverlayTrigger>
       </div>

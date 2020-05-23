@@ -10,8 +10,7 @@ const preprod = {
   CAROUSEL_BASE: "https://challenge-accepted-mob.s3.eu-west-2.amazonaws.com/carousel-preprod"
 }
 
-
-const config = process.env.REACT_APP_STAGE ==='preprod' ? preprod : dev;
+const config = process.env.REACT_APP_STAGE === 'preprod' ? preprod : dev;
 
 export default {
   ...config

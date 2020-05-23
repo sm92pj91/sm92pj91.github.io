@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import React, {Component} from "react";
+import {NavLink} from "react-router-dom";
 
 import AdminNavbarLinks from "../Navbars/AdminNavbarLinks.jsx";
 
@@ -12,20 +12,21 @@ class Sidebar extends Component {
       width: window.innerWidth
     };
   }
+
   activeRoute(routeName) {
     return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
   }
+
   updateDimensions() {
-    this.setState({ width: window.innerWidth });
+    this.setState({width: window.innerWidth});
   }
+
   componentDidMount() {
     this.updateDimensions();
     window.addEventListener("resize", this.updateDimensions.bind(this));
   }
+
   render() {
-    const sidebarBackground = {
-      backgroundImage: "url(" + this.props.image + ")"
-    };
     return (
         <div
             id="sidebar"
@@ -39,7 +40,7 @@ class Sidebar extends Component {
                 href="/challenges/view"
             >
               <div className="logo-img">
-                <img src={icon} alt="logo_image" />
+                <img src={icon} alt="logo_image"/>
               </div>
             </a>
             <a
@@ -52,12 +53,12 @@ class Sidebar extends Component {
           </div>
           <div className="sidebar-wrapper">
             <ul className="nav">
-              {this.state.width <= 991 ? <AdminNavbarLinks /> : null}
+              {this.state.width <= 991 ? <AdminNavbarLinks/> : null}
               {this.props.routes.map((prop, key) => {
-                if (!prop.redirect)
+                if (!prop.redirect) {
                   return (
                       <li
-                          style={{width:"100%"}}
+                          style={{width: "100%"}}
                           className={
                             prop.upgrade
                                 ? "active active-pro"
@@ -70,11 +71,12 @@ class Sidebar extends Component {
                             className="nav-link"
                             activeClassName="active"
                         >
-                          <i className={prop.icon} />
+                          <i className={prop.icon}/>
                           <p>{prop.name}</p>
                         </NavLink>
                       </li>
                   );
+                }
                 return null;
               })}
             </ul>

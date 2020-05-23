@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {Layout} from 'antd';
 import {MyHeader} from "./components/layout/header";
-import {BrowserRouter as Router, Route, useLocation} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {SearchScreenDefault} from "./screens/search/search-screen-default";
 import {AddRssFeedScreen} from "./screens/add-rss-feed";
 import {AuthScreen} from "./screens/auth/auth-screen";
@@ -15,7 +15,7 @@ import UserProfile from "./screens/profile/UserProfile";
 // import image from "*.jpg";
 import routes from "./routes.js";
 import ViewChallenges from "./screens/viewchallenges/ViewChallenges";
-import CreateChallenge, {WrappedCreateChallenge} from "./screens/challenge/create/CreateChallenge";
+import CreateChallenge from "./screens/challenge/create/CreateChallenge";
 import HomePage from "./screens/homepage/homepage";
 import Carousel from "./screens/carousel/Carousel";
 import Bugs from "./screens/viewbugs/Bugs";
@@ -54,7 +54,6 @@ export class App extends React.Component {
     });
   };
 
-
   componentDidUpdate(e) {
     if (
         window.innerWidth < 993 &&
@@ -70,16 +69,15 @@ export class App extends React.Component {
     }
   }
 
-
-
   render() {
     return (
         <div className="wrapper">
 
           <div id="main-panel" className="main-panel" ref="mainPanel">
             <Router>
-              <Route path={"/"} render={props => <Sidebar {...props} routes={routes}
-                color={this.state.color}/>} />
+              <Route path={"/"}
+                     render={props => <Sidebar {...props} routes={routes}
+                                               color={this.state.color}/>}/>
 
               <Layout>
 
@@ -105,9 +103,11 @@ export class App extends React.Component {
                       <Route path={"/forgotpassword1"} component={AuthScreen}/>
                       <Route path={"/forgotpassword2"} component={AuthScreen}/>
                       <Route path={"/profile"} component={UserProfile}/>
-                      <Route path={"/challenges/view"} component={ViewChallenges}/>
+                      <Route path={"/challenges/view"}
+                             component={ViewChallenges}/>
                       {/*<Route path={"/challenges/create"} component={CreateChallenge}/>*/}
-                      <Route path={"/challenges/create/:id?"} component={CreateChallenge}/>
+                      <Route path={"/challenges/create/:id?"}
+                             component={CreateChallenge}/>
                       <Route path={"/homepage"} component={HomePage}/>
                       <Route path={"/carousel"} component={Carousel}/>
                       <Route path={"/bugs"} component={Bugs}/>

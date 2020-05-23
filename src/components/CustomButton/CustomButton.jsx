@@ -15,14 +15,14 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { Component } from "react";
-import { Button } from "react-bootstrap";
+import React, {Component} from "react";
+import {Button} from "react-bootstrap";
 import cx from "classnames";
 import PropTypes from "prop-types";
 
 class CustomButton extends Component {
   render() {
-    const { fill, simple, pullRight, round, block, ...rest } = this.props;
+    const {fill, simple, pullRight, round, block, ...rest} = this.props;
 
     const btnClasses = cx({
       "btn-fill": fill,

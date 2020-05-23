@@ -16,10 +16,10 @@ import {MultiSelect} from "react-selectize";
 import imageDataURI from "image-data-uri"
 import {Redirect} from "react-router-dom";
 import {notification} from 'antd';
-import  randomstring from 'randomstring';
+import randomstring from 'randomstring';
 
 const CreateChallenge = (props) => {
-  const [validated, setValidated] = useState(false);
+  const [validated] = useState(false);
   const [ChallengeId, setChallengeId] = useState(props.match.params.id);
   const [ChallengeLoaded, setChallengeLoaded] = useState(false);
   const [redirect, setRedirect] = useState(false);
@@ -45,9 +45,12 @@ const CreateChallenge = (props) => {
   })
 
   const [challengeItemsBackup, setChallengeItemsBackup] = useState(
-      [{item: "",id: randomstring.generate(10)}])
+      [{item: "", id: randomstring.generate(10)}])
   const [categoryItemsBackup, setCategoryItemsBackup] = useState(
-      [{Category: "", ChallengeItems: [{item: "",id: randomstring.generate(10)}]}])
+      [{
+        Category: "",
+        ChallengeItems: [{item: "", id: randomstring.generate(10)}]
+      }])
   const [image, setImage] = useState([]);
 
   Auth.currentSession({
@@ -62,7 +65,7 @@ const CreateChallenge = (props) => {
         },
       }).then(res => {
             setChallengeLoaded(true)
-            if(res.status !==200){
+            if (res.status !== 200) {
               alert("Error, Challenge not found");
               return;
             }
@@ -96,7 +99,7 @@ const CreateChallenge = (props) => {
                   '[name="challengeName"]').value = response.Name
               document.querySelector(
                   '[name="Description"]').value = response.Description
-              if(response.ChallengeType === 'ENTERASYOUGO'){
+              if (response.ChallengeType === 'ENTERASYOUGO') {
                 document.querySelector(
                     '[name="Placeholder"]').value = response.Placeholder
                 document.querySelector(
@@ -121,7 +124,7 @@ const CreateChallenge = (props) => {
   });
   const renderRedirect = () => {
     if (redirect) {
-      return <Redirect to={'/login'} />
+      return <Redirect to={'/login'}/>
     }
   }
   const renderInterval = () => {
@@ -180,23 +183,25 @@ const CreateChallenge = (props) => {
       }
       if (newChallenge.ChallengeType === 'ENTERASYOUGO') {
         newChallenge.Placeholder = Placeholder.current.value.length > 0
-        ? Placeholder.current.value : 'Add Item'
+            ? Placeholder.current.value : 'Add Item'
         newChallenge.InputCount = parseInt(InputCount.current.value)
-      } else if(newChallenge.ChallengeType === 'BASIC' || newChallenge.ChallengeType === 'BASICINTERVAL') {
+      } else if (newChallenge.ChallengeType === 'BASIC'
+          || newChallenge.ChallengeType === 'BASICINTERVAL') {
         newChallenge.ChallengeItems = challenge.ChallengeItems.map(
             (c, index) => ({index: index, item: c.item, id: c.id}));
-        if( newChallenge.ChallengeType === 'BASICINTERVAL'){
+        if (newChallenge.ChallengeType === 'BASICINTERVAL') {
           newChallenge.Interval = challenge.Interval;
         }
-      } else if( newChallenge.ChallengeType === 'CATEGORIES'){
-        newChallenge.CategoryItems = challenge.CategoryItems.map((cat, ind) => ({
-          Category: cat.Category,
-          ChallengeItems: cat.ChallengeItems.map((ch, index) => ({
-            index: index,
-            item: ch.item,
-            id: ch.id
-          }))
-        }));
+      } else if (newChallenge.ChallengeType === 'CATEGORIES') {
+        newChallenge.CategoryItems = challenge.CategoryItems.map(
+            (cat, ind) => ({
+              Category: cat.Category,
+              ChallengeItems: cat.ChallengeItems.map((ch, index) => ({
+                index: index,
+                item: ch.item,
+                id: ch.id
+              }))
+            }));
       }
       console.log(newChallenge)
       Auth.currentSession({
@@ -236,7 +241,8 @@ const CreateChallenge = (props) => {
               }
               res.json()
               .then(response => {
-                let message = 'Challenge ' + (ChallengeId? 'edited successfully' : 'created successfully')
+                let message = 'Challenge ' + (ChallengeId ? 'edited successfully'
+                    : 'created successfully')
                 notification.open({
                   type: 'success',
                   message: message,
@@ -350,7 +356,12 @@ const CreateChallenge = (props) => {
     } else if (ctype === "ENTERASYOUGO") {
       setChallengeItemsBackup(challenge.ChallengeItems)
       setCategoryItemsBackup(challenge.CategoryItems)
-      setChallenge({...challenge, CategoryItems: [], ChallengeItems: [],  ChallengeType: ctype})
+      setChallenge({
+        ...challenge,
+        CategoryItems: [],
+        ChallengeItems: [],
+        ChallengeType: ctype
+      })
     } else {
       if (challenge.ChallengeItems.length === 0) {
         setCategoryItemsBackup(challenge.CategoryItems)
@@ -516,7 +527,10 @@ const CreateChallenge = (props) => {
               return {
                 ...categoryItem,
                 ChallengeItems: [...categoryItem.ChallengeItems.slice(0, idc),
-                  {...categoryItem.ChallengeItems.slice(idc,idc+1)[0], item: evt.target.value},
+                  {
+                    ...categoryItem.ChallengeItems.slice(idc, idc + 1)[0],
+                    item: evt.target.value
+                  },
                   ...categoryItem.ChallengeItems.slice(idc + 1)]
               }
             }
@@ -538,7 +552,10 @@ const CreateChallenge = (props) => {
     setChallenge({
       ...challenge,
       CategoryItems: [...challenge.CategoryItems.slice(0, idx + 1),
-        {Category: "", ChallengeItems: [{item: "",id: randomstring.generate(10)}]},
+        {
+          Category: "",
+          ChallengeItems: [{item: "", id: randomstring.generate(10)}]
+        },
         ...challenge.CategoryItems.slice(idx + 1)]
     });
   };
@@ -656,7 +673,8 @@ const CreateChallenge = (props) => {
                     setChallenge(
                         {...challenge, Categories: value.map(x => x.value)})
                   }}
-                  values={challenge.Categories.map(category => ({label: category, value: category}))}
+                  values={challenge.Categories.map(
+                      category => ({label: category, value: category}))}
               /></div>
           </Form.Group>
         </Form.Row>
@@ -734,151 +752,154 @@ const CreateChallenge = (props) => {
               </Form.Group>
             </Form.Row>
             : challenge.ChallengeType !== 'CALENDAR' ?
-            <Form.Row>
-              <Form.Group as={Col} md="5">
-                <Form.Label>Challenge Items</Form.Label>
-              </Form.Group>
-            </Form.Row> : <></>
+                <Form.Row>
+                  <Form.Group as={Col} md="5">
+                    <Form.Label>Challenge Items</Form.Label>
+                  </Form.Group>
+                </Form.Row> : <></>
         }
-        {challenge.ChallengeItems ? challenge.ChallengeItems.map((challengeItem, idx) => (
-            <div>
-              <Form.Row>
-                <Form.Group as={Col} md={"6"}>
-                  <Form.Control
-                      type="text"
-                      placeholder={`Challenge Item #${idx + 1} name`}
-                      value={challengeItem.item}
-                      onChange={handleChangeChallengeItem(idx)}
-                  />
-                </Form.Group>
-                <Form.Group as={Col} md={"4"}>
-                  <Button
-                      type="button"
-                      onClick={handleRemoveChallengeItem(idx)}
-                      className="small"
-                  >
-                    -
-                  </Button>
-                  <Button
-                      type="button"
-                      onClick={handleInsertChallengeItem(idx)}
-                      className="small"
-                  >
-                    +
-                  </Button>
-                  <Button
-                      type="button"
-                      onClick={handleMoveUpChallengeItem(idx)}
-                      className="small"
-                  >
-                    ^
-                  </Button>
-                  <Button
-                      type="button"
-                      onClick={handleMoveDownChallengeItem(idx)}
-                      className="small"
-                  >
-                    v
-                  </Button>
-                </Form.Group>
-              </Form.Row>
-            </div>
-        )) : <></> }
+        {challenge.ChallengeItems ? challenge.ChallengeItems.map(
+            (challengeItem, idx) => (
+                <div>
+                  <Form.Row>
+                    <Form.Group as={Col} md={"6"}>
+                      <Form.Control
+                          type="text"
+                          placeholder={`Challenge Item #${idx + 1} name`}
+                          value={challengeItem.item}
+                          onChange={handleChangeChallengeItem(idx)}
+                      />
+                    </Form.Group>
+                    <Form.Group as={Col} md={"4"}>
+                      <Button
+                          type="button"
+                          onClick={handleRemoveChallengeItem(idx)}
+                          className="small"
+                      >
+                        -
+                      </Button>
+                      <Button
+                          type="button"
+                          onClick={handleInsertChallengeItem(idx)}
+                          className="small"
+                      >
+                        +
+                      </Button>
+                      <Button
+                          type="button"
+                          onClick={handleMoveUpChallengeItem(idx)}
+                          className="small"
+                      >
+                        ^
+                      </Button>
+                      <Button
+                          type="button"
+                          onClick={handleMoveDownChallengeItem(idx)}
+                          className="small"
+                      >
+                        v
+                      </Button>
+                    </Form.Group>
+                  </Form.Row>
+                </div>
+            )) : <></>}
 
-        {challenge.CategoryItems ? challenge.CategoryItems.map((categoryItem, idx) => (
-            <div>
-              <Form.Row>
-                <Form.Group as={Col} md={"6"}>
-                  <Form.Control
-                      type="text"
-                      placeholder={`Category Item #${idx + 1} name`}
-                      value={categoryItem.Category}
-                      onChange={handleChangeCategoryItem(idx)}
-                  />
-                </Form.Group>
-                <Form.Group as={Col} md={"4"}>
-                  <Button
-                      type="button"
-                      onClick={handleRemoveCategoryItem(idx)}
-                      className="small"
-                  >
-                    -
-                  </Button>
-                  <Button
-                      type="button"
-                      onClick={handleInsertCategoryItem(idx)}
-                      className="small"
-                  >
-                    +
-                  </Button>
-                  <Button
-                      type="button"
-                      onClick={handleMoveUpCategoryItem(idx)}
-                      className="small"
-                  >
-                    ^
-                  </Button>
-                  <Button
-                      type="button"
-                      onClick={handleMoveDownCategoryItem(idx)}
-                      className="small"
-                  >
-                    v
-                  </Button>
-                </Form.Group>
-              </Form.Row>
-              {categoryItem.ChallengeItems.map((challengeItem, idc) => (
-                  <div>
-                    <Form.Row>
-                      <Form.Group as={Col} md={"1"}></Form.Group>
-                      <Form.Group as={Col} md={"6"}>
-                        <Form.Control
-                            type="text"
-                            placeholder={`Challenge Item #${idc + 1} name`}
-                            value={challengeItem.item}
-                            onChange={handleChangeCategoryChallengeItem(idx,
-                                idc)}
-                        />
-                      </Form.Group>
-                      <Form.Group as={Col} md={"4"}>
-                        <Button
-                            type="button"
-                            onClick={handleRemoveCategoryChallengeItem(idx,
-                                idc)}
-                            className="small"
-                        >
-                          -
-                        </Button>
-                        <Button
-                            type="button"
-                            onClick={handleInsertCategoryChallengeItem(idx,
-                                idc)}
-                            className="small"
-                        >
-                          +
-                        </Button>
-                        <Button
-                            type="button"
-                            onClick={handleMoveUpCategoryChallengeItem(idx,
-                                idc)}
-                            className="small"
-                        >
-                          ^
-                        </Button>
-                        <Button
-                            type="button"
-                            onClick={handleMoveDownCategoryChallengeItem(idx,
-                                idc)}
-                            className="small"
-                        >
-                          v
-                        </Button>
-                      </Form.Group>
-                    </Form.Row>
-                  </div>))}
+        {challenge.CategoryItems ? challenge.CategoryItems.map(
+            (categoryItem, idx) => (
+                <div>
+                  <Form.Row>
+                    <Form.Group as={Col} md={"6"}>
+                      <Form.Control
+                          type="text"
+                          placeholder={`Category Item #${idx + 1} name`}
+                          value={categoryItem.Category}
+                          onChange={handleChangeCategoryItem(idx)}
+                      />
+                    </Form.Group>
+                    <Form.Group as={Col} md={"4"}>
+                      <Button
+                          type="button"
+                          onClick={handleRemoveCategoryItem(idx)}
+                          className="small"
+                      >
+                        -
+                      </Button>
+                      <Button
+                          type="button"
+                          onClick={handleInsertCategoryItem(idx)}
+                          className="small"
+                      >
+                        +
+                      </Button>
+                      <Button
+                          type="button"
+                          onClick={handleMoveUpCategoryItem(idx)}
+                          className="small"
+                      >
+                        ^
+                      </Button>
+                      <Button
+                          type="button"
+                          onClick={handleMoveDownCategoryItem(idx)}
+                          className="small"
+                      >
+                        v
+                      </Button>
+                    </Form.Group>
+                  </Form.Row>
+                  {categoryItem.ChallengeItems.map((challengeItem, idc) => (
+                      <div>
+                        <Form.Row>
+                          <Form.Group as={Col} md={"1"}></Form.Group>
+                          <Form.Group as={Col} md={"6"}>
+                            <Form.Control
+                                type="text"
+                                placeholder={`Challenge Item #${idc + 1} name`}
+                                value={challengeItem.item}
+                                onChange={handleChangeCategoryChallengeItem(idx,
+                                    idc)}
+                            />
+                          </Form.Group>
+                          <Form.Group as={Col} md={"4"}>
+                            <Button
+                                type="button"
+                                onClick={handleRemoveCategoryChallengeItem(idx,
+                                    idc)}
+                                className="small"
+                            >
+                              -
+                            </Button>
+                            <Button
+                                type="button"
+                                onClick={handleInsertCategoryChallengeItem(idx,
+                                    idc)}
+                                className="small"
+                            >
+                              +
+                            </Button>
+                            <Button
+                                type="button"
+                                onClick={handleMoveUpCategoryChallengeItem(idx,
+                                    idc)}
+                                className="small"
+                            >
+                              ^
+                            </Button>
+                            <Button
+                                type="button"
+                                onClick={handleMoveDownCategoryChallengeItem(
+                                    idx,
+                                    idc)}
+                                className="small"
+                            >
+                              v
+                            </Button>
+                          </Form.Group>
+                        </Form.Row>
+                      </div>))}
 
-            </div>
-        )) : <></> }
+                </div>
+            )) : <></>}
 
         {/*<input type="file" name="file" onChange={onFileChangeHandler}/>*/}
         <Form.Row>

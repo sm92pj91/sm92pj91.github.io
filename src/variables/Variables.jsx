@@ -21,9 +21,9 @@
 // //
 //
 var defaultWidth =
-  window.screen.width > 768
-    ? (window.screen.width * 1) / 3
-    : window.screen.width;
+    window.screen.width > 768
+        ? (window.screen.width * 1) / 3
+        : window.screen.width;
 
 var style = {
   Wrapper: {},
@@ -540,7 +540,7 @@ var responsiveSales = [
     "screen and (max-width: 640px)",
     {
       axisX: {
-        labelInterpolationFnc: function(value) {
+        labelInterpolationFnc: function (value) {
           return value[0];
         }
       }
@@ -586,7 +586,7 @@ var responsiveBar = [
     {
       seriesBarDistance: 5,
       axisX: {
-        labelInterpolationFnc: function(value) {
+        labelInterpolationFnc: function (value) {
           return value[0];
         }
       }

@@ -4,15 +4,12 @@ import {DndProvider} from "react-dnd";
 import CarouselDnD from "../../components/CarouselDnD/CarouselDnD";
 import HTML5Backend from "react-dnd-html5-backend";
 import TouchBackend from "react-dnd-touch-backend";
-import cuid from "cuid";
 import update from "immutability-helper";
 import "./carousel.css"
 import {Auth} from "aws-amplify";
 import config from "../../configs/config";
-import imageDataURI from "image-data-uri";
 import {notification} from 'antd';
 import {Redirect} from "react-router-dom";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 export const isTouchDevice = () => {
@@ -26,52 +23,56 @@ const backendForDND = isTouchDevice() ? TouchBackend : HTML5Backend;
 
 const Carousel = (props) => {
   const [images, setImages] = useState([]);
-  const [carouselItems,setCarouselItems] = useState([]);
+  // const [carouselItems,setCarouselItems] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const [carouselLoaded, setCarouselLoaded] = useState(false);
 
   Auth.currentSession({
     bypassCache: true
   }).then(user => {
-    if(!carouselLoaded){
-    fetch(config.BASE_URL + '/carousel', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + user.getIdToken().getJwtToken()
-      },
-    }).then(res => {
-      setCarouselLoaded(true)
-      if (res.status !== 200) {
+    if (!carouselLoaded) {
+      fetch(config.BASE_URL + '/carousel', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + user.getIdToken().getJwtToken()
+        },
+      }).then(res => {
+        setCarouselLoaded(true)
+        if (res.status !== 200) {
+          notification.open({
+            type: 'error',
+            message: 'Carousel Not Found',
+            description: 'Redirecting to login page',
+            duration: 10
+          });
+          return;
+        }
+        res.json()
+        .then(response => {
+          // setCarouselItems(response.CarouselItems);
+          let newCarouselItems = []
+          response.CarouselItems.forEach(c => {
+            newCarouselItems = [...newCarouselItems, {
+              id: c.Id,
+              src: config.CAROUSEL_BASE + '/' + c.ImageId,
+              CarouselItem: c
+            }]
+          })
+          setImages(newCarouselItems)
+
+        })
+      }).catch(err => {
         notification.open({
           type: 'error',
-          message: 'Carousel Not Found',
-          description: 'Redirecting to login page',
+          message: 'Not could not load carousel',
+          description: err,
           duration: 10
         });
-        return;
-      }
-      res.json()
-      .then(response => {
-        setCarouselItems(response.CarouselItems);
-        let newCarouselItems = []
-        response.CarouselItems.forEach(c => {
-          newCarouselItems = [...newCarouselItems ,{id: c.Id, src: config.CAROUSEL_BASE + '/' + c.ImageId, CarouselItem: c}]
-        })
-        setImages(newCarouselItems)
-
-
-      })
-    })  .catch(err => {
-      notification.open({
-        type: 'error',
-        message: 'Not could not load carousel',
-        description: err,
-        duration: 10
       });
-    });
 
-  }})
+    }
+  })
   .catch(err => {
     notification.open({
       type: 'error',
@@ -104,24 +105,23 @@ const Carousel = (props) => {
             },
             body: JSON.stringify({Image: e.target.result.split(',')[1]}),
           }).then(res => {
-            if(res.status !== 201){
-              res.json().then(json =>{
-              notification.open({
-                type: 'error',
-                message: 'Something went wrong',
-                description: json,
-                duration: 10
-              });
-            }).catch(err => {
-                {
+            if (res.status !== 201) {
+              res.json().then(json => {
+                notification.open({
+                  type: 'error',
+                  message: 'Something went wrong',
+                  description: json,
+                  duration: 10
+                });
+              }).catch(err => {
                   notification.open({
                     type: 'error',
                     message: 'Something went wrong',
                     description: err,
                     duration: 10
                   });
-                }
-              })}
+              })
+            }
             notification.open({
               type: 'success',
               message: 'Submitted new image',
@@ -130,7 +130,17 @@ const Carousel = (props) => {
             res.json().then(json => {
               setImages(prevState => [
                 ...prevState,
-                {id: json.Id, src: e.target.result, CarouselItem: {ImageId: json.Id, Index: images.length, Type: "challenge", Active: false, Id: ""}}
+                {
+                  id: json.Id,
+                  src: e.target.result,
+                  CarouselItem: {
+                    ImageId: json.Id,
+                    Index: images.length,
+                    Type: "challenge",
+                    Active: false,
+                    Id: ""
+                  }
+                }
               ]);
             })
             .catch(err => {
@@ -144,14 +154,12 @@ const Carousel = (props) => {
 
           })
           .catch(err => {
-            {
               notification.open({
                 type: 'error',
                 message: 'Something went wrong',
                 description: err,
                 duration: 10
               });
-            }
           })
         })
         .catch(err => {
@@ -162,7 +170,6 @@ const Carousel = (props) => {
             duration: 10
           });
         })
-
 
       };
       reader.readAsDataURL(file);
@@ -181,17 +188,16 @@ const Carousel = (props) => {
 
   const onUpdateImage = useCallback(image => {
     let newImages = images.map(img => {
-      if(img.id===image.id){
+      if (img.id === image.id) {
         return image
-      }
-      else{
+      } else {
         return img
       }
     })
     setImages(newImages)
   }, [images]);
-  const submitChange = () =>{
-    if((images.filter(img => (img.CarouselItem.Id === ""))).length > 0){
+  const submitChange = () => {
+    if ((images.filter(img => (img.CarouselItem.Id === ""))).length > 0) {
       notification.open({
         type: 'error',
         message: 'Make sure all carousel items have either a challenge id or category',
@@ -210,7 +216,10 @@ const Carousel = (props) => {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + user.getIdToken().getJwtToken()
         },
-        body: JSON.stringify({CarouselItems: images.map((img,ind) => ({...img.CarouselItem, Index: ind}))}),
+        body: JSON.stringify({
+          CarouselItems: images.map(
+              (img, ind) => ({...img.CarouselItem, Index: ind}))
+        }),
       }).then(res => {
         notification.open({
           type: 'success',
@@ -220,14 +229,12 @@ const Carousel = (props) => {
 
       })
       .catch(err => {
-        {
           notification.open({
             type: 'error',
             message: 'Something went wrong',
             description: err,
             duration: 10
           });
-        }
       })
     })
     .catch(err => {
@@ -246,7 +253,8 @@ const Carousel = (props) => {
         <Dropzone onDrop={onDrop} title={"Upload New Carousel Image"}
                   accept={"image/*"}/>
         <DndProvider backend={backendForDND}>
-          <CarouselDnD images={images} callback={onUpdateImage} moveImage={moveImage}/>
+          <CarouselDnD images={images} callback={onUpdateImage}
+                       moveImage={moveImage}/>
         </DndProvider>
         <Button onClick={submitChange}>Submit Changes</Button>
       </div>
