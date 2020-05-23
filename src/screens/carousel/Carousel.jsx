@@ -175,6 +175,7 @@ const Carousel = (props) => {
       reader.readAsDataURL(file);
       return file;
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const moveImage = (dragIndex, hoverIndex) => {

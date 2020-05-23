@@ -290,6 +290,7 @@ const CreateChallenge = (props) => {
       reader.readAsBinaryString(file);
       return file;
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [challenge]);
 
   const setChallengesUpload = (file) => {

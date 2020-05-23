@@ -34,6 +34,7 @@ class ViewChallenges extends Component {
   }
   rowEvents = {
     onClick: (e, row, rowIndex) => {
+      // eslint-disable-next-line react/no-direct-mutation-state
       this.state.redirectChallenge = row.id;
       this.setRedirect()
       console.log(row.id)
