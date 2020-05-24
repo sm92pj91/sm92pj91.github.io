@@ -23,8 +23,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Build
         run: |
-          npm install
-          npm run build
+          yarn install
+          yarn build
 
       # Runs a set of commands using the runners shell
 #      - name: Deploy
