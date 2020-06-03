@@ -6,6 +6,8 @@ import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit';
 import {Redirect} from 'react-router-dom'
 import Card from "../../components/Card/Card.jsx"
 import config from "../../configs/config"
+import {Auth} from "aws-amplify";
+import {notification} from "antd";
 
 const challengeColumns = [
   {
@@ -30,7 +32,8 @@ class ViewChallenges extends Component {
   state = {
     tdChallenges: [],
     redirect: false,
-    redirectChallenge: ""
+    redirectChallenge: "",
+    redirectHome: false,
   }
   rowEvents = {
     onClick: (e, row, rowIndex) => {
@@ -44,24 +47,48 @@ class ViewChallenges extends Component {
       redirect: true
     })
   }
+  setRedirectHome = () => {
+    this.setState({
+      redirectHome: true
+    })
+  }
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect
           to={'/challenges/create/' + this.state.redirectChallenge}/>
     }
+  };
+  renderRedirectHome = () => {
+    if (this.state.redirectHome) {
+      return <Redirect to={'/login'}/>
+    }
   }
   componentDidMount() {
-    fetch(
-        config.BASE_URL + '/challenge')
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({
-        tdChallenges: data.sort(function (a, b) {
-          return Date.parse(b.UpdatedAt) - Date.parse(a.UpdatedAt)
-        }).map(c => this.createChallengeData(c))
+    Auth.currentSession({
+      bypassCache: true
+    }).then(() => {
+      fetch(
+          config.BASE_URL + '/challenge')
+      .then(res => res.json())
+      .then((data) => {
+        this.setState({
+          tdChallenges: data.sort(function (a, b) {
+            return Date.parse(b.UpdatedAt) - Date.parse(a.UpdatedAt)
+          }).map(c => this.createChallengeData(c))
+        })
       })
+      .catch(console.log)
+
     })
-    .catch(console.log)
+    .catch(err => {
+      notification.open({
+        type: 'error',
+        message: 'Not logged in',
+        description: 'Redirecting to login page',
+        duration: 10
+      });
+      this.setRedirectHome(true);
+    });
   }
 
   createChallengeData(challenge) {
@@ -84,6 +111,7 @@ class ViewChallenges extends Component {
         <div className="content">
           <div>
             {this.renderRedirect()}
+            {this.renderRedirectHome()}
           </div>
           <Container fluid>
             <Row>
