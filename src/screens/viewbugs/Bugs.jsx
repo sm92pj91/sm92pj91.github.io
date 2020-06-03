@@ -7,6 +7,7 @@ import Card from "../../components/Card/Card.jsx"
 import config from "../../configs/config"
 import {Auth} from "aws-amplify";
 import {notification} from "antd";
+import {Redirect} from "react-router-dom";
 
 const bugColumns = [
   {dataField: 'bug', text: "Bug", sort: true},
@@ -18,6 +19,7 @@ const {SearchBar} = Search;
 class Bugs extends Component {
   state = {
     tdBugs: [],
+    redirect: false,
   };
 
   componentDidMount() {
@@ -52,10 +54,14 @@ class Bugs extends Component {
         description: 'Redirecting to login page',
         duration: 10
       });
-      // setRedirect(true)
+      this.setRedirect(true)
     });
   }
-
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to={'/login'}/>
+    }
+  }
   // createBugData(bug){
   //   return {
   //     bug: bug.bug,
@@ -78,11 +84,16 @@ class Bugs extends Component {
   //     createdAt: challenge.CreatedAt
   //   }
   // }
-
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
   render() {
     return (
 
         <div className="content">
+          {this.renderRedirect()}
           <Container fluid>
             <Row>
               <Col md={12}>

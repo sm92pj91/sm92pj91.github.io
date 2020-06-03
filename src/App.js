@@ -93,7 +93,7 @@ export class App extends React.Component {
                       width: "100%",
                       marginTop: "20px"
                     }}>
-                      <Route exact path='/' component={ViewChallenges}/>
+                      <Route exact path='/' component={AuthScreen}/>
                       <Route path={"/search"} component={SearchScreenDefault}/>
                       {/*<Route path={"/browse"} component={BrowseScreen}/>*/}
                       <Route path={"/addrss"} component={AddRssFeedScreen}/>
