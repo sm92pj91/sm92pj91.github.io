@@ -49,7 +49,7 @@
   "scripts": {
     "start": "REACT_APP_STAGE=dev react-scripts start --history-api-fallback",
     "start-nonprod": "REACT_APP_STAGE=preprod react-scripts start --history-api-fallback",
-    "build": "REACT_APP_STAGE=preprod react-scripts build",
+    "build": "REACT_APP_STAGE=preprod react-scripts build && echo 'cms.challengeacceptedapp.com' > ./build/CNAME",
     "deploy": "gh-pages -d build -b master",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
