@@ -9,8 +9,13 @@ const preprod = {
   IMAGE_BASE: "https://challenge-accepted-mob.s3.eu-west-2.amazonaws.com/challenges-preprod",
   CAROUSEL_BASE: "https://challenge-accepted-mob.s3.eu-west-2.amazonaws.com/carousel-preprod"
 }
+const prod = {
+  BASE_URL: "https://api.challengeacceptedapp.com/private-admin-prod",
+  IMAGE_BASE: "https://challenge-accepted-mob.s3.eu-west-2.amazonaws.com/challenges-prod",
+  CAROUSEL_BASE: "https://challenge-accepted-mob.s3.eu-west-2.amazonaws.com/carousel-prod"
+}
 
-const config = process.env.REACT_APP_STAGE === 'preprod' ? preprod : dev;
+const config = process.env.REACT_APP_STAGE === 'preprod' ? preprod : process.env.REACT_APP_STAGE === 'prod' ? prod : dev;
 
 export default {
   ...config
