@@ -685,7 +685,6 @@ const CreateChallenge = (props) => {
             <Form.Control
                 type="textarea"
                 placeholder="Description"
-                maxLength="60"
                 ref={Description}
                 name="Description"
             />
