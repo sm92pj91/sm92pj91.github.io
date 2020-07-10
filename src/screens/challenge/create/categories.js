@@ -19,7 +19,7 @@ export const CATEGORIES = [
   "For Kids",
   "Health",
   "Fitness",
-  "Mindfullness",
+  "Mindfulness",
   "Yoga",
   "Workouts",
   "Exercise",
