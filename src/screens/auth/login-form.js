@@ -86,14 +86,35 @@ class LoginForm extends React.Component {
           });
         }
       } else {
-        notification.open({
-          type: 'success',
-          message:
-              ' You have successfully logged in!',
-          description: 'Welcome!',
-        });
+        console.log('challenge name ' + payload.user.challengeName)
+        if(payload.user.challengeName === 'NEW_PASSWORD_REQUIRED'){
+          notification.open({
+            type: 'info',
+            message:
+                'New Password Required',
+            description: 'Please update your password',
+          });
+          this.props.history.push("/passwordChallenge")
 
-        this.props.history.push("/")
+        } else if(payload.user.challengeName === 'MFA_SETUP'){
+          notification.open({
+            type: 'info',
+            message:
+                '2FA required',
+            description: 'Please set up 2FA now',
+          });
+          // this.props.history.push("/passwordChallenge")
+        }
+        else {
+          notification.open({
+            type: 'success',
+            message:
+                ' You have successfully logged in!',
+            description: 'Welcome back!',
+          });
+
+          this.props.history.push("/")
+        }
       }
     }
   };

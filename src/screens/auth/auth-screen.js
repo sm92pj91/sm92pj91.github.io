@@ -6,6 +6,9 @@ import {WrappedRegisterForm} from "./register-form";
 import {WrappedForgotPasswordEmailForm} from "./forgot-password-email-form";
 import {WrappedForgotPasswordEmailCodeForm} from "./forgot-password-email-code-form";
 import {WrappedRegisterConfirmForm} from "./register-confirm-form";
+import {
+  WrappedPasswordChallengeForm
+} from "./password-challenge-form";
 
 export class AuthScreen extends React.Component {
 
@@ -21,6 +24,7 @@ export class AuthScreen extends React.Component {
             <Row>
               <Route path={"/login"} component={WrappedLoginForm}/>
               <Route path={"/register"} component={WrappedRegisterForm}/>
+              <Route path={"/passwordChallenge"} component={WrappedPasswordChallengeForm}/>
               <Route path={"/registerconfirm"}
                      component={WrappedRegisterConfirmForm}/>
               <Route path={"/forgotpassword1"}

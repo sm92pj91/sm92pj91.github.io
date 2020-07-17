@@ -222,11 +222,11 @@ const CreateChallenge = (props) => {
           },
           body: JSON.stringify(newChallenge),
         }).then(res => {
-              if (res.status !== 201) {
+              if (!res.ok) {
                 notification.open({
                   type: 'error',
                   message: 'Something went wrong',
-                  description: 'status' + res.status,
+                  description: 'status: ' + res.status,
                   duration: 10
                 });
                 res.json()

@@ -142,7 +142,32 @@ export class AuthService {
 
     })
     .catch(err => {
-      logger.info(err);
+      logger.info('Error: ' + err);
+      Hub.dispatch(AuthService.CHANNEL, {
+        event: AuthService.AUTH_EVENTS.PASSWORD_CHANGE,
+        success: false,
+        message: err.message
+      }, AuthService.CHANNEL);
+      return err;
+    });
+  }
+  static passwordChallenge = (email, oldPassword, newPassword) => {
+    Auth.signIn(email, oldPassword)
+    .then(user => {
+      return Auth.completeNewPassword(user,newPassword,[]);
+    })
+    .then(data => {
+      logger.info(data);
+      Hub.dispatch(AuthService.CHANNEL, {
+        event: AuthService.AUTH_EVENTS.PASSWORD_CHANGE,
+        success: true,
+        message: "",
+        data: data
+      }, AuthService.CHANNEL);
+
+    })
+    .catch(err => {
+      logger.info('Error: ' + err);
       Hub.dispatch(AuthService.CHANNEL, {
         event: AuthService.AUTH_EVENTS.PASSWORD_CHANGE,
         success: false,

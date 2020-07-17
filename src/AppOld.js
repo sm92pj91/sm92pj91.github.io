@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
 import {Layout} from 'antd';
+import {MyHeader} from "./components/layout/header";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {SearchScreenDefault} from "./screens/search/search-screen-default";
 import {AddRssFeedScreen} from "./screens/add-rss-feed";
+import {AuthScreen} from "./screens/auth/auth-screen";
 import Amplify from '@aws-amplify/core'
 import Sidebar from "./components/Sidebar/Sidebar";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -82,7 +84,7 @@ export class App extends React.Component {
               <Layout>
 
                 <Layout>
-                  {/*<MyHeader/>*/}
+                  <MyHeader/>
 
                   <Content
                       style={{padding: '0 50px', marginTop: 64, width: "100%"}}>
@@ -93,10 +95,16 @@ export class App extends React.Component {
                       width: "100%",
                       marginTop: "20px"
                     }}>
-                      <Route exact path='/' component={HomePage}/>
+                      <Route exact path='/' component={AuthScreen}/>
                       <Route path={"/search"} component={SearchScreenDefault}/>
                       {/*<Route path={"/browse"} component={BrowseScreen}/>*/}
                       <Route path={"/addrss"} component={AddRssFeedScreen}/>
+                      <Route path={"/login"} component={AuthScreen}/>
+                      <Route path={"/passwordChallenge"} component={AuthScreen}/>
+                      <Route path={"/register"} component={AuthScreen}/>
+                      <Route path={"/registerconfirm"} component={AuthScreen}/>
+                      <Route path={"/forgotpassword1"} component={AuthScreen}/>
+                      <Route path={"/forgotpassword2"} component={AuthScreen}/>
                       <Route path={"/profile"} component={UserProfile}/>
                       <Route path={"/challenges/view"} component={ViewChallenges}/>
                       {/*<Route path={"/challenges/create"} component={CreateChallenge}/>*/}
