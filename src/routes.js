@@ -73,6 +73,13 @@ const dashboardRoutes = [
     component: Bugs,
     layout: "/"
   },
+  {
+    path: "metrics",
+    name: "Metrics",
+    icon: "pe-7s-graph",
+    component: ViewChallenges,
+    layout: "/"
+  },
   // {
   //   path: "/maps",
   //   name: "Maps",

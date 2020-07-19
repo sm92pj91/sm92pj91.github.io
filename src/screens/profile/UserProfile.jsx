@@ -18,14 +18,12 @@
 import React, {Component} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 
-import {Card} from "../.././components/Card/Card.jsx";
-import {FormInputs} from "../.././components/FormInputs/FormInputs.jsx";
-// import { UserCard } from "/Users/psj03/IdeaProjects/ReactjsCognitoStarter/src/components/UserCard/UserCard.jsx";
-// import avatar from "/Users/psj03/IdeaProjects/ReactjsCognitoStarter/src/assets/img/faces/face-3.jpg";
+import {Card} from "../../components/Card/Card";
+import {FormInputs} from "../../components/FormInputs/FormInputs";
 import {Hub} from "@aws-amplify/core";
-import {AuthService} from "../../services/auth-service";
 import {Auth} from "aws-amplify";
 import {notification} from "antd";
+import {AuthService} from "../../services/auth-service";
 
 class UserProfile extends Component {
 

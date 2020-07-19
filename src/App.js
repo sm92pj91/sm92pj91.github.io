@@ -18,10 +18,18 @@ import Carousel from "./screens/carousel/Carousel";
 import Bugs from "./screens/viewbugs/Bugs";
 import {withAuthenticator} from "aws-amplify-react";
 import '@aws-amplify/ui/dist/style.css';
+import ViewSubscriptions from "./screens/viewsubscriptions/ViewSubscriptions";
 
 const {Content, Footer} = Layout;
 
-Amplify.configure(awsConfig);
+Amplify.configure({...awsConfig,
+  Storage: {
+    AWSS3: {
+      bucket: 'challenge-accepted-mob', //REQUIRED -  Amazon S3 bucket
+      region: 'eu-west-1', //OPTIONAL -  Amazon service region
+    }
+  }
+});
 
 Amplify.Logger.LOG_LEVEL = 'INFO';
 
@@ -93,7 +101,7 @@ export class App extends React.Component {
                       width: "100%",
                       marginTop: "20px"
                     }}>
-                      <Route exact path='/' component={HomePage}/>
+                      <Route exact path='/' component={UserProfile}/>
                       <Route path={"/search"} component={SearchScreenDefault}/>
                       {/*<Route path={"/browse"} component={BrowseScreen}/>*/}
                       <Route path={"/addrss"} component={AddRssFeedScreen}/>
@@ -104,6 +112,7 @@ export class App extends React.Component {
                       <Route path={"/homepage"} component={HomePage}/>
                       <Route path={"/carousel"} component={Carousel}/>
                       <Route path={"/bugs"} component={Bugs}/>
+                      <Route path={"/metrics"} component={ViewSubscriptions}/>
 
                     </div>
                   </Content>

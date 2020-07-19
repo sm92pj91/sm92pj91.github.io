@@ -45,6 +45,7 @@
     "react-selectize": "^3.0.1",
     "react-toggle": "4.0.2",
     "react-transition-group": "^1.1.2",
+    "recharts": "^1.8.5",
     "stringquery": "^1.0.8"
   },
   "scripts": {
