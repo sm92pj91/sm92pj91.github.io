@@ -7,6 +7,7 @@ import Card from "../../components/Card/Card.jsx"
 import config from "../../configs/config"
 import {Auth} from "aws-amplify";
 import {notification} from "antd";
+import moment from "moment";
 
 const challengeColumns = [
   {
@@ -17,7 +18,10 @@ const challengeColumns = [
       return {width: '300px'};
     }
   },
-  {dataField: 'count', text: "Count", sort: true}];
+  {dataField: 'count', text: "Count", sort: true},
+  {dataField: 'active', text: "Active", sort: true},
+  {dataField: 'complete', text: "Ever Completed", sort: true},
+  {dataField: 'updated', text: "Updated this week", sort: true}];
 const {SearchBar} = Search;
 
 class ViewSubscriptions extends Component {
@@ -62,16 +66,29 @@ class ViewSubscriptions extends Component {
         data.map(subscription => {
           let challenge = this.state.tdChallenges.find(x => x.ChallengeId === subscription.ChallengeId);
           if(challenge) {
-            return challenge.Name;
+            subscription.Name = challenge.Name;
           } else {
-            return 'Create your own'
+            subscription.Name = 'Create your own'
           }
+          return subscription;
         }).forEach((el) => {
-          counts[el] = counts[el] ? (counts[el] += 1) : 1;
+          counts[el.Name] = counts[el.Name] ?
+              {
+                count: counts[el.Name].count + 1,
+                active: counts[el.Name].active + (el.IsActive ? 1 : 0),
+                complete: counts[el.Name].complete + (el.TimesCompleted > 0 ? 1 : 0),
+                updated: counts[el.Name].updated + ((moment().diff(moment(el.UpdatedAt), 'hours')) < 168 ? 1 : 0)
+              } :
+              {
+                count: 1,
+                active: el.IsActive ? 1 : 0,
+                complete: el.TimesCompleted > 0 ? 1 : 0,
+                updated: (moment().diff(moment(el.UpdatedAt), 'hours')) < 24 ? 1 : 0
+              };
         });
         let pieData = [];
         Object.keys(counts).forEach(function(key) {
-          pieData.push({name: key, count: counts[key]})
+          pieData.push({name: key, ...counts[key]})
         })
         this.setState({
           tdSubscriptions: pieData.sort(function (a, b) {
