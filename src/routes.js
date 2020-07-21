@@ -22,6 +22,7 @@ import CreateChallenge from "./screens/challenge/create/CreateChallenge";
 import HomePage from "./screens/homepage/homepage";
 import Carousel from "./screens/carousel/Carousel"
 import Bugs from "./screens/viewbugs/Bugs";
+import ViewUnsubscribes from "./screens/viewunsubscribes/ViewUnsubscribes";
 
 const dashboardRoutes = [
   // {
@@ -78,6 +79,13 @@ const dashboardRoutes = [
     name: "Metrics",
     icon: "pe-7s-graph",
     component: ViewChallenges,
+    layout: "/"
+  },
+  {
+    path: "unsubscribes",
+    name: "Unsubscribes",
+    icon: "pe-7s-science",
+    component: ViewUnsubscribes,
     layout: "/"
   },
   // {
