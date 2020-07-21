@@ -40,6 +40,7 @@ export const CATEGORIES = [
   "Food",
   "Drink",
   "Beer",
+  "Entertain Kids",
   "Eating out",
   "Golf",
   "Indoor Entertainment"
