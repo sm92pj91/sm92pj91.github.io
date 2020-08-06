@@ -86,13 +86,23 @@ class ViewSubscriptions extends Component {
                 updated: (moment().diff(moment(el.UpdatedAt), 'hours')) < 24 ? 1 : 0
               };
         });
+        this.state.tdChallenges.forEach(challenge => {
+          if (!counts[challenge.Name]) {
+            counts[challenge.Name] = {
+              count: 0,
+              active: 0,
+              complete: 0,
+              updated: 0
+            };
+          }
+        })
         let pieData = [];
         Object.keys(counts).forEach(function(key) {
           pieData.push({name: key, ...counts[key]})
         })
         this.setState({
           tdSubscriptions: pieData.sort(function (a, b) {
-            return Date.parse(b.count) - Date.parse(a.count)
+            return b.count - a.count
           })
         })
 
