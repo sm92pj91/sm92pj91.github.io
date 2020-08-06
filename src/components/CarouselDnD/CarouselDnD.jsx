@@ -89,6 +89,42 @@ const Image = ({image, callback, index, moveImage}) => {
                 <option>New</option>
                 <option>Arts & Culture</option>
                 <option>Daily Life</option>
+                <option>Daily Life</option>
+                <option>Music</option>
+                <option>30 day challenges</option>
+                <option>Theatre</option>
+                <option>Get Creative</option>
+                <option>Productivity</option>
+                <option>At Home</option>
+                <option>Wellbeing</option>
+                <option>For Kids</option>
+                <option>Health</option>
+                <option>Fitness</option>
+                <option>Mindfulness</option>
+                <option>Yoga</option>
+                <option>Workouts</option>
+                <option>Exercise</option>
+                <option>Walks</option>
+                <option>Reading</option>
+                <option>Football</option>
+                <option>Extreme sports</option>
+                <option>Basketball</option>
+                <option>Cricket</option>
+                <option>Tennis</option>
+                <option>Film</option>
+                <option>TV</option>
+                <option>Gigs</option>
+                <option>Global travel</option>
+                <option>UK Travel</option>
+                <option>Exploring</option>
+                <option>Sightseeing</option>
+                <option>Food</option>
+                <option>Drink</option>
+                <option>Beer</option>
+                <option>Entertain Kids</option>
+                <option>Eating out</option>
+                <option>Golf</option>
+                <option>Indoor Entertainment</option>
               </Form.Control>
             </Form.Row>
           </div>)
