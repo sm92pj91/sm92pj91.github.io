@@ -36,6 +36,7 @@ class ViewSubscriptions extends Component {
       console.log(row.id)
     }
   };
+
   componentDidMount() {
     fetch(
         config.BASE_URL + '/challenge')
@@ -63,9 +64,11 @@ class ViewSubscriptions extends Component {
       .then(res => res.json())
       .then((data) => {
         const counts = {};
+        counts['TOTAL'] = {count: 0, active: 0, complete: 0, updated: 0}
         data.map(subscription => {
-          let challenge = this.state.tdChallenges.find(x => x.ChallengeId === subscription.ChallengeId);
-          if(challenge) {
+          let challenge = this.state.tdChallenges.find(
+              x => x.ChallengeId === subscription.ChallengeId);
+          if (challenge) {
             subscription.Name = challenge.Name;
           } else {
             subscription.Name = 'Create your own'
@@ -76,15 +79,26 @@ class ViewSubscriptions extends Component {
               {
                 count: counts[el.Name].count + 1,
                 active: counts[el.Name].active + (el.IsActive ? 1 : 0),
-                complete: counts[el.Name].complete + (el.TimesCompleted > 0 ? 1 : 0),
-                updated: counts[el.Name].updated + ((moment().diff(moment(el.UpdatedAt), 'hours')) < 168 ? 1 : 0)
+                complete: counts[el.Name].complete + (el.TimesCompleted > 0 ? 1
+                    : 0),
+                updated: counts[el.Name].updated + ((moment().diff(
+                    moment(el.UpdatedAt), 'hours')) < 168 ? 1 : 0)
               } :
               {
                 count: 1,
                 active: el.IsActive ? 1 : 0,
                 complete: el.TimesCompleted > 0 ? 1 : 0,
-                updated: (moment().diff(moment(el.UpdatedAt), 'hours')) < 24 ? 1 : 0
+                updated: (moment().diff(moment(el.UpdatedAt), 'hours')) < 24 ? 1
+                    : 0
               };
+          counts['TOTAL'] = {
+            count: counts['TOTAL'].count + 1,
+            active: counts['TOTAL'].active + (el.IsActive ? 1 : 0),
+            complete: counts['TOTAL'].complete + (el.TimesCompleted > 0 ? 1
+                : 0),
+            updated: counts['TOTAL'].updated + ((moment().diff(
+                moment(el.UpdatedAt), 'hours')) < 168 ? 1 : 0)
+          }
         });
         this.state.tdChallenges.forEach(challenge => {
           if (!counts[challenge.Name]) {
@@ -97,7 +111,7 @@ class ViewSubscriptions extends Component {
           }
         })
         let pieData = [];
-        Object.keys(counts).forEach(function(key) {
+        Object.keys(counts).forEach(function (key) {
           pieData.push({name: key, ...counts[key]})
         })
         this.setState({
