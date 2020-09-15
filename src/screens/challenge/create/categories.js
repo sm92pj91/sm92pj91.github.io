@@ -43,5 +43,6 @@ export const CATEGORIES = [
   "Entertain Kids",
   "Eating out",
   "Golf",
-  "Indoor Entertainment"
+  "Indoor Entertainment",
+  "Gaming"
 ]
