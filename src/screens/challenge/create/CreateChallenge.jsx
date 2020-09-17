@@ -35,7 +35,7 @@ const CreateChallenge = (props) => {
     ProgressType: "fraction",
     IsActive: true,
     IsReminder: true,
-    IsSearchable: true,
+    IsSearchable: false,
     LiveAt: new Date(),
     ChallengeItems: [{item: "", id: randomstring.generate(10)}],
     CategoryItems: [],
