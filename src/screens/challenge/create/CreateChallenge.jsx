@@ -328,10 +328,6 @@ const CreateChallenge = (props) => {
     let newChallenge = {...challenge, IsActive: !challenge.IsActive}
     setChallenge(newChallenge)
   };
-  const toggleReminder = () => {
-    let newChallenge = {...challenge, IsReminder: !challenge.Reminder}
-    setChallenge(newChallenge)
-  };
   const toggleSearchable = () => {
     setChallenge({...challenge, IsSearchable: !challenge.IsSearchable})
   };
@@ -707,6 +703,7 @@ const CreateChallenge = (props) => {
                 label="Searchable"
                 checked={challenge.IsSearchable}
                 onChange={toggleSearchable}
+                defaultValue={false}
             />
           </Form.Group>
           <Form.Group as={Col} md="6">
