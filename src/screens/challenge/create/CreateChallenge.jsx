@@ -717,17 +717,6 @@ const CreateChallenge = (props) => {
             />
           </Form.Group>
         </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} md="3">
-            <Form.Check
-                type="switch"
-                id="reminderswitch"
-                label="User can set reminder"
-                checked={challenge.Reminder}
-                onChange={toggleReminder}
-            />
-          </Form.Group>
-        </Form.Row>
 
         {challenge.ChallengeType === 'ENTERASYOUGO' ?
             <Form.Row>
