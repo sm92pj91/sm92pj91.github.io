@@ -209,9 +209,11 @@ const CreateChallenge = (props) => {
       }).then(user => {
         let url = config.BASE_URL + '/challenge'
         let method = "POST"
-        if (ChallengeId) {
+        if (newChallenge.ChallengeId && newChallenge.ChallengeId.length > 0) {
           method = "PUT"
           url = config.BASE_URL + '/challenge/' + ChallengeId
+        } else {
+          delete newChallenge.ChallengeId;
         }
 
         fetch(url, {
