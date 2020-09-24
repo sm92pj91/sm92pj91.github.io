@@ -601,12 +601,28 @@ const CreateChallenge = (props) => {
     };
     const [show, setShow] = useState(false);
     const [infoIndex, setInfoIndex] = useState(false);
-
+    // const removeEmpties = json => {
+    //     if (json.Description) {
+    //         if(json.Description.length === 0) {
+    //             delete json.Description;
+    //         }
+    //     }
+    //     if (json.Description) {
+    //         if(json.Description.length === 0) {
+    //             delete json.Description;
+    //         }
+    //     }
+    // }
     const handleClose = () => setShow(false);
     const handleSubmitItemInfo = () => {
         const newChallengeItems = challenge.ChallengeItems.map(
             (challengeItem, sidx) => {
                 if (infoIndex !== sidx) {
+                    return challengeItem;
+                }
+                if ((Object.keys(info).length === 0 || (Object.keys(info).length === 1 && info.misc)) && extraInfo.length === 0) {
+
+                    delete challengeItem.info;
                     return challengeItem;
                 }
                 return {...challengeItem, info: {...info, misc: extraInfo}};
@@ -619,12 +635,13 @@ const CreateChallenge = (props) => {
     const handleShow = () => setShow(true);
     const [info, setInfo] = useState({})
     const [extraInfo, setExtraInfo] = useState([])
-    const handleItemDescriptionChange = evt => {
-        setInfo({...info, Description: evt.target.value})
-    }
     const handleInfoChange = item => evt => {
         let newInfo = info;
-        newInfo[item] = evt.target.value;
+        if(evt.target.value.length === 0) {
+            delete newInfo[item]
+        } else {
+            newInfo[item] = evt.target.value;
+        }
         setInfo(newInfo)
     }
     const addInfo = idx => {
@@ -633,7 +650,6 @@ const CreateChallenge = (props) => {
         if (item.info) {
             setInfo(item.info);
             if (item.info.misc) {
-                console.log('here')
                 setExtraInfo(item.info.misc);
             } else {
                 setExtraInfo([])
@@ -649,13 +665,21 @@ const CreateChallenge = (props) => {
         if(!extraInfo.find(x => x.index === idx)) {
             setExtraInfo(extraInfo.concat(newItem));
         } else {
-            setExtraInfo(extraInfo.map(x => {
-                if (x.index === idx) {
-                    return newItem;
+            if (newItem.key.length === 0 && newItem.value.length === 0) {
+                if(extraInfo.length === 0) {
+                    setExtraInfo([])
                 } else {
-                    return x;
+                    setExtraInfo(extraInfo.filter(x => x.index !== idx));
                 }
-            }))
+            } else {
+                setExtraInfo(extraInfo.map(x => {
+                    if (x.index === idx) {
+                        return newItem;
+                    } else {
+                        return x;
+                    }
+                }))
+            }
         }
     }
     const handleExtraInfoValueChange = idx => evt => {
@@ -663,13 +687,21 @@ const CreateChallenge = (props) => {
         if(!extraInfo.find(x => x.index === idx)) {
             setExtraInfo(extraInfo.concat(newItem));
         } else {
-            setExtraInfo(extraInfo.map(x => {
-                if (x.index === idx) {
-                    return newItem;
+            if (newItem.key.length === 0 && newItem.value.length === 0) {
+                if(extraInfo.length === 0) {
+                    setExtraInfo([])
                 } else {
-                    return x;
+                    setExtraInfo(extraInfo.filter(x => x.index !== idx));
                 }
-            }))
+            } else {
+                setExtraInfo(extraInfo.map(x => {
+                    if (x.index === idx) {
+                        return newItem;
+                    } else {
+                        return x;
+                    }
+                }))
+            }
         }
     }
     return (
@@ -689,7 +721,7 @@ const CreateChallenge = (props) => {
                                       placeholder="Description" id="ItemDescription"
                                       name="ItemDescription"
                                       ref={ref}
-                                      onChange={handleItemDescriptionChange}
+                                      onChange={handleInfoChange('Description')}
                                       defaultValue={info.Description ? info.Description : ''}
                         />
                     </Form.Row>
