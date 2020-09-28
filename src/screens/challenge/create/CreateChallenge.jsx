@@ -18,7 +18,7 @@ import imageDataURI from "image-data-uri"
 import {Redirect} from "react-router-dom";
 import {notification} from 'antd';
 import randomstring from 'randomstring';
-
+import Papa from 'papaparse';
 const CreateChallenge = (props) => {
     const [validated] = useState(false);
     const [ChallengeId, setChallengeId] = useState(props.match.params.id);
@@ -300,14 +300,15 @@ const CreateChallenge = (props) => {
 
     const setChallengesUpload = (file) => {
         console.log(challenge)
+        var data = Papa.parse(file);
         if (file.split("\n")[0].split(',')[0] === 'Category') {
             let newItems = []
             let currentCategory = '';
             let categoryItem = {Category: '', ChallengeItems: []}
-            file.split("\n").forEach((x, ind) => {
+            data.data.forEach((csvArray, ind) => {
                 if(ind > 0) {
-                    let csvArray = x.split(',');
-                    let info = extractInfo(x.substring(x.split(',')[0].length + 1));
+                    let info = extractInfo(csvArray.slice(2));
+                    console.log(info);
                     if (csvArray[0] !== currentCategory) {
                         if(currentCategory !== '') {
                             newItems.push(categoryItem);
@@ -328,14 +329,13 @@ const CreateChallenge = (props) => {
         } else {
             console.log('here')
             let newItems = []
-            file.split("\n").forEach((x, ind) => {
+            data.data.forEach((x, ind) => {
                 if (x.length > 0 && ind > 0) {
-                    let info = extractInfo(x);
+                    let info = extractInfo(x.slice(1));
                     if(info) {
-                        newItems.push({item: x.split(',')[0], id: randomstring.generate(10), info: info})
+                        newItems.push({item: x[0], id: randomstring.generate(10), info: info})
                     } else {
-                        newItems.push({item: x.split(',')[0], id: randomstring.generate(10)})
-
+                        newItems.push({item: x[0], id: randomstring.generate(10)})
                     }
                 }
             })
@@ -346,29 +346,29 @@ const CreateChallenge = (props) => {
     };
 
     const extractInfo = infoString => {
-        if(infoString.substring(infoString.length - 11).trim() !== ',,,,,,,,,,'){
-            let csvArray = infoString.split(',');
+        if(infoString.join().length > 9){
+            let csvArray = infoString;
             let extraInfo = {};
+            if(csvArray[0].length > 0) {
+                extraInfo.Description = csvArray[0];
+            }
             if(csvArray[1].length > 0) {
-                extraInfo.Description = csvArray[1];
+                extraInfo.URL = csvArray[1];
             }
             if(csvArray[2].length > 0) {
-                extraInfo.URL = csvArray[2];
+                extraInfo.URLText = csvArray[2];
             }
             if(csvArray[3].length > 0) {
-                extraInfo.URLText = csvArray[3];
+                extraInfo.MapsLink = csvArray[3];
             }
-            if(csvArray[4].length > 0) {
-                extraInfo.MapsLink = csvArray[4];
+            if(csvArray[4].length > 0 && csvArray[5].length) {
+                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[4], value: csvArray[5]}) : [{index: 0, key: csvArray[4], value: csvArray[5]}]
             }
-            if(csvArray[5].length > 0 && csvArray[6].length) {
-                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[5], value: csvArray[6]}) : [{index: 0, key: csvArray[5], value: csvArray[6]}]
+            if(csvArray[6].length > 0 && csvArray[7].length) {
+                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[6], value: csvArray[7]}) : [{index: 0, key: csvArray[6], value: csvArray[7]}]
             }
-            if(csvArray[7].length > 0 && csvArray[8].length) {
-                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[75], value: csvArray[8]}) : [{index: 0, key: csvArray[7], value: csvArray[8]}]
-            }
-            if(csvArray[9].length > 0 && csvArray[10].length) {
-                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[9], value: csvArray[10]}) : [{index: 0, key: csvArray[9], value: csvArray[10]}]
+            if(csvArray[8].length > 0 && csvArray[9].length) {
+                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[8], value: csvArray[9]}) : [{index: 0, key: csvArray[8], value: csvArray[9]}]
             }
             return extraInfo;
         } else return null
