@@ -199,6 +199,7 @@ const CreateChallenge = (props) => {
                     (cat, ind) => ({
                         Category: cat.Category,
                         ChallengeItems: cat.ChallengeItems.map((ch, index) => ({
+                            ...ch,
                             index: index,
                             item: ch.item,
                             id: ch.id
@@ -299,34 +300,79 @@ const CreateChallenge = (props) => {
 
     const setChallengesUpload = (file) => {
         console.log(challenge)
-        if (challenge.ChallengeType === "CATEGORIES") {
+        if (file.split("\n")[0].split(',')[0] === 'Category') {
             let newItems = []
-            file.split("\n").forEach(x => {
-                if (x.length !== 0) {
-                    let categoryItem = {Category: x.split(",")[0], ChallengeItems: []}
-                    x.split(",").splice(1).forEach(y => {
-                        categoryItem = {
-                            ...categoryItem,
-                            ChallengeItems: [...categoryItem.ChallengeItems,
-                                {item: y, id: randomstring.generate(10)}]
+            let currentCategory = '';
+            let categoryItem = {Category: '', ChallengeItems: []}
+            file.split("\n").forEach((x, ind) => {
+                if(ind > 0) {
+                    let csvArray = x.split(',');
+                    let info = extractInfo(x.substring(x.split(',')[0].length + 1));
+                    if (csvArray[0] !== currentCategory) {
+                        if(currentCategory !== '') {
+                            newItems.push(categoryItem);
                         }
-                    })
-                    newItems.push(categoryItem);
+                        currentCategory = csvArray[0];
+                        categoryItem = {Category: csvArray[0], ChallengeItems: []}
+                    }
+                    if (info) {
+                        categoryItem = {Category: categoryItem.Category, ChallengeItems: categoryItem.ChallengeItems.concat({item: csvArray[1], id: randomstring.generate(10), info: info})}
+                    } else {
+                        categoryItem = {Category: categoryItem.Category, ChallengeItems: categoryItem.ChallengeItems.concat({item: csvArray[1], id: randomstring.generate(10)})}
+                    }
                 }
-
             })
-            setChallenge({...challenge, CategoryItems: newItems})
+            newItems.push(categoryItem);
+            console.log(newItems)
+            setChallenge({...challenge, ChallengeType: 'CATEGORIES', CategoryItems: newItems, ChallengeItems: []})
         } else {
             let newItems = []
-            file.split("\n").forEach(x => {
-                if (x.length > 0) {
-                    newItems.push({item: x, id: randomstring.generate(10)})
+            file.split("\n").forEach((x, ind) => {
+                if (x.length > 0 && ind > 0) {
+                    let info = extractInfo(x);
+                    if(info) {
+                        newItems.push({item: x, id: randomstring.generate(10), info: info})
+                    } else {
+                        newItems.push({item: x, id: randomstring.generate(10)})
+
+                    }
                 }
             })
             setChallenge({...challenge, ChallengeItems: [...newItems]})
+            console.log({...challenge, ChallengeItems: [...newItems]})
         }
 
     };
+
+    const extractInfo = infoString => {
+        if(infoString.substring(infoString.length - 11).trim() !== ',,,,,,,,,,'){
+            let csvArray = infoString.split(',');
+            let extraInfo = {};
+            if(csvArray[1].length > 0) {
+                extraInfo.Description = csvArray[1];
+            }
+            if(csvArray[2].length > 0) {
+                extraInfo.URL = csvArray[2];
+            }
+            if(csvArray[3].length > 0) {
+                extraInfo.URLText = csvArray[3];
+            }
+            if(csvArray[4].length > 0) {
+                extraInfo.MapsLink = csvArray[4];
+            }
+            if(csvArray[5].length > 0 && csvArray[6].length) {
+                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[5], value: csvArray[6]}) : [{index: 0, key: csvArray[5], value: csvArray[6]}]
+            }
+            if(csvArray[7].length > 0 && csvArray[8].length) {
+                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[75], value: csvArray[8]}) : [{index: 0, key: csvArray[7], value: csvArray[8]}]
+            }
+            if(csvArray[9].length > 0 && csvArray[10].length) {
+                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[9], value: csvArray[10]}) : [{index: 0, key: csvArray[9], value: csvArray[10]}]
+            }
+            return extraInfo;
+        } else return null
+
+    }
 
     const toggleActive = () => {
         let newChallenge = {...challenge, IsActive: !challenge.IsActive}
@@ -601,35 +647,53 @@ const CreateChallenge = (props) => {
     };
     const [show, setShow] = useState(false);
     const [infoIndex, setInfoIndex] = useState(false);
-    // const removeEmpties = json => {
-    //     if (json.Description) {
-    //         if(json.Description.length === 0) {
-    //             delete json.Description;
-    //         }
-    //     }
-    //     if (json.Description) {
-    //         if(json.Description.length === 0) {
-    //             delete json.Description;
-    //         }
-    //     }
-    // }
+    const [infoCategoryIndex, setInfoCategoryIndex] = useState(false);
     const handleClose = () => setShow(false);
     const handleSubmitItemInfo = () => {
-        const newChallengeItems = challenge.ChallengeItems.map(
-            (challengeItem, sidx) => {
-                if (infoIndex !== sidx) {
-                    return challengeItem;
-                }
-                if ((Object.keys(info).length === 0 || (Object.keys(info).length === 1 && info.misc)) && extraInfo.length === 0) {
+        if(challenge.ChallengeType !== 'CATEGORIES') {
+            const newChallengeItems = challenge.ChallengeItems.map(
+                (challengeItem, sidx) => {
+                    if (infoIndex !== sidx) {
+                        return challengeItem;
+                    }
+                    if ((Object.keys(info).length === 0 || (Object.keys(info).length === 1 && info.misc)) && extraInfo.length === 0) {
 
-                    delete challengeItem.info;
-                    return challengeItem;
-                }
-                return {...challengeItem, info: {...info, misc: extraInfo}};
+                        delete challengeItem.info;
+                        return challengeItem;
+                    }
+                    return {...challengeItem, info: {...info, misc: extraInfo}};
+                });
+            console.log(newChallengeItems);
+            console.log(extraInfo);
+            setChallenge({...challenge, ChallengeItems: newChallengeItems})
+        } else {
+            setChallenge({
+                ...challenge,
+                CategoryItems: challenge.CategoryItems.map((categoryItem, sidx) => {
+                        if (infoCategoryIndex !== sidx) {
+                            return categoryItem
+                        } else {
+                            let ci = categoryItem.ChallengeItems.slice(infoIndex, infoIndex + 1)[0];
+
+                            if ((Object.keys(info).length === 0 || (Object.keys(info).length === 1 && info.misc)) && extraInfo.length === 0) {
+                                delete ci.info;
+                            } else {
+                                ci.info = {...info, misc: extraInfo}
+                                if(extraInfo.length === 0) {
+                                    delete ci.info.misc;
+                                }
+                            }
+                            return {
+                                ...categoryItem,
+                                ChallengeItems: [...categoryItem.ChallengeItems.slice(0, infoIndex),
+                                    ci,
+                                    ...categoryItem.ChallengeItems.slice(infoIndex + 1)]
+                            }
+                        }
+                    }
+                )
             });
-        console.log(newChallengeItems);
-        console.log(extraInfo);
-        setChallenge({...challenge, ChallengeItems: newChallengeItems})
+        }
         setShow(false);
     }
     const handleShow = () => setShow(true);
@@ -648,6 +712,42 @@ const CreateChallenge = (props) => {
         setInfoIndex(idx);
         let item = challenge.ChallengeItems[idx];
         if (item.info) {
+            setInfo(item.info);
+            if (item.info.misc) {
+                setExtraInfo(item.info.misc);
+            } else {
+                setExtraInfo([])
+            }
+        } else {
+            setInfo({})
+            setExtraInfo([])
+        }
+        handleShow();
+    }
+
+    // setChallenge({
+    //     ...challenge,
+    //     CategoryItems: challenge.CategoryItems.map((categoryItem, sidx) => {
+    //             if (idx !== sidx) {
+    //                 return categoryItem
+    //             } else {
+    //                 return {
+    //                     ...categoryItem,
+    //                     ChallengeItems: [...categoryItem.ChallengeItems.slice(0, idc),
+    //                         {
+    //                             ...categoryItem.ChallengeItems.slice(idc, idc + 1)[0],
+    //                             item: evt.target.value
+    //                         },
+    //                         ...categoryItem.ChallengeItems.slice(idc + 1)]
+    //                 }
+    //             }
+    //         }
+    //     )
+    // });
+    const addCategoryInfo = (idx, idc, item) => {
+        setInfoCategoryIndex(idx);
+        setInfoIndex(idc);
+         if (item.info) {
             setInfo(item.info);
             if (item.info.misc) {
                 setExtraInfo(item.info.misc);
@@ -801,7 +901,7 @@ const CreateChallenge = (props) => {
                                       placeholder="url text" id="urltext"
                                       name="urltext"
                                       onChange={handleInfoChange('URLText')}
-                                      defaultValue={info.UrlText ? info.UrlText : ''}
+                                      defaultValue={info.URLText ? info.URLText : ''}
                         />
                     </Form.Row>
                     <Form.Row>
@@ -1075,6 +1175,16 @@ const CreateChallenge = (props) => {
                             <div>
                                 <Form.Row>
                                     <Form.Group as={Col} md={"1"}></Form.Group>
+                                    <Form.Group as={Col} md={"1"}>
+                                        <Button
+                                            type="button"
+                                            onClick={() => addCategoryInfo(idx,idc, challengeItem)}
+                                            className="small"
+                                            variant={challengeItem.info ?"success": "primary"}
+                                        >
+                                            info
+                                        </Button>
+                                    </Form.Group>
                                     <Form.Group as={Col} md={"6"}>
                                         <Form.Control
                                             type="text"
