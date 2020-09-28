@@ -326,14 +326,15 @@ const CreateChallenge = (props) => {
             console.log(newItems)
             setChallenge({...challenge, ChallengeType: 'CATEGORIES', CategoryItems: newItems, ChallengeItems: []})
         } else {
+            console.log('here')
             let newItems = []
             file.split("\n").forEach((x, ind) => {
                 if (x.length > 0 && ind > 0) {
                     let info = extractInfo(x);
                     if(info) {
-                        newItems.push({item: x, id: randomstring.generate(10), info: info})
+                        newItems.push({item: x.split(',')[0], id: randomstring.generate(10), info: info})
                     } else {
-                        newItems.push({item: x, id: randomstring.generate(10)})
+                        newItems.push({item: x.split(',')[0], id: randomstring.generate(10)})
 
                     }
                 }
