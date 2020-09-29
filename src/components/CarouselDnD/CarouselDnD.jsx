@@ -126,6 +126,7 @@ const Image = ({image, callback, index, moveImage}) => {
                 <option>Golf</option>
                 <option>Indoor Entertainment</option>
                 <option>Gaming</option>
+                <option>Green</option>
               </Form.Control>
             </Form.Row>
           </div>)
