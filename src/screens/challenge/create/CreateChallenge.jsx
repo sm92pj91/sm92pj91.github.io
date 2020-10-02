@@ -811,7 +811,7 @@ const CreateChallenge = (props) => {
             <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter"
                    centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Added Information</Modal.Title>
+                    <Modal.Title>Added Information for {challenge.ChallengeItems[infoIndex] ? challenge.ChallengeItems[infoIndex].item : ''}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Row>
