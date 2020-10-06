@@ -8,7 +8,7 @@ import Form from "react-bootstrap/Form";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 
-const Image = ({image, callback, index, moveImage}) => {
+const Image = ({image, callback, index, moveImage, onDelete}) => {
   const ref = useRef(null);
   const [showModal, setShowModal] = useState(false)
   const [type, setType] = useState(image.CarouselItem.Type)
@@ -51,6 +51,10 @@ const Image = ({image, callback, index, moveImage}) => {
   const handleClose = () => {
     setShowModal(false)
 
+  };
+  const handleDelete = () => {
+    onDelete(image);
+    setShowModal(false);
   };
   const handleSubmit = () => {
     image = {
@@ -208,6 +212,9 @@ const Image = ({image, callback, index, moveImage}) => {
             </div>
           </Modal.Body>
           <Modal.Footer>
+            <Button variant="secondary" onClick={handleDelete}>
+              Delete
+            </Button>
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
@@ -229,13 +236,14 @@ const Image = ({image, callback, index, moveImage}) => {
   );
 };
 
-const CarouselDnD = ({images, callback, moveImage}) => {
+const CarouselDnD = ({images, callback, moveImage, onDelete}) => {
   const renderImage = (image, index) => {
     return (
 
         <Image
             image={image}
             callback={callback}
+            onDelete={onDelete}
             index={index}
             key={`${image.id}-image`}
             moveImage={moveImage}

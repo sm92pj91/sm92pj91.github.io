@@ -197,6 +197,48 @@ const Carousel = (props) => {
     })
     setImages(newImages)
   }, [images]);
+  const onDeleteImage = useCallback(image => {
+    Auth.currentSession({
+      bypassCache: true
+    }).then(user => {
+      let url = config.BASE_URL + '/carousel/' + image.CarouselItem.ImageId
+      let method = "DELETE"
+      fetch(url, {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + user.getIdToken().getJwtToken()
+        },
+      }).then(res => {
+        notification.open({
+          type: 'success',
+          message: 'Changes Submitted',
+          duration: 10
+        });
+        let newImages = images.filter(img => img.id !== image.id);
+        setImages(newImages);
+
+      })
+          .catch(err => {
+            notification.open({
+              type: 'error',
+              message: 'Something went wrong',
+              description: err,
+              duration: 10
+            });
+          })
+    })
+        .catch(err => {
+          notification.open({
+            type: 'error',
+            message: 'Issue with authentication, please log in again',
+            description: err,
+            duration: 10
+          });
+        })
+
+  }, [images]);
+
   const submitChange = () => {
     if ((images.filter(img => (img.CarouselItem.Id === ""))).length > 0) {
       notification.open({
@@ -255,7 +297,7 @@ const Carousel = (props) => {
                   accept={"image/*"}/>
         <DndProvider backend={backendForDND}>
           <CarouselDnD images={images} callback={onUpdateImage}
-                       moveImage={moveImage}/>
+                       moveImage={moveImage} onDelete={onDeleteImage}/>
         </DndProvider>
         <Button onClick={submitChange}>Submit Changes</Button>
       </div>
