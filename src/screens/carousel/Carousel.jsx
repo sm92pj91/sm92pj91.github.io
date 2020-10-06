@@ -212,7 +212,7 @@ const Carousel = (props) => {
       }).then(res => {
         notification.open({
           type: 'success',
-          message: 'Changes Submitted',
+          message: 'Item Deleted',
           duration: 10
         });
         let newImages = images.filter(img => img.id !== image.id);
