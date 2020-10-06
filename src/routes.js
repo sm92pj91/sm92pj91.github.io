@@ -23,6 +23,7 @@ import HomePage from "./screens/homepage/homepage";
 import Carousel from "./screens/carousel/Carousel"
 import Bugs from "./screens/viewbugs/Bugs";
 import ViewUnsubscribes from "./screens/viewunsubscribes/ViewUnsubscribes";
+import Interest from "./screens/viewinterest/Interest";
 
 const dashboardRoutes = [
   // {
@@ -72,6 +73,13 @@ const dashboardRoutes = [
     name: "Bugs",
     icon: "pe-7s-science",
     component: Bugs,
+    layout: "/"
+  },
+  {
+    path: "interest",
+    name: "Interest",
+    icon: "pe-7s-science",
+    component: Interest,
     layout: "/"
   },
   {

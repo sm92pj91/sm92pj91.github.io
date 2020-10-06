@@ -21,6 +21,7 @@ import '@aws-amplify/ui/dist/style.css';
 import ViewSubscriptions from "./screens/viewsubscriptions/ViewSubscriptions";
 import ViewUnsubscribes from "./screens/viewunsubscribes/ViewUnsubscribes";
 import {Auth} from "@aws-amplify/auth";
+import Interest from "./screens/viewinterest/Interest";
 
 const {Content, Footer} = Layout;
 
@@ -124,6 +125,7 @@ export class App extends React.Component {
                                         <Route path={"/homepage"} component={HomePage}/>
                                         <Route path={"/carousel"} component={Carousel}/>
                                         <Route path={"/bugs"} component={Bugs}/>
+                                        <Route path={"/interest"} component={Interest}/>
                                         <Route path={"/unsubscribes"} component={ViewUnsubscribes}/>
                                         <Route path={"/metrics"} component={ViewSubscriptions}/>
 
