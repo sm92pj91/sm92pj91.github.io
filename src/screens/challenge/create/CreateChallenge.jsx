@@ -735,25 +735,6 @@ const CreateChallenge = (props) => {
         handleShow();
     }
 
-    // setChallenge({
-    //     ...challenge,
-    //     CategoryItems: challenge.CategoryItems.map((categoryItem, sidx) => {
-    //             if (idx !== sidx) {
-    //                 return categoryItem
-    //             } else {
-    //                 return {
-    //                     ...categoryItem,
-    //                     ChallengeItems: [...categoryItem.ChallengeItems.slice(0, idc),
-    //                         {
-    //                             ...categoryItem.ChallengeItems.slice(idc, idc + 1)[0],
-    //                             item: evt.target.value
-    //                         },
-    //                         ...categoryItem.ChallengeItems.slice(idc + 1)]
-    //                 }
-    //             }
-    //         }
-    //     )
-    // });
     const addCategoryInfo = (idx, idc, item) => {
         setInfoCategoryIndex(idx);
         setInfoIndex(idc);
@@ -814,13 +795,23 @@ const CreateChallenge = (props) => {
             }
         }
     }
+    const getCurrentItemText = () => {
+        if (challenge.ChallengeType === 'CATEGORIES' && challenge.CategoryItems[infoCategoryIndex]) {
+            if(challenge.CategoryItems[infoCategoryIndex].ChallengeItems[infoIndex]) {
+                return challenge.CategoryItems[infoCategoryIndex].ChallengeItems[infoIndex].item
+            }
+        } else {
+            return challenge.ChallengeItems[infoIndex] ? challenge.ChallengeItems[infoIndex] : '';
+        }
+        return ''
+    }
     return (
 
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter"
                    centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Added Information for {challenge.ChallengeItems[infoIndex] ? challenge.ChallengeItems[infoIndex].item : ''}</Modal.Title>
+                    <Modal.Title>Added Information for {getCurrentItemText()}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Row>
