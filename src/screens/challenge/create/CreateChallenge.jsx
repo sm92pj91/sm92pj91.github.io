@@ -651,7 +651,7 @@ const CreateChallenge = (props) => {
     const [infoCategoryIndex, setInfoCategoryIndex] = useState(false);
     const handleClose = () => setShow(false);
     const handleSubmitItemInfo = () => {
-        if(extraInfo.length > 0 && extraInfo.find(x => ((x.key.length > 0 && x.value.length === 0) || (x.key.length === 0 && x.value.length > 0)))) {
+        if((extraInfo.length > 0 && extraInfo.find(x => ((x.key.length > 0 && x.value.length === 0) || (x.key.length === 0 && x.value.length > 0)))) || (info.URL && info.URL.length > 0 && (!info.URLText || info.URLText.length === 0)) || ((!info.URL || info.URL.length === 0) && info.URLText && info.URLText.length > 0)) {
             notification.open({
                 type: 'error',
                 message: 'Form not valid',
@@ -800,8 +800,8 @@ const CreateChallenge = (props) => {
             if(challenge.CategoryItems[infoCategoryIndex].ChallengeItems[infoIndex]) {
                 return challenge.CategoryItems[infoCategoryIndex].ChallengeItems[infoIndex].item
             }
-        } else {
-            return challenge.ChallengeItems[infoIndex] ? challenge.ChallengeItems[infoIndex] : '';
+         } else {
+                return challenge.ChallengeItems[infoIndex] ? challenge.ChallengeItems[infoIndex].item : '';
         }
         return ''
     }
