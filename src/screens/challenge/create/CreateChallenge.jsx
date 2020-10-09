@@ -651,6 +651,15 @@ const CreateChallenge = (props) => {
     const [infoCategoryIndex, setInfoCategoryIndex] = useState(false);
     const handleClose = () => setShow(false);
     const handleSubmitItemInfo = () => {
+        if(extraInfo.length > 0 && extraInfo.find(x => ((x.key.length > 0 && x.value.length === 0) || (x.key.length === 0 && x.value.length > 0)))) {
+            notification.open({
+                type: 'error',
+                message: 'Form not valid',
+                description: 'please check every key value pair is complete',
+                duration: 10
+            });
+            return;
+        }
         if(challenge.ChallengeType !== 'CATEGORIES') {
             const newChallengeItems = challenge.ChallengeItems.map(
                 (challengeItem, sidx) => {

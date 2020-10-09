@@ -16,6 +16,7 @@
     "chartist": "0.10.1",
     "cuid": "^2.1.8",
     "date-fns": "latest",
+    "formik": "^2.2.0",
     "gh-pages": "^2.2.0",
     "image-data-uri": "^2.0.1",
     "immutability-helper": "^3.0.1",
@@ -47,7 +48,8 @@
     "react-toggle": "4.0.2",
     "react-transition-group": "^1.1.2",
     "recharts": "^1.8.5",
-    "stringquery": "^1.0.8"
+    "stringquery": "^1.0.8",
+    "yup": "^0.29.3"
   },
   "scripts": {
     "start": "REACT_APP_STAGE=dev react-scripts start --history-api-fallback",
