@@ -365,10 +365,10 @@ const CreateChallenge = (props) => {
                 extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[4], value: csvArray[5]}) : [{index: 0, key: csvArray[4], value: csvArray[5]}]
             }
             if(csvArray[6].length > 0 && csvArray[7].length) {
-                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[6], value: csvArray[7]}) : [{index: 0, key: csvArray[6], value: csvArray[7]}]
+                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 1, key: csvArray[6], value: csvArray[7]}) : [{index: 1, key: csvArray[6], value: csvArray[7]}]
             }
             if(csvArray[8].length > 0 && csvArray[9].length) {
-                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[8], value: csvArray[9]}) : [{index: 0, key: csvArray[8], value: csvArray[9]}]
+                extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 2, key: csvArray[8], value: csvArray[9]}) : [{index: 2, key: csvArray[8], value: csvArray[9]}]
             }
             return extraInfo;
         } else return null
