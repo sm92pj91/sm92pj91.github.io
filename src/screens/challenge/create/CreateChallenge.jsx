@@ -796,6 +796,9 @@ const CreateChallenge = (props) => {
         }
     }
     const getCurrentItemText = () => {
+        if (challenge.ChallengeType === 'CALENDAR') {
+            return '';
+        }
         if (challenge.ChallengeType === 'CATEGORIES' && challenge.CategoryItems[infoCategoryIndex]) {
             if(challenge.CategoryItems[infoCategoryIndex].ChallengeItems[infoIndex]) {
                 return challenge.CategoryItems[infoCategoryIndex].ChallengeItems[infoIndex].item
