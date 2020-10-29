@@ -131,6 +131,7 @@ const Image = ({image, callback, index, moveImage, onDelete}) => {
                 <option>Indoor Entertainment</option>
                 <option>Gaming</option>
                 <option>Green</option>
+                <option>Christmas</option>
               </Form.Control>
             </Form.Row>
           </div>)
