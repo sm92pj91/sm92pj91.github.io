@@ -1043,6 +1043,7 @@ const CreateChallenge = (props) => {
                     <DatePicker
                         selected={challenge.LiveAt}
                         onChange={setChallengeLiveAt}
+                        showTimeSelect
                     />
                 </Form.Group>
             </Form.Row>
