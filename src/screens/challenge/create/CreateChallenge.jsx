@@ -796,7 +796,7 @@ const CreateChallenge = (props) => {
         }
     }
     const getCurrentItemText = () => {
-        if (challenge.ChallengeType === 'CALENDAR') {
+        if (challenge.ChallengeType === 'CALENDAR' || challenge.ChallengeType === 'ENTERASYOUGO') {
             return '';
         }
         if (challenge.ChallengeType === 'CATEGORIES' && challenge.CategoryItems[infoCategoryIndex]) {
