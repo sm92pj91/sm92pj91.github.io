@@ -313,7 +313,7 @@ const CreateChallenge = (props) => {
                         if(currentCategory !== '') {
                             newItems.push(categoryItem);
                         }
-                        currentCategory = csvArray[0];
+                        currentCategory = csvArray[0].trim();
                         categoryItem = {Category: csvArray[0], ChallengeItems: []}
                     }
                     if (info) {
