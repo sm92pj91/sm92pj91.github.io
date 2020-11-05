@@ -309,12 +309,12 @@ const CreateChallenge = (props) => {
                 if(ind > 0) {
                     let info = extractInfo(csvArray.slice(2));
                     console.log(info);
-                    if (csvArray[0] !== currentCategory) {
+                    if (csvArray[0].trim() !== currentCategory) {
                         if(currentCategory !== '') {
                             newItems.push(categoryItem);
                         }
                         currentCategory = csvArray[0].trim();
-                        categoryItem = {Category: csvArray[0], ChallengeItems: []}
+                        categoryItem = {Category: csvArray[0].trim(), ChallengeItems: []}
                     }
                     if (info) {
                         categoryItem = {Category: categoryItem.Category, ChallengeItems: categoryItem.ChallengeItems.concat({item: csvArray[1], id: randomstring.generate(10), info: info})}
