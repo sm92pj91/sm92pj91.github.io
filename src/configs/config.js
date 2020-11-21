@@ -1,5 +1,5 @@
 const dev = {
-  BASE_URL: "https://api.challengeacceptedapp.com/private-admin-dev",
+  BASE_URL: "https://uu6tvasc0i.execute-api.eu-west-1.amazonaws.com/dev",
   IMAGE_BASE: "https://challenge-accepted-mob.s3.eu-west-2.amazonaws.com/challenges-dev",
   CAROUSEL_BASE: "https://challenge-accepted-mob.s3.eu-west-2.amazonaws.com/carousel-dev"
 }

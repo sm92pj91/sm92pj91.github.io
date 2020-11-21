@@ -47,4 +47,5 @@ export const CATEGORIES = [
   "Gaming",
   "Green",
   "Christmas",
+  "Charity"
 ]
