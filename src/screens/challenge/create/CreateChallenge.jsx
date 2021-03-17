@@ -522,13 +522,33 @@ const CreateChallenge = (props) => {
         });
     };
     const handleMoveUpCategoryChallengeItem = (idx, idc) => () => {
-        if (idc !== 0) {
+        let itemMoveUpCategory = idc === 0 && idx !== 0;
+        let itemMoveUp = challenge.CategoryItems[idx].ChallengeItems[idc];
+        if(idx !== 0 || idc !== 0) {
             setChallenge({
                 ...challenge,
                 CategoryItems: challenge.CategoryItems.map((categoryItem, sidx) => {
                         if (idx !== sidx) {
+                            if (itemMoveUpCategory && idx === sidx + 1) {
+                                return {
+                                    ...categoryItem,
+                                    ChallengeItems: [...categoryItem.ChallengeItems, itemMoveUp]
+                                }
+                            }
                             return categoryItem
                         } else {
+                            if (idc === 0) {
+                                if (categoryItem.ChallengeItems.length === 1) {
+                                    return {
+                                        ...categoryItem,
+                                        ChallengeItems: [{item: "", id: randomstring.generate(10)}]
+                                    }
+                                }
+                                return {
+                                    ...categoryItem,
+                                    ChallengeItems: [...categoryItem.ChallengeItems.slice(1, categoryItem.ChallengeItems.length)]
+                                }
+                            }
                             return {
                                 ...categoryItem,
                                 ChallengeItems: [...categoryItem.ChallengeItems.slice(0, idc - 1),
@@ -543,26 +563,45 @@ const CreateChallenge = (props) => {
         }
     };
     const handleMoveDownCategoryChallengeItem = (idx, idc) => () => {
-        setChallenge({
-            ...challenge,
-            CategoryItems: challenge.CategoryItems.map((categoryItem, sidx) => {
-                    if (idx !== sidx) {
-                        return categoryItem
-                    } else {
-                        if (idc === categoryItem.ChallengeItems.length - 1) {
+        let itemMoveDownCategory = false;
+        let itemMoveDown = {};
+            setChallenge({
+                ...challenge,
+                CategoryItems: challenge.CategoryItems.map((categoryItem, sidx) => {
+                        if (idx !== sidx) {
+                            if (itemMoveDownCategory && idx === sidx - 1) {
+                                return {
+                                    ...categoryItem,
+                                    ChallengeItems: [itemMoveDown, ...categoryItem.ChallengeItems]
+                                }
+                            }
                             return categoryItem
-                        }
-                        return {
-                            ...categoryItem,
-                            ChallengeItems: [...categoryItem.ChallengeItems.slice(0, idc),
-                                categoryItem.ChallengeItems[idc + 1],
-                                categoryItem.ChallengeItems[idc],
-                                ...categoryItem.ChallengeItems.slice(idc + 2)]
+                        } else {
+                            if (idc === categoryItem.ChallengeItems.length - 1) {
+                                itemMoveDownCategory = true;
+                                itemMoveDown = categoryItem.ChallengeItems[idc];
+                                if (categoryItem.ChallengeItems.length === 1) {
+                                    return {
+                                        ...categoryItem,
+                                        ChallengeItems: [{item: "", id: randomstring.generate(10)}]
+                                    }
+                                }
+                                return {
+                                    ...categoryItem,
+                                    ChallengeItems: [...categoryItem.ChallengeItems.slice(0, categoryItem.ChallengeItems.length - 1)]
+                                }
+                            }
+                            return {
+                                ...categoryItem,
+                                ChallengeItems: [...categoryItem.ChallengeItems.slice(0, idc),
+                                    categoryItem.ChallengeItems[idc + 1],
+                                    categoryItem.ChallengeItems[idc],
+                                    ...categoryItem.ChallengeItems.slice(idc + 2)]
+                            }
                         }
                     }
-                }
-            )
-        });
+                )
+            });
     };
 
     const handleChangeCategoryChallengeItem = (idx, idc) => evt => {

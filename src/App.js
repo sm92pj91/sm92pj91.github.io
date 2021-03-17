@@ -22,7 +22,7 @@ import ViewSubscriptions from "./screens/viewsubscriptions/ViewSubscriptions";
 import ViewUnsubscribes from "./screens/viewunsubscribes/ViewUnsubscribes";
 import {Auth} from "@aws-amplify/auth";
 import Interest from "./screens/viewinterest/Interest";
-
+import config from "./configs/config"
 const {Content, Footer} = Layout;
 
 Amplify.configure({
@@ -52,7 +52,7 @@ export class App extends React.Component {
         super(props);
         this.state = {
             _notificationSystem: null,
-            color: "challenge",
+            color: config.env === "" ? "challenge" : "purple",
             fixedClasses: "dropdown show-dropdown open",
             location: null
         };

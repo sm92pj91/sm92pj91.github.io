@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
+import config from "../../configs/config"
 
 import AdminNavbarLinks from "../Navbars/AdminNavbarLinks.jsx";
 
@@ -48,7 +49,7 @@ class Sidebar extends Component {
                 href="/challenges/view"
 
             >
-              Challenge CMS
+              Challenge CMS {config.env}
             </a>
           </div>
           <div className="sidebar-wrapper">
