@@ -19,7 +19,7 @@ const prod = {
 }
 
 const config = process.env.REACT_APP_STAGE === 'preprod' ? preprod : process.env.REACT_APP_STAGE === 'prod' ? prod : dev;
-
+// eslint-disable-next-line
 export default {
   ...config
 };
