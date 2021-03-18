@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import {Layout} from 'antd';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {SearchScreenDefault} from "./screens/search/search-screen-default";
 import {AddRssFeedScreen} from "./screens/add-rss-feed";
 import Amplify from '@aws-amplify/core'
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -115,7 +114,6 @@ export class App extends React.Component {
                                         marginTop: "20px"
                                     }}>
                                         <Route exact path='/' component={UserProfile}/>
-                                        <Route path={"/search"} component={SearchScreenDefault}/>
                                         {/*<Route path={"/browse"} component={BrowseScreen}/>*/}
                                         <Route path={"/addrss"} component={AddRssFeedScreen}/>
                                         <Route path={"/profile"} component={UserProfile}/>

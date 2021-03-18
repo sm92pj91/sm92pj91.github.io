@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {DndProvider} from "react-dnd";
 import HomePageData from './HomePageData'
-import Backend from 'react-dnd-html5-backend'
+import { HTML5Backend } from "react-dnd-html5-backend";
 import {Col, Container, Row,} from "react-bootstrap";
 import {Card} from "../.././components/Card/Card.jsx";
 import {Redirect} from "react-router-dom";
@@ -39,7 +39,7 @@ const HomePage = (props) => {
                   title="Home Page Layout"
                   content={
                     <div>
-                      <DndProvider backend={Backend}>
+                      <DndProvider backend={HTML5Backend}>
                         <HomePageData/>
                       </DndProvider>
 

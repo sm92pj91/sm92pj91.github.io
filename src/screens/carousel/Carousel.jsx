@@ -2,8 +2,8 @@ import React, {useCallback, useState} from "react";
 import Dropzone from "../../components/Dropzone/Dropzone";
 import {DndProvider} from "react-dnd";
 import CarouselDnD from "../../components/CarouselDnD/CarouselDnD";
-import HTML5Backend from "react-dnd-html5-backend";
-import TouchBackend from "react-dnd-touch-backend";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
 import update from "immutability-helper";
 import "./carousel.css"
 import {Auth} from "aws-amplify";
