@@ -36,6 +36,7 @@ const Image = ({image, callback, index, moveImage, onDelete}) => {
   });
 
   const [{isDragging}, drag] = useDrag({
+    type: type,
     item: {type, id: image.id, index},
     collect: monitor => ({
       isDragging: monitor.isDragging()
