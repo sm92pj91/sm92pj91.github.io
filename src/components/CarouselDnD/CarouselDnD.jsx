@@ -84,6 +84,7 @@ const Image = ({image, callback, index, moveImage, onDelete}) => {
             <Form.Row>
               <Form.Control as="select" size="sm" onChange={selectChange}
                             value={category} custom>
+                <option>Captain Tom 100</option>
                 <option>Travel</option>
                 <option>Health & Fitness</option>
                 <option>Food & Drink</option>

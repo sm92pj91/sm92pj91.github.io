@@ -1,4 +1,5 @@
 export const CATEGORIES = [
+  "Captain Tom 100",
   "London",
   "Travel",
   "Health & Fitness",

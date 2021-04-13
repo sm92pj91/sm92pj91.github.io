@@ -19,6 +19,7 @@ import {Redirect} from "react-router-dom";
 import {notification} from 'antd';
 import randomstring from 'randomstring';
 import Papa from 'papaparse';
+
 const CreateChallenge = (props) => {
     const [validated] = useState(false);
     const [ChallengeId, setChallengeId] = useState(props.match.params.id);
@@ -27,6 +28,9 @@ const CreateChallenge = (props) => {
     let ChallengeName = React.createRef();
     let Description = React.createRef();
     let InputCount = React.createRef();
+    let HalfWayCount = React.createRef();
+    let ThreeQuarterCount = React.createRef();
+    let CompleteCount = React.createRef();
     let Placeholder = React.createRef();
     const [challenge, setChallenge] = useState({
         ChallengeId: "",
@@ -101,6 +105,18 @@ const CreateChallenge = (props) => {
                                 '[name="challengeName"]').value = response.Name
                             document.querySelector(
                                 '[name="Description"]').value = response.Description
+                            if (response.HalfWayCount) {
+                                document.querySelector(
+                                    '[name="HalfWayCount"]').value = response.HalfWayCount
+                            }
+                            if (response.ThreeQuarterCount) {
+                                document.querySelector(
+                                    '[name="ThreeQuarterCount"]').value = response.ThreeQuarterCount
+                            }
+                            if (response.CompleteCount) {
+                                document.querySelector(
+                                    '[name="CompleteCount"]').value = response.CompleteCount
+                            }
                             if (response.ChallengeType === 'ENTERASYOUGO') {
                                 document.querySelector(
                                     '[name="Placeholder"]').value = response.Placeholder
@@ -182,6 +198,15 @@ const CreateChallenge = (props) => {
                 if (image[0].src.split(',').length > 1) {
                     newChallenge.Image = image[0].src.split(',')[1]
                 }
+            }
+            if (HalfWayCount && HalfWayCount.current && HalfWayCount.current.value && HalfWayCount.current.value.length > 0) {
+                newChallenge.HalfWayCount = parseInt(HalfWayCount.current.value);
+            }
+            if (ThreeQuarterCount && ThreeQuarterCount.current && ThreeQuarterCount.current.value && ThreeQuarterCount.current.value.length > 0) {
+                newChallenge.ThreeQuarterCount = parseInt(ThreeQuarterCount.current.value);
+            }
+            if (CompleteCount && CompleteCount.current && CompleteCount.current.value && CompleteCount.current.value.length > 0) {
+                newChallenge.CompleteCount = parseInt(CompleteCount.current.value);
             }
             if (newChallenge.ChallengeType === 'ENTERASYOUGO') {
                 newChallenge.Placeholder = Placeholder.current.value.length > 0
@@ -306,11 +331,11 @@ const CreateChallenge = (props) => {
             let currentCategory = '';
             let categoryItem = {Category: '', ChallengeItems: []}
             data.data.forEach((csvArray, ind) => {
-                if(ind > 0) {
+                if (ind > 0) {
                     let info = extractInfo(csvArray.slice(2));
                     console.log(info);
                     if (csvArray[0].trim() !== currentCategory) {
-                        if(currentCategory !== '') {
+                        if (currentCategory !== '') {
                             newItems.push(categoryItem);
                         }
                         currentCategory = csvArray[0].trim();
@@ -332,7 +357,7 @@ const CreateChallenge = (props) => {
             data.data.forEach((x, ind) => {
                 if (x.length > 0 && ind > 0) {
                     let info = extractInfo(x.slice(1));
-                    if(info) {
+                    if (info) {
                         newItems.push({item: x[0], id: randomstring.generate(10), info: info})
                     } else {
                         newItems.push({item: x[0], id: randomstring.generate(10)})
@@ -346,28 +371,28 @@ const CreateChallenge = (props) => {
     };
 
     const extractInfo = infoString => {
-        if(infoString.join().length > 9){
+        if (infoString.join().length > 9) {
             let csvArray = infoString;
             let extraInfo = {};
-            if(csvArray[0].length > 0) {
+            if (csvArray[0].length > 0) {
                 extraInfo.Description = csvArray[0];
             }
-            if(csvArray[1].length > 0) {
+            if (csvArray[1].length > 0) {
                 extraInfo.URL = csvArray[1];
             }
-            if(csvArray[2].length > 0) {
+            if (csvArray[2].length > 0) {
                 extraInfo.URLText = csvArray[2];
             }
-            if(csvArray[3].length > 0) {
+            if (csvArray[3].length > 0) {
                 extraInfo.MapsLink = csvArray[3];
             }
-            if(csvArray[4].length > 0 && csvArray[5].length) {
+            if (csvArray[4].length > 0 && csvArray[5].length) {
                 extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 0, key: csvArray[4], value: csvArray[5]}) : [{index: 0, key: csvArray[4], value: csvArray[5]}]
             }
-            if(csvArray[6].length > 0 && csvArray[7].length) {
+            if (csvArray[6].length > 0 && csvArray[7].length) {
                 extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 1, key: csvArray[6], value: csvArray[7]}) : [{index: 1, key: csvArray[6], value: csvArray[7]}]
             }
-            if(csvArray[8].length > 0 && csvArray[9].length) {
+            if (csvArray[8].length > 0 && csvArray[9].length) {
                 extraInfo.misc = extraInfo.misc ? extraInfo.misc.concat({index: 2, key: csvArray[8], value: csvArray[9]}) : [{index: 2, key: csvArray[8], value: csvArray[9]}]
             }
             return extraInfo;
@@ -389,9 +414,15 @@ const CreateChallenge = (props) => {
 
     const onTypeChange = ctype => {
         console.log(ctype)
+        if (challenge.ChallengeType === "BASIC" || challenge.ChallengeType === "BASICINTERVAL") {
+            setChallengeItemsBackup(challenge.ChallengeItems)
+        }
+        if (challenge.ChallengeType === "CATEGORIES") {
+            setCategoryItemsBackup(challenge.CategoryItems)
+
+        }
         if (ctype === "CATEGORIES") {
             if (challenge.CategoryItems.length === 0) {
-                setChallengeItemsBackup(challenge.ChallengeItems)
                 setChallenge({
                     ...challenge,
                     ChallengeItems: [],
@@ -401,9 +432,8 @@ const CreateChallenge = (props) => {
             } else {
                 setChallenge({...challenge, ChallengeType: ctype})
             }
-        } else if (ctype === "ENTERASYOUGO") {
-            setChallengeItemsBackup(challenge.ChallengeItems)
-            setCategoryItemsBackup(challenge.CategoryItems)
+        } else if (ctype === "ENTERASYOUGO" || ctype === "CALENDAR") {
+
             setChallenge({
                 ...challenge,
                 CategoryItems: [],
@@ -412,7 +442,6 @@ const CreateChallenge = (props) => {
             })
         } else {
             if (challenge.ChallengeItems.length === 0) {
-                setCategoryItemsBackup(challenge.CategoryItems)
                 setChallenge({
                     ...challenge,
                     CategoryItems: [],
@@ -524,7 +553,7 @@ const CreateChallenge = (props) => {
     const handleMoveUpCategoryChallengeItem = (idx, idc) => () => {
         let itemMoveUpCategory = idc === 0 && idx !== 0;
         let itemMoveUp = challenge.CategoryItems[idx].ChallengeItems[idc];
-        if(idx !== 0 || idc !== 0) {
+        if (idx !== 0 || idc !== 0) {
             setChallenge({
                 ...challenge,
                 CategoryItems: challenge.CategoryItems.map((categoryItem, sidx) => {
@@ -565,43 +594,43 @@ const CreateChallenge = (props) => {
     const handleMoveDownCategoryChallengeItem = (idx, idc) => () => {
         let itemMoveDownCategory = false;
         let itemMoveDown = {};
-            setChallenge({
-                ...challenge,
-                CategoryItems: challenge.CategoryItems.map((categoryItem, sidx) => {
-                        if (idx !== sidx) {
-                            if (itemMoveDownCategory && idx === sidx - 1) {
-                                return {
-                                    ...categoryItem,
-                                    ChallengeItems: [itemMoveDown, ...categoryItem.ChallengeItems]
-                                }
+        setChallenge({
+            ...challenge,
+            CategoryItems: challenge.CategoryItems.map((categoryItem, sidx) => {
+                    if (idx !== sidx) {
+                        if (itemMoveDownCategory && idx === sidx - 1) {
+                            return {
+                                ...categoryItem,
+                                ChallengeItems: [itemMoveDown, ...categoryItem.ChallengeItems]
                             }
-                            return categoryItem
-                        } else {
-                            if (idc === categoryItem.ChallengeItems.length - 1) {
-                                itemMoveDownCategory = true;
-                                itemMoveDown = categoryItem.ChallengeItems[idc];
-                                if (categoryItem.ChallengeItems.length === 1) {
-                                    return {
-                                        ...categoryItem,
-                                        ChallengeItems: [{item: "", id: randomstring.generate(10)}]
-                                    }
-                                }
+                        }
+                        return categoryItem
+                    } else {
+                        if (idc === categoryItem.ChallengeItems.length - 1) {
+                            itemMoveDownCategory = true;
+                            itemMoveDown = categoryItem.ChallengeItems[idc];
+                            if (categoryItem.ChallengeItems.length === 1) {
                                 return {
                                     ...categoryItem,
-                                    ChallengeItems: [...categoryItem.ChallengeItems.slice(0, categoryItem.ChallengeItems.length - 1)]
+                                    ChallengeItems: [{item: "", id: randomstring.generate(10)}]
                                 }
                             }
                             return {
                                 ...categoryItem,
-                                ChallengeItems: [...categoryItem.ChallengeItems.slice(0, idc),
-                                    categoryItem.ChallengeItems[idc + 1],
-                                    categoryItem.ChallengeItems[idc],
-                                    ...categoryItem.ChallengeItems.slice(idc + 2)]
+                                ChallengeItems: [...categoryItem.ChallengeItems.slice(0, categoryItem.ChallengeItems.length - 1)]
                             }
                         }
+                        return {
+                            ...categoryItem,
+                            ChallengeItems: [...categoryItem.ChallengeItems.slice(0, idc),
+                                categoryItem.ChallengeItems[idc + 1],
+                                categoryItem.ChallengeItems[idc],
+                                ...categoryItem.ChallengeItems.slice(idc + 2)]
+                        }
                     }
-                )
-            });
+                }
+            )
+        });
     };
 
     const handleChangeCategoryChallengeItem = (idx, idc) => evt => {
@@ -690,7 +719,7 @@ const CreateChallenge = (props) => {
     const [infoCategoryIndex, setInfoCategoryIndex] = useState(false);
     const handleClose = () => setShow(false);
     const handleSubmitItemInfo = () => {
-        if((extraInfo.length > 0 && extraInfo.find(x => ((x.key.length > 0 && x.value.length === 0) || (x.key.length === 0 && x.value.length > 0)))) || (info.URL && info.URL.length > 0 && (!info.URLText || info.URLText.length === 0)) || ((!info.URL || info.URL.length === 0) && info.URLText && info.URLText.length > 0)) {
+        if ((extraInfo.length > 0 && extraInfo.find(x => ((x.key.length > 0 && x.value.length === 0) || (x.key.length === 0 && x.value.length > 0)))) || (info.URL && info.URL.length > 0 && (!info.URLText || info.URLText.length === 0)) || ((!info.URL || info.URL.length === 0) && info.URLText && info.URLText.length > 0)) {
             notification.open({
                 type: 'error',
                 message: 'Form not valid',
@@ -699,7 +728,7 @@ const CreateChallenge = (props) => {
             });
             return;
         }
-        if(challenge.ChallengeType !== 'CATEGORIES') {
+        if (challenge.ChallengeType !== 'CATEGORIES') {
             const newChallengeItems = challenge.ChallengeItems.map(
                 (challengeItem, sidx) => {
                     if (infoIndex !== sidx) {
@@ -728,7 +757,7 @@ const CreateChallenge = (props) => {
                                 delete ci.info;
                             } else {
                                 ci.info = {...info, misc: extraInfo}
-                                if(extraInfo.length === 0) {
+                                if (extraInfo.length === 0) {
                                     delete ci.info.misc;
                                 }
                             }
@@ -750,7 +779,7 @@ const CreateChallenge = (props) => {
     const [extraInfo, setExtraInfo] = useState([])
     const handleInfoChange = item => evt => {
         let newInfo = info;
-        if(evt.target.value.length === 0) {
+        if (evt.target.value.length === 0) {
             delete newInfo[item]
         } else {
             newInfo[item] = evt.target.value;
@@ -777,7 +806,7 @@ const CreateChallenge = (props) => {
     const addCategoryInfo = (idx, idc, item) => {
         setInfoCategoryIndex(idx);
         setInfoIndex(idc);
-         if (item.info) {
+        if (item.info) {
             setInfo(item.info);
             if (item.info.misc) {
                 setExtraInfo(item.info.misc);
@@ -792,11 +821,11 @@ const CreateChallenge = (props) => {
     }
     const handleExtraInfoKeyChange = idx => evt => {
         let newItem = extraInfo.find(x => x.index === idx) ? {...extraInfo.find(x => x.index === idx), key: evt.target.value} : {index: idx, key: evt.target.value, value: ''};
-        if(!extraInfo.find(x => x.index === idx)) {
+        if (!extraInfo.find(x => x.index === idx)) {
             setExtraInfo(extraInfo.concat(newItem));
         } else {
             if (newItem.key.length === 0 && newItem.value.length === 0) {
-                if(extraInfo.length === 0) {
+                if (extraInfo.length === 0) {
                     setExtraInfo([])
                 } else {
                     setExtraInfo(extraInfo.filter(x => x.index !== idx));
@@ -814,11 +843,11 @@ const CreateChallenge = (props) => {
     }
     const handleExtraInfoValueChange = idx => evt => {
         let newItem = extraInfo.find(x => x.index === idx) ? {...extraInfo.find(x => x.index === idx), value: evt.target.value} : {index: idx, value: evt.target.value, key: ''};
-        if(!extraInfo.find(x => x.index === idx)) {
+        if (!extraInfo.find(x => x.index === idx)) {
             setExtraInfo(extraInfo.concat(newItem));
         } else {
             if (newItem.key.length === 0 && newItem.value.length === 0) {
-                if(extraInfo.length === 0) {
+                if (extraInfo.length === 0) {
                     setExtraInfo([])
                 } else {
                     setExtraInfo(extraInfo.filter(x => x.index !== idx));
@@ -839,11 +868,11 @@ const CreateChallenge = (props) => {
             return '';
         }
         if (challenge.ChallengeType === 'CATEGORIES' && challenge.CategoryItems[infoCategoryIndex]) {
-            if(challenge.CategoryItems[infoCategoryIndex].ChallengeItems[infoIndex]) {
+            if (challenge.CategoryItems[infoCategoryIndex].ChallengeItems[infoIndex]) {
                 return challenge.CategoryItems[infoCategoryIndex].ChallengeItems[infoIndex].item
             }
-         } else {
-                return challenge.ChallengeItems[infoIndex] ? challenge.ChallengeItems[infoIndex].item : '';
+        } else {
+            return challenge.ChallengeItems[infoIndex] ? challenge.ChallengeItems[infoIndex].item : '';
         }
         return ''
     }
@@ -1086,36 +1115,63 @@ const CreateChallenge = (props) => {
                     />
                 </Form.Group>
             </Form.Row>
-
-            {challenge.ChallengeType === 'ENTERASYOUGO' ?
-                <Form.Row>
-                    <Form.Group as={Col} md="6" controlId="placeholderControl">
-                        <Form.Label>Placeholder Text</Form.Label>
-                        <Form.Control
-                            type="textarea"
-                            placeholder="Item Placeholder Text"
-                            maxLength="30"
-                            ref={Placeholder}
-                            name="Placeholder"
-                        />
-                    </Form.Group>
-                    <Form.Group as={Col} md="6" controlId="inputCountControl">
-                        <Form.Label>Number of Items</Form.Label>
-                        <Form.Control
-                            type="number"
-                            placeholder="0 for infinite"
-                            ref={InputCount}
-                            name="InputCount"
-                        />
-                    </Form.Group>
-                </Form.Row>
-                : challenge.ChallengeType !== 'CALENDAR' ?
-                    <Form.Row>
-                        <Form.Group as={Col} md="5">
-                            <Form.Label>Challenge Items</Form.Label>
-                        </Form.Group>
-                    </Form.Row> : <></>
-            }
+            {challenge.ChallengeType === 'ENTERASYOUGO' &&
+            <Form.Row>
+                <Form.Group as={Col} md="6" controlId="placeholderControl">
+                    <Form.Label>Placeholder Text</Form.Label>
+                    <Form.Control
+                        type="textarea"
+                        placeholder="Item Placeholder Text"
+                        maxLength="30"
+                        ref={Placeholder}
+                        name="Placeholder"
+                    />
+                </Form.Group>
+                <Form.Group as={Col} md="6" controlId="inputCountControl">
+                    <Form.Label>Number of Items</Form.Label>
+                    <Form.Control
+                        type="number"
+                        placeholder="0 for infinite"
+                        ref={InputCount}
+                        name="InputCount"
+                    />
+                </Form.Group>
+            </Form.Row>}
+            <Form.Row>
+                <Form.Group as={Col} md="4" controlId="halfWayCountControl">
+                    <Form.Label>Days to show half way message</Form.Label>
+                    <Form.Control
+                        type="number"
+                        placeholder="Leave empty if none"
+                        ref={HalfWayCount}
+                        name="HalfWayCount"
+                    />
+                </Form.Group>
+                <Form.Group as={Col} md="4" controlId="ThreeQuarterCountControl">
+                    <Form.Label>Days to show 75% message</Form.Label>
+                    <Form.Control
+                        type="number"
+                        placeholder="Leave empty if none"
+                        ref={ThreeQuarterCount}
+                        name="ThreeQuarterCount"
+                    />
+                </Form.Group>
+                <Form.Group as={Col} md="4" controlId="CompleteCountControl">
+                    <Form.Label>Days to show complete message</Form.Label>
+                    <Form.Control
+                        type="number"
+                        placeholder="Leave empty if none"
+                        ref={CompleteCount}
+                        name="CompleteCount"
+                    />
+                </Form.Group>
+            </Form.Row>
+            {challenge.ChallengeType !== 'ENTERASYOUGO' && challenge.ChallengeType !== 'CALENDAR' &&
+            <Form.Row>
+                <Form.Group as={Col} md="5">
+                    <Form.Label>Challenge Items</Form.Label>
+                </Form.Group>
+            </Form.Row>}
             {challenge.ChallengeItems ? challenge.ChallengeItems.map(
                 (challengeItem, idx) => (
                     <div>
@@ -1125,7 +1181,7 @@ const CreateChallenge = (props) => {
                                     type="button"
                                     onClick={() => addInfo(idx)}
                                     className="small"
-                                    variant={challenge.ChallengeItems[idx].info ?"success": "primary"}
+                                    variant={challenge.ChallengeItems[idx].info ? "success" : "primary"}
                                 >
                                     info
                                 </Button>
@@ -1222,9 +1278,9 @@ const CreateChallenge = (props) => {
                                     <Form.Group as={Col} md={"1"}>
                                         <Button
                                             type="button"
-                                            onClick={() => addCategoryInfo(idx,idc, challengeItem)}
+                                            onClick={() => addCategoryInfo(idx, idc, challengeItem)}
                                             className="small"
-                                            variant={challengeItem.info ?"success": "primary"}
+                                            variant={challengeItem.info ? "success" : "primary"}
                                         >
                                             info
                                         </Button>
