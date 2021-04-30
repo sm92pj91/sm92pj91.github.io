@@ -1,0 +1,20 @@
+{
+  "projects": {
+    "default": "challenge-accepted-app-aef5c"
+  },
+  "targets": {
+    "challenge-accepted-app-aef5c": {
+      "hosting": {
+        "prod": [
+          "challengeacceptedcms-prod"
+        ],
+        "preprod": [
+          "challengeacceptedcms-preprod"
+        ],
+        "dev": [
+          "challengeacceptedcms-dev"
+        ]
+      }
+    }
+  }
+}

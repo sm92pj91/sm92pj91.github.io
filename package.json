@@ -57,7 +57,10 @@
     "deploy": "gh-pages -d build -b master",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
-    "deploy-firebase": "REACT_APP_STAGE=preprod react-app-rewired build && firebase deploy"
+    "deploy-firebase": "REACT_APP_STAGE=preprod react-app-rewired build && firebase deploy",
+    "deploy-firebase-dev": "REACT_APP_STAGE=dev react-app-rewired build && firebase deploy --only hosting:dev",
+    "deploy-firebase-preprod": "REACT_APP_STAGE=preprod react-app-rewired build && firebase deploy --only hosting:preprod",
+    "deploy-firebase-prod": "REACT_APP_STAGE=prod react-app-rewired build && firebase deploy --only hosting:prod"
   },
   "eslintConfig": {
     "extends": "react-app"

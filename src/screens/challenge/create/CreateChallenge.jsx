@@ -31,11 +31,14 @@ const CreateChallenge = (props) => {
     let HalfWayCount = React.createRef();
     let ThreeQuarterCount = React.createRef();
     let CompleteCount = React.createRef();
+    let CompleteMetricCount = React.createRef();
+    let MetricDescription = React.createRef();
     let Placeholder = React.createRef();
     const [challenge, setChallenge] = useState({
         ChallengeId: "",
         Name: "",
         Description: "",
+        MetricDescription: "",
         ChallengeType: "BASIC",
         ProgressType: "fraction",
         IsActive: true,
@@ -105,6 +108,15 @@ const CreateChallenge = (props) => {
                                 '[name="challengeName"]').value = response.Name
                             document.querySelector(
                                 '[name="Description"]').value = response.Description
+                            if (response.MetricDescription) {
+                                console.log(response.MetricDescription)
+                                document.querySelector(
+                                    '[name="MetricDescription"]').value = response.MetricDescription
+                            }
+                            if (response.Metric) {
+                                document.querySelector(
+                                    '[name="CompleteMetricCount"]').value = response.Metric
+                            }
                             if (response.HalfWayCount) {
                                 document.querySelector(
                                     '[name="HalfWayCount"]').value = response.HalfWayCount
@@ -131,7 +143,7 @@ const CreateChallenge = (props) => {
         }
 
     })
-        .catch(err => {
+        .catch(() => {
             notification.open({
                 type: 'error',
                 message: 'Not logged in',
@@ -176,10 +188,12 @@ const CreateChallenge = (props) => {
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.currentTarget;
+        console.log(form.checkValidity())
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         } else {
+            console.log(MetricDescription.current.value)
             let newChallenge = {
                 // ...challenge,
                 Categories: challenge.Categories,
@@ -208,6 +222,13 @@ const CreateChallenge = (props) => {
             if (CompleteCount && CompleteCount.current && CompleteCount.current.value && CompleteCount.current.value.length > 0) {
                 newChallenge.CompleteCount = parseInt(CompleteCount.current.value);
             }
+            if (CompleteMetricCount && CompleteMetricCount.current && CompleteMetricCount.current.value && CompleteMetricCount.current.value.length > 0 && challenge.ChallengeType === 'CALENDAR') {
+                console.log(CompleteMetricCount.current.value)
+                newChallenge.Metric = parseFloat(CompleteMetricCount.current.value);
+            }
+            if (MetricDescription && MetricDescription.current && MetricDescription.current.value && MetricDescription.current.value.length > 0 && challenge.ChallengeType === 'CALENDAR') {
+                newChallenge.MetricDescription = MetricDescription.current.value;
+            }
             if (newChallenge.ChallengeType === 'ENTERASYOUGO') {
                 newChallenge.Placeholder = Placeholder.current.value.length > 0
                     ? Placeholder.current.value : 'Add Item'
@@ -221,7 +242,7 @@ const CreateChallenge = (props) => {
                 }
             } else if (newChallenge.ChallengeType === 'CATEGORIES') {
                 newChallenge.CategoryItems = challenge.CategoryItems.map(
-                    (cat, ind) => ({
+                    (cat) => ({
                         Category: cat.Category,
                         ChallengeItems: cat.ChallengeItems.map((ch, index) => ({
                             ...ch,
@@ -413,7 +434,6 @@ const CreateChallenge = (props) => {
     }
 
     const onTypeChange = ctype => {
-        console.log(ctype)
         if (challenge.ChallengeType === "BASIC" || challenge.ChallengeType === "BASICINTERVAL") {
             setChallengeItemsBackup(challenge.ChallengeItems)
         }
@@ -1166,6 +1186,27 @@ const CreateChallenge = (props) => {
                     />
                 </Form.Group>
             </Form.Row>
+            {challenge.ChallengeType === 'CALENDAR' && <Form.Row>
+                <Form.Group as={Col} md="4" controlId="halfWayCountControl">
+                    <Form.Label>Completion Amount</Form.Label>
+                    <Form.Control
+                        type="number"
+                        step="0.1"
+                        placeholder="Leave empty if none"
+                        ref={CompleteMetricCount}
+                        name="CompleteMetricCount"
+                    />
+                </Form.Group>
+                <Form.Group as={Col} md="6" controlId="metricDescriptionControl">
+                    <Form.Label>Metric description e.g. miles</Form.Label>
+                    <Form.Control
+                        type="textarea"
+                        placeholder="Enter description"
+                        ref={MetricDescription}
+                        name="MetricDescription"
+                    />
+                </Form.Group>
+            </Form.Row>}
             {challenge.ChallengeType !== 'ENTERASYOUGO' && challenge.ChallengeType !== 'CALENDAR' &&
             <Form.Row>
                 <Form.Group as={Col} md="5">
